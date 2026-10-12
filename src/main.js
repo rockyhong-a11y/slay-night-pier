@@ -177,7 +177,7 @@ function update(state) {
   $('#health-fill').style.width = `${hp}%`; $('#health-number').textContent = Math.ceil(player.hp);
   $('.health-track').setAttribute('aria-valuenow', String(Math.ceil(hp)));
   const meter = Math.max(0, Math.min(100, player.meter / (player.maxMeter || 100) * 100));
-  $('#special-fill').style.width = `${meter}%`; $('[data-action="special"]').classList.toggle('charged', meter >= 100);
+  $('#special-fill').style.width = `${meter}%`; $('[data-action="special"]').classList.toggle('charged', meter >= 45);
   $('#partner-health').style.width = `${Math.max(0, (partner?.hp || 0) / (partner?.maxHp || 100) * 100)}%`;
   $('[data-action="tag"]').classList.toggle('unavailable', !partner?.hp);
   $('#score').textContent = String(state.score || 0).padStart(6, '0'); $('#kills').textContent = state.kills || 0;
