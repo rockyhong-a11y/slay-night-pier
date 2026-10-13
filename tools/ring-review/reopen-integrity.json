@@ -1,0 +1,84 @@
+{
+  "status": "REOPEN_INTEGRITY_PASS",
+  "actualBlenderVersion": "5.2.2 LTS",
+  "clips": {
+    "ropeRebound": {
+      "sampledFramesChecked": 5,
+      "keyCount": 14,
+      "scaleInvariant": true,
+      "packedPoseAndContactStateMatchesJSON": true
+    },
+    "runningClothesline": {
+      "sampledFramesChecked": 5,
+      "keyCount": 14,
+      "scaleInvariant": true,
+      "packedPoseAndContactStateMatchesJSON": true
+    },
+    "atlas_cornerDive": {
+      "sampledFramesChecked": 5,
+      "keyCount": 14,
+      "scaleInvariant": true,
+      "packedPoseAndContactStateMatchesJSON": true
+    },
+    "nova_cornerDive": {
+      "sampledFramesChecked": 5,
+      "keyCount": 14,
+      "scaleInvariant": true,
+      "packedPoseAndContactStateMatchesJSON": true
+    },
+    "atlas_cover": {
+      "sampledFramesChecked": 5,
+      "keyCount": 14,
+      "scaleInvariant": true,
+      "packedPoseAndContactStateMatchesJSON": true
+    },
+    "nova_cover": {
+      "sampledFramesChecked": 5,
+      "keyCount": 14,
+      "scaleInvariant": true,
+      "packedPoseAndContactStateMatchesJSON": true
+    },
+    "atlas_submission": {
+      "sampledFramesChecked": 5,
+      "keyCount": 14,
+      "scaleInvariant": true,
+      "packedPoseAndContactStateMatchesJSON": true
+    },
+    "nova_submission": {
+      "sampledFramesChecked": 5,
+      "keyCount": 14,
+      "scaleInvariant": true,
+      "packedPoseAndContactStateMatchesJSON": true
+    },
+    "atlas_finisher": {
+      "sampledFramesChecked": 6,
+      "keyCount": 14,
+      "scaleInvariant": true,
+      "packedPoseAndContactStateMatchesJSON": true
+    },
+    "nova_finisher": {
+      "sampledFramesChecked": 6,
+      "keyCount": 14,
+      "scaleInvariant": true,
+      "packedPoseAndContactStateMatchesJSON": true
+    },
+    "pinEscape": {
+      "sampledFramesChecked": 5,
+      "keyCount": 14,
+      "scaleInvariant": true,
+      "packedPoseAndContactStateMatchesJSON": true
+    },
+    "submissionEscape": {
+      "sampledFramesChecked": 5,
+      "keyCount": 14,
+      "scaleInvariant": true,
+      "packedPoseAndContactStateMatchesJSON": true
+    }
+  },
+  "packedOriginalTextures": 2,
+  "sourceSpriteHashes": {
+    "atlas": "10c41f60db291de24ea575d024c0df7fd4f8a1496543f92d8e1ceff6918e4aab",
+    "nova": "fef876442f102edcac3eb670d829dcd0df25a25792381daee43b51f5139dd0be"
+  },
+  "sceneSHA256": "ecdb8d416e6f66e618bcdea54cc69904bbd979401b55b53cb6d3491328c7942a"
+}

@@ -1,0 +1,179 @@
+{
+  "status": "PASS",
+  "checkCount": 39,
+  "errors": [],
+  "requests": [],
+  "checks": [
+    {
+      "name": "Responsive dual HUD and controls 320x568 dark",
+      "passed": true
+    },
+    {
+      "name": "Responsive dual HUD and controls 320x568 light",
+      "passed": true
+    },
+    {
+      "name": "Responsive dual HUD and controls 360x640 dark",
+      "passed": true
+    },
+    {
+      "name": "Responsive dual HUD and controls 360x640 light",
+      "passed": true
+    },
+    {
+      "name": "Responsive dual HUD and controls 393x852 dark",
+      "passed": true
+    },
+    {
+      "name": "Responsive dual HUD and controls 393x852 light",
+      "passed": true
+    },
+    {
+      "name": "Responsive dual HUD and controls 430x932 dark",
+      "passed": true
+    },
+    {
+      "name": "Responsive dual HUD and controls 430x932 light",
+      "passed": true
+    },
+    {
+      "name": "Responsive dual HUD and controls 844x390 dark",
+      "passed": true
+    },
+    {
+      "name": "Responsive dual HUD and controls 844x390 light",
+      "passed": true
+    },
+    {
+      "name": "Responsive dual HUD and controls 1280x900 dark",
+      "passed": true
+    },
+    {
+      "name": "Responsive dual HUD and controls 1280x900 light",
+      "passed": true
+    },
+    {
+      "name": "Nova selection creates Atlas opponent",
+      "passed": true
+    },
+    {
+      "name": "Actual touch joystick movement and release",
+      "passed": true
+    },
+    {
+      "name": "Pause freezes simulation and resumes",
+      "passed": true
+    },
+    {
+      "name": "Actual850ms touch long press [data-action=\"strike\"]",
+      "passed": true
+    },
+    {
+      "name": "Actual850ms touch long press [data-action=\"grab\"]",
+      "passed": true
+    },
+    {
+      "name": "Actual850ms touch long press [data-action=\"counter\"]",
+      "passed": true
+    },
+    {
+      "name": "Actual850ms touch long press [data-action=\"run\"]",
+      "passed": true
+    },
+    {
+      "name": "Actual850ms touch long press #joystick",
+      "passed": true
+    },
+    {
+      "name": "Actual850ms touch long press #pause",
+      "passed": true
+    },
+    {
+      "name": "Actual850ms touch long press [data-action=\"corner\"] in legal state fixture",
+      "passed": true
+    },
+    {
+      "name": "Actual850ms touch long press [data-action=\"pin\"] in legal state fixture",
+      "passed": true
+    },
+    {
+      "name": "Actual850ms touch long press [data-action=\"submission\"] in legal state fixture",
+      "passed": true
+    },
+    {
+      "name": "Actual850ms touch long press [data-action=\"finisher\"] in legal state fixture",
+      "passed": true
+    },
+    {
+      "name": "Real submission hold releases on touchEnd",
+      "passed": true
+    },
+    {
+      "name": "Real submission hold releases on touchCancel",
+      "passed": true
+    },
+    {
+      "name": "Real submission hold releases on blur",
+      "passed": true
+    },
+    {
+      "name": "Callout/selection/drag suppression on all ring and ordinary controls",
+      "passed": true
+    },
+    {
+      "name": "Native checkbox and help resume remain usable",
+      "passed": true
+    },
+    {
+      "name": "Special keyboard contract dispatches exact actions and hold release",
+      "passed": true
+    },
+    {
+      "name": "Pin count and defender escape context rendered",
+      "passed": true
+    },
+    {
+      "name": "Submission attacker can retain or release the hold",
+      "passed": true
+    },
+    {
+      "name": "Match result dialog renders winner and pin finish",
+      "passed": true
+    },
+    {
+      "name": "Keyboard accessible hero selection",
+      "passed": true
+    },
+    {
+      "name": "Lobby touch scrolling preserved",
+      "passed": true
+    },
+    {
+      "name": "Pinch zoom preserved",
+      "passed": true
+    },
+    {
+      "name": "No JavaScript or asset request errors",
+      "passed": true
+    },
+    {
+      "name": "Targeted latest help close restores canvas focus and result Escape retains rematch choice",
+      "passed": true
+    }
+  ],
+  "limitation": "Chromium mobile touch emulation. Physical iOS Safari browser chrome and callouts are not tested.",
+  "visualReview": {
+    "reviewer": "browser_qa",
+    "verdict": "ACCEPTED",
+    "inspected": [
+      "lobby-320x568-dark.png",
+      "lobby-393x852-dark.png",
+      "ring-320x568-dark.png",
+      "ring-393x852-dark.png",
+      "ring-844x390-dark.png",
+      "pin-escape-context.png",
+      "result-mobile.png"
+    ],
+    "notes": "Both athletes and controls readable; short portrait permits natural vertical scroll; ring count appears once after scene fix. Physical iOS Safari callout behavior remains outside Chromium emulation."
+  }
+}

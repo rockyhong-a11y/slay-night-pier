@@ -1,0 +1,91 @@
+{
+  "cases": [
+    {
+      "kind": "strike",
+      "action": "strike",
+      "visibleLabels": [
+        "RING NIGHT",
+        "SLAY  •  SINGLES MATCH",
+        "SLAY",
+        "RING  /  NIGHT",
+        "S L A Y",
+        "NIGHT PIER ARENA",
+        "!",
+        "ONE FALL"
+      ],
+      "opponentAction": "strike",
+      "time": 0.275,
+      "finish": {
+        "visibleLabels": [
+          "RING NIGHT",
+          "SLAY  •  SINGLES MATCH",
+          "SLAY",
+          "RING  /  NIGHT",
+          "S L A Y",
+          "NIGHT PIER ARENA",
+          "ONE FALL"
+        ],
+        "opponentAction": "idle"
+      }
+    },
+    {
+      "kind": "grab",
+      "action": "grappleWindup",
+      "visibleLabels": [
+        "RING NIGHT",
+        "SLAY  •  SINGLES MATCH",
+        "SLAY",
+        "RING  /  NIGHT",
+        "S L A Y",
+        "NIGHT PIER ARENA",
+        "잡기",
+        "ONE FALL"
+      ],
+      "opponentAction": "grappleWindup",
+      "time": 0.17483333333333334,
+      "finish": {
+        "visibleLabels": [
+          "RING NIGHT",
+          "SLAY  •  SINGLES MATCH",
+          "SLAY",
+          "RING  /  NIGHT",
+          "S L A Y",
+          "NIGHT PIER ARENA",
+          "ONE FALL",
+          "스냅메어"
+        ],
+        "opponentAction": "grapple"
+      }
+    },
+    {
+      "kind": "finisher",
+      "action": "finisherWindup",
+      "visibleLabels": [
+        "RING NIGHT",
+        "SLAY  •  SINGLES MATCH",
+        "SLAY",
+        "RING  /  NIGHT",
+        "S L A Y",
+        "NIGHT PIER ARENA",
+        "FINISH",
+        "ONE FALL"
+      ],
+      "opponentAction": "finisherWindup",
+      "time": 0.22433333333333333,
+      "finish": {
+        "visibleLabels": [
+          "RING NIGHT",
+          "SLAY  •  SINGLES MATCH",
+          "SLAY",
+          "RING  /  NIGHT",
+          "S L A Y",
+          "NIGHT PIER ARENA",
+          "ONE FALL",
+          "오로라 스플렉스"
+        ],
+        "opponentAction": "finisher"
+      }
+    }
+  ],
+  "errors": []
+}

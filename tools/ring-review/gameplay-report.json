@@ -1,0 +1,326 @@
+{
+  "passed": true,
+  "description": "Two matches using action/setMove/step only. No health, position, meter, AI or outcome injection. A simple legal-input bot attempts close grapples and pins; each match must terminate by the rules.",
+  "results": [
+    {
+      "hero": "atlas",
+      "status": "victory",
+      "time": 9.283333333333447,
+      "winner": "atlas",
+      "method": "pin",
+      "hp": [
+        160,
+        56
+      ],
+      "meters": [
+        29,
+        9
+      ],
+      "events": [
+        {
+          "type": "grapple",
+          "time": 0.2833333333333334,
+          "move": "atlas_front_down"
+        },
+        {
+          "type": "hit",
+          "time": 1.083333333333332
+        },
+        {
+          "type": "slam",
+          "time": 1.083333333333332,
+          "move": "atlas_front_down"
+        },
+        {
+          "type": "pinStart",
+          "time": 1.6999999999999964
+        },
+        {
+          "type": "pinCount",
+          "time": 2.6249999999999933
+        },
+        {
+          "type": "holdEscape",
+          "time": 3.4249999999999905
+        },
+        {
+          "type": "strike",
+          "time": 4.250000000000001,
+          "move": "jab"
+        },
+        {
+          "type": "counterWindow",
+          "time": 4.258333333333335
+        },
+        {
+          "type": "counterMiss",
+          "time": 4.441666666666677
+        },
+        {
+          "type": "strike",
+          "time": 4.633333333333353,
+          "move": "cross"
+        },
+        {
+          "type": "telegraph",
+          "time": 4.633333333333353
+        },
+        {
+          "type": "strike",
+          "time": 4.675000000000022,
+          "move": "cross"
+        },
+        {
+          "type": "hit",
+          "time": 4.833333333333363
+        },
+        {
+          "type": "grapple",
+          "time": 5.100000000000043,
+          "move": "atlas_front_down"
+        },
+        {
+          "type": "hit",
+          "time": 5.900000000000083
+        },
+        {
+          "type": "slam",
+          "time": 5.900000000000083,
+          "move": "atlas_front_down"
+        },
+        {
+          "type": "pinStart",
+          "time": 6.51666666666678
+        },
+        {
+          "type": "pinCount",
+          "time": 7.441666666666826
+        },
+        {
+          "type": "pinCount",
+          "time": 8.3583333333335
+        },
+        {
+          "type": "pinCount",
+          "time": 9.283333333333447
+        },
+        {
+          "type": "matchEnd",
+          "time": 9.283333333333447
+        }
+      ]
+    },
+    {
+      "hero": "nova",
+      "status": "victory",
+      "time": 79.97500000000971,
+      "winner": "nova",
+      "method": "pin",
+      "hp": [
+        140,
+        1
+      ],
+      "meters": [
+        0,
+        33
+      ],
+      "events": [
+        {
+          "type": "grapple",
+          "time": 0.2833333333333334,
+          "move": "nova_front_down"
+        },
+        {
+          "type": "hit",
+          "time": 1.0416666666666654
+        },
+        {
+          "type": "slam",
+          "time": 1.0416666666666654,
+          "move": "nova_front_down"
+        },
+        {
+          "type": "pinStart",
+          "time": 1.9833333333333287
+        },
+        {
+          "type": "pinCount",
+          "time": 2.9083333333333257
+        },
+        {
+          "type": "holdEscape",
+          "time": 3.608333333333323
+        },
+        {
+          "type": "telegraph",
+          "time": 4.816666666666696
+        },
+        {
+          "type": "grapple",
+          "time": 5.525000000000064,
+          "move": "nova_front_down"
+        },
+        {
+          "type": "hit",
+          "time": 6.283333333333435
+        },
+        {
+          "type": "slam",
+          "time": 6.283333333333435,
+          "move": "nova_front_down"
+        },
+        {
+          "type": "telegraph",
+          "time": 11.324999999999998
+        },
+        {
+          "type": "grapple",
+          "time": 11.33333333333333,
+          "move": "nova_front_down"
+        },
+        {
+          "type": "hit",
+          "time": 12.09166666666662
+        },
+        {
+          "type": "slam",
+          "time": 12.09166666666662,
+          "move": "nova_front_down"
+        },
+        {
+          "type": "grapple",
+          "time": 17.991666666666287,
+          "move": "nova_front_down"
+        },
+        {
+          "type": "hit",
+          "time": 18.749999999999577
+        },
+        {
+          "type": "slam",
+          "time": 18.749999999999577,
+          "move": "nova_front_down"
+        },
+        {
+          "type": "grapple",
+          "time": 25.499999999999194,
+          "move": "nova_front_down"
+        },
+        {
+          "type": "hit",
+          "time": 26.258333333332484
+        },
+        {
+          "type": "slam",
+          "time": 26.258333333332484,
+          "move": "nova_front_down"
+        },
+        {
+          "type": "grapple",
+          "time": 33.57499999999874,
+          "move": "nova_front_down"
+        },
+        {
+          "type": "hit",
+          "time": 34.33333333333203
+        },
+        {
+          "type": "slam",
+          "time": 34.33333333333203,
+          "move": "nova_front_down"
+        },
+        {
+          "type": "grapple",
+          "time": 41.79166666666494,
+          "move": "nova_front_down"
+        },
+        {
+          "type": "hit",
+          "time": 42.54999999999823
+        },
+        {
+          "type": "slam",
+          "time": 42.54999999999823,
+          "move": "nova_front_down"
+        },
+        {
+          "type": "grapple",
+          "time": 50.00833333333114,
+          "move": "nova_front_down"
+        },
+        {
+          "type": "hit",
+          "time": 50.76666666666443
+        },
+        {
+          "type": "slam",
+          "time": 50.76666666666443,
+          "move": "nova_front_down"
+        },
+        {
+          "type": "grapple",
+          "time": 58.22499999999734,
+          "move": "nova_front_down"
+        },
+        {
+          "type": "hit",
+          "time": 58.98333333333063
+        },
+        {
+          "type": "slam",
+          "time": 58.98333333333063,
+          "move": "nova_front_down"
+        },
+        {
+          "type": "grapple",
+          "time": 66.44166666666561,
+          "move": "nova_front_down"
+        },
+        {
+          "type": "hit",
+          "time": 67.19999999999955
+        },
+        {
+          "type": "slam",
+          "time": 67.19999999999955,
+          "move": "nova_front_down"
+        },
+        {
+          "type": "finisher",
+          "time": 74.65833333333882,
+          "move": "nova_finisher"
+        },
+        {
+          "type": "hit",
+          "time": 76.15000000000667
+        },
+        {
+          "type": "slam",
+          "time": 76.15000000000667,
+          "move": "nova_finisher"
+        },
+        {
+          "type": "pinStart",
+          "time": 77.20833333334085
+        },
+        {
+          "type": "pinCount",
+          "time": 78.13333333334158
+        },
+        {
+          "type": "pinCount",
+          "time": 79.05000000000898
+        },
+        {
+          "type": "pinCount",
+          "time": 79.97500000000971
+        },
+        {
+          "type": "matchEnd",
+          "time": 79.97500000000971
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,180 @@
+{
+  "status": "PASS",
+  "reviewer": "browser_qa",
+  "description": "Independent actual browser scene, opaque-raster, rule and telegraph review. UI39checks are separately retained; no repeat after unchanged UI.",
+  "sceneCount": 30,
+  "sceneChecksPassed": true,
+  "resolvedPoseCoverage": {
+    "clipCount": 30,
+    "missing": 0
+  },
+  "fairMatches": [
+    {
+      "hero": "atlas",
+      "status": "victory",
+      "time": 9.283333333333447,
+      "winner": "atlas",
+      "method": "pin",
+      "hp": [
+        160,
+        56
+      ],
+      "meters": [
+        29,
+        9
+      ]
+    },
+    {
+      "hero": "nova",
+      "status": "victory",
+      "time": 79.97500000000971,
+      "winner": "nova",
+      "method": "pin",
+      "hp": [
+        140,
+        1
+      ],
+      "meters": [
+        0,
+        33
+      ]
+    }
+  ],
+  "telegraphs": {
+    "strike": "!",
+    "grab": "잡기",
+    "finisher": "FINISH",
+    "appearedDuringRealAIDecision": true,
+    "disappearedAfterContact": true
+  },
+  "manualVisualReview": {
+    "accepted": [
+      "Nova cover places Atlas horizontally on mat; attacking and defending heads remain distinguishable.",
+      "Atlas and Nova submission poses show two heads and arm engagement.",
+      "All16 impact captures use actual ground/posture art and preserve head/body drawing aspect.",
+      "Corner dives and both finisher sampled midposes remain inside canvas.",
+      "AI threat label and contact-progress strip are readable above opponent head.",
+      "Previously collapsed rolling-cradle recovery now shows both standing wrestlers separately near the rope."
+    ],
+    "limitation": "The hero banks have no true face-down prone drawing. DDT/bulldog reactions reuse a low side-fall. These are stylized paired drawings, not exact anatomical wrestling choreography."
+  },
+  "openFindings": [],
+  "errors": [],
+  "requests": [],
+  "sourceSHA256": {
+    "src/wrestling-game.js": "348804b4ba0409343dadfe2be6cea1121b182d35b16b6013d2e4d082dfbfd9d5",
+    "src/ring-scene.js": "f521591a25636ad93653e558347fb2ee006bfc17789efd83121eb1742b54f324",
+    "public/assets/motion/ring.json": "d161432420a8999fbcd65590ea11d2d5ea7b8cb479c9ba139793a523c40012cf",
+    "public/assets/sprites/manifest.json": "365dd0b2a6150c23bac4ebaa534edad779b1f5d6cb820308a551bef481f382d4",
+    "src/main.js": "2e4235bfcbd2f23d1bade8d02470834abf2bc56ef9345a9840ae48df67bfc4d1",
+    "src/style.css": "5ea995cc97a337de4b2854e9b7e055ce16b5b92186038f67cc4f39c58b5b478d"
+  },
+  "completedAt": "2026-10-13T14:47:37.358345+00:00",
+  "actualRasterProfiles": [
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "completeSequences": 52,
+      "opaqueDraws": 26317,
+      "fallbackCalls": 0,
+      "clippedCalls": 0,
+      "missingResolvedPoseKeys": 0,
+      "minPostReleaseRootGapWorld": 44.80000000000001,
+      "errors": [],
+      "requests": []
+    },
+    {
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "completeSequences": 52,
+      "opaqueDraws": 26317,
+      "fallbackCalls": 0,
+      "clippedCalls": 0,
+      "missingResolvedPoseKeys": 0,
+      "minPostReleaseRootGapWorld": 44.80000000000001,
+      "errors": [],
+      "requests": []
+    }
+  ],
+  "passiveAi": {
+    "passed": true,
+    "description": "Ordinary player inactivity for20seconds with default health/position/meter/activeAI. No state injection.",
+    "results": [
+      {
+        "hero": "atlas",
+        "initialHp": 160,
+        "hp": 1,
+        "status": "playing",
+        "time": 19.999999999999506,
+        "receivedHits": 14,
+        "legalCpuHolds": 2,
+        "eventTypes": [
+          "strike",
+          "telegraph",
+          "hurt",
+          "grapple",
+          "slam",
+          "pinStart",
+          "ropeBreak",
+          "chainReady",
+          "finisher"
+        ]
+      },
+      {
+        "hero": "nova",
+        "initialHp": 140,
+        "hp": 1,
+        "status": "playing",
+        "time": 19.999999999999506,
+        "receivedHits": 14,
+        "legalCpuHolds": 2,
+        "eventTypes": [
+          "strike",
+          "telegraph",
+          "hurt",
+          "grapple",
+          "slam",
+          "pinStart",
+          "ropeBreak",
+          "chainReady",
+          "finisher"
+        ]
+      }
+    ]
+  },
+  "unitChecks": {
+    "total": 53,
+    "passed": 53,
+    "focusedRingTests": 17
+  },
+  "resolvedFindings": [
+    {
+      "id": "boundary-release-overlap",
+      "resolution": "Shared translation preserves both authored root offsets at a rope; upright separation prevents persistent full overlap.",
+      "actualWitness": {
+        "playerX": 294.6,
+        "opponentX": 365,
+        "gapWorld": 70.4,
+        "actions": [
+          "idle",
+          "idle"
+        ],
+        "afterSeconds": 10
+      },
+      "before": "artifacts/ring-night/independent/boundary/nova-rear-right-x175-both-standing.png",
+      "after": "artifacts/ring-night/independent/boundary/nova-rear-right-x175-both-standing-fixed.png"
+    }
+  ],
+  "evidence": {
+    "visual": "artifacts/ring-night/independent/visual/report.json",
+    "gameplay": "artifacts/ring-night/independent/gameplay/report.json",
+    "telegraph": "artifacts/ring-night/independent/telegraphs/report.json",
+    "ui": "artifacts/ring-ui-qa/report.json",
+    "opaqueRaster": "artifacts/ring-night/independent/render-probe-portrait390.json",
+    "smallPortraitOpaqueRaster": "artifacts/ring-night/independent/render-probe-portrait320.json"
+  }
+}

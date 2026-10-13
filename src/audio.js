@@ -125,7 +125,21 @@ export class AudioEngine {
     this.unlock();
     if (!this.context) return;
     const now = this.context.currentTime;
-    if (name === 'swing') {
+    if (name === 'bell') {
+      for (let i = 0; i < 3; i++) {
+        this.tone(880, .62, 'sine', .10, now + i * .22);
+        this.tone(1423, .40, 'sine', .035, now + i * .22);
+      }
+    } else if (name === 'count') {
+      this.hit('ground', now, .62);
+      this.tone(180, .075, 'triangle', .045, now);
+    } else if (name === 'rope') {
+      this.tone(118, .20, 'triangle', .06, now, 52);
+      this.noise(.09, .015, now, 700);
+    } else if (name === 'escape') {
+      this.noise(.1, .028, now, 1600);
+      this.tone(440, .12, 'sine', .05, now, 660);
+    } else if (name === 'swing') {
       this.noise(0.1, 0.035, now, 1600);
     } else if (name === 'punch' || name === 'kick' || name === 'hurt') {
       this.hit('light', now);

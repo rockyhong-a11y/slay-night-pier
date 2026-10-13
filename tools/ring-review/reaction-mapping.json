@@ -1,0 +1,174 @@
+{
+  "status": "ALL16_SEMANTIC_KEYS_RESOLVE_NO_JAB_FALLBACK",
+  "anatomyAcceptance": "Actual runtime art review required",
+  "clips": {
+    "atlas_front_up": {
+      "victim": "nova",
+      "resolvedPoses": {
+        "folded": "underhook",
+        "hurt": "hurt",
+        "idle": "idle",
+        "shoulderFold": "cradleTuck",
+        "supine": "verticalRelease"
+      },
+      "standingJabFallback": false
+    },
+    "atlas_front_down": {
+      "victim": "nova",
+      "resolvedPoses": {
+        "folded": "underhook",
+        "idle": "idle",
+        "prone": "neckbreakerFall",
+        "shoulderFold": "cradleTuck"
+      },
+      "standingJabFallback": false
+    },
+    "atlas_front_left": {
+      "victim": "nova",
+      "resolvedPoses": {
+        "folded": "underhook",
+        "hurt": "hurt",
+        "idle": "idle",
+        "supine": "verticalRelease"
+      },
+      "standingJabFallback": false
+    },
+    "atlas_front_right": {
+      "victim": "nova",
+      "resolvedPoses": {
+        "backbend": "backSuplexArch",
+        "folded": "underhook",
+        "idle": "idle",
+        "supine": "verticalRelease"
+      },
+      "standingJabFallback": false
+    },
+    "atlas_rear_up": {
+      "victim": "nova",
+      "resolvedPoses": {
+        "backbend": "backSuplexArch",
+        "folded": "underhook",
+        "rearFacing": "rearFacing",
+        "shoulderFold": "cradleTuck",
+        "supine": "verticalRelease"
+      },
+      "standingJabFallback": false
+    },
+    "atlas_rear_down": {
+      "victim": "nova",
+      "resolvedPoses": {
+        "backbend": "backSuplexArch",
+        "rearFacing": "rearFacing",
+        "supine": "verticalRelease"
+      },
+      "standingJabFallback": false
+    },
+    "atlas_rear_left": {
+      "victim": "nova",
+      "resolvedPoses": {
+        "backbend": "backSuplexArch",
+        "hurt": "hurt",
+        "rearFacing": "rearFacing",
+        "supine": "verticalRelease"
+      },
+      "standingJabFallback": false
+    },
+    "atlas_rear_right": {
+      "victim": "nova",
+      "resolvedPoses": {
+        "folded": "underhook",
+        "kneeling": "snapmareFinish",
+        "prone": "neckbreakerFall",
+        "rearFacing": "rearFacing"
+      },
+      "standingJabFallback": false
+    },
+    "nova_front_up": {
+      "victim": "atlas",
+      "resolvedPoses": {
+        "folded": "underhook",
+        "hurt": "hurt",
+        "idle": "idle",
+        "shoulderFold": "powerbombSit",
+        "supine": "germanRelease"
+      },
+      "standingJabFallback": false
+    },
+    "nova_front_down": {
+      "victim": "atlas",
+      "resolvedPoses": {
+        "folded": "underhook",
+        "idle": "idle",
+        "seated": "bulldogLand",
+        "shoulderFold": "powerbombSit",
+        "tuck": "powerbombSit"
+      },
+      "standingJabFallback": false
+    },
+    "nova_front_left": {
+      "victim": "atlas",
+      "resolvedPoses": {
+        "folded": "underhook",
+        "hurt": "hurt",
+        "idle": "idle",
+        "shoulderFold": "powerbombSit",
+        "supine": "germanRelease",
+        "tuck": "powerbombSit"
+      },
+      "standingJabFallback": false
+    },
+    "nova_front_right": {
+      "victim": "atlas",
+      "resolvedPoses": {
+        "folded": "underhook",
+        "hurt": "hurt",
+        "idle": "idle",
+        "shoulderFold": "powerbombSit",
+        "supine": "germanRelease",
+        "tuck": "powerbombSit"
+      },
+      "standingJabFallback": false
+    },
+    "nova_rear_up": {
+      "victim": "atlas",
+      "resolvedPoses": {
+        "backbend": "throwArc",
+        "hurt": "hurt",
+        "rearFacing": "rearFacing",
+        "shoulderFold": "powerbombSit",
+        "supine": "germanRelease"
+      },
+      "standingJabFallback": false
+    },
+    "nova_rear_down": {
+      "victim": "atlas",
+      "resolvedPoses": {
+        "backbend": "throwArc",
+        "folded": "underhook",
+        "rearFacing": "rearFacing",
+        "supine": "germanRelease"
+      },
+      "standingJabFallback": false
+    },
+    "nova_rear_left": {
+      "victim": "atlas",
+      "resolvedPoses": {
+        "backbend": "throwArc",
+        "rearFacing": "rearFacing",
+        "supine": "germanRelease"
+      },
+      "standingJabFallback": false
+    },
+    "nova_rear_right": {
+      "victim": "atlas",
+      "resolvedPoses": {
+        "folded": "underhook",
+        "kneeling": "spinebusterLand",
+        "rearFacing": "rearFacing",
+        "supine": "germanRelease",
+        "tuck": "powerbombSit"
+      },
+      "standingJabFallback": false
+    }
+  }
+}

@@ -1,0 +1,523 @@
+{
+  "passed": true,
+  "description": "Controlled state fixtures for visual inspection. These are not evidence of a fair match outcome; ring-gameplay-qa verifies legal-input matches separately.",
+  "records": [
+    {
+      "hero": "atlas",
+      "kind": "walk",
+      "accepted": true,
+      "action": "walk",
+      "opponentAction": "idle",
+      "phase": "wrestling",
+      "scale": 1,
+      "positions": [
+        200.0000000000001,
+        0.54,
+        243.0000000000001,
+        0.54
+      ],
+      "file": "atlas-walk.png"
+    },
+    {
+      "hero": "atlas",
+      "kind": "jab",
+      "accepted": true,
+      "action": "strike",
+      "opponentAction": "hurt",
+      "phase": "wrestling",
+      "clip": "jab",
+      "scale": 1,
+      "positions": [
+        175,
+        0.54,
+        242.13333333333333,
+        0.54
+      ],
+      "file": "atlas-jab.png"
+    },
+    {
+      "hero": "atlas",
+      "kind": "rope",
+      "accepted": true,
+      "action": "run",
+      "opponentAction": "idle",
+      "phase": "wrestling",
+      "scale": 0.885157695476763,
+      "positions": [
+        89.51666666666664,
+        0.54,
+        242,
+        0.54
+      ],
+      "file": "atlas-rope.png"
+    },
+    {
+      "hero": "atlas",
+      "kind": "corner",
+      "accepted": true,
+      "action": "cornerDive",
+      "opponentAction": "idle",
+      "phase": "wrestling",
+      "scale": 0.8346813255149581,
+      "positions": [
+        142.36772266666668,
+        0.3092133688888889,
+        242,
+        0.54
+      ],
+      "file": "atlas-corner.png"
+    },
+    {
+      "hero": "atlas",
+      "kind": "finisher",
+      "accepted": true,
+      "action": "finisher",
+      "opponentAction": "grabbed",
+      "phase": "wrestling",
+      "clip": "atlas_finisher",
+      "scale": 0.9999865030743111,
+      "positions": [
+        175,
+        0.54,
+        199.3208406518208,
+        0.54
+      ],
+      "file": "atlas-finisher.png"
+    },
+    {
+      "hero": "atlas",
+      "kind": "pin",
+      "accepted": true,
+      "action": "pin",
+      "opponentAction": "held",
+      "phase": "pin",
+      "scale": 1,
+      "positions": [
+        208.67168386131587,
+        0.54,
+        242,
+        0.54
+      ],
+      "file": "atlas-pin.png"
+    },
+    {
+      "hero": "atlas",
+      "kind": "submission",
+      "accepted": true,
+      "action": "submission",
+      "opponentAction": "held",
+      "phase": "submission",
+      "scale": 1,
+      "positions": [
+        189.52,
+        0.54,
+        242,
+        0.54
+      ],
+      "file": "atlas-submission.png"
+    },
+    {
+      "hero": "atlas",
+      "kind": "grab",
+      "direction": "front_up",
+      "accepted": true,
+      "action": "grapple",
+      "opponentAction": "grabbed",
+      "phase": "wrestling",
+      "clip": "atlas_front_up",
+      "scale": 1,
+      "positions": [
+        175,
+        0.54,
+        281.73053262134863,
+        0.54
+      ],
+      "file": "atlas-grab-front_up.png"
+    },
+    {
+      "hero": "atlas",
+      "kind": "grab",
+      "direction": "front_down",
+      "accepted": true,
+      "action": "grapple",
+      "opponentAction": "grabbed",
+      "phase": "wrestling",
+      "clip": "atlas_front_down",
+      "scale": 1,
+      "positions": [
+        175,
+        0.54,
+        233.18215375558475,
+        0.54
+      ],
+      "file": "atlas-grab-front_down.png"
+    },
+    {
+      "hero": "atlas",
+      "kind": "grab",
+      "direction": "front_left",
+      "accepted": true,
+      "action": "grapple",
+      "opponentAction": "grabbed",
+      "phase": "wrestling",
+      "clip": "atlas_front_left",
+      "scale": 1,
+      "positions": [
+        175,
+        0.54,
+        210.81942057560468,
+        0.54
+      ],
+      "file": "atlas-grab-front_left.png"
+    },
+    {
+      "hero": "atlas",
+      "kind": "grab",
+      "direction": "front_right",
+      "accepted": true,
+      "action": "grapple",
+      "opponentAction": "grabbed",
+      "phase": "wrestling",
+      "clip": "atlas_front_right",
+      "scale": 1,
+      "positions": [
+        175,
+        0.54,
+        299.52572232938934,
+        0.54
+      ],
+      "file": "atlas-grab-front_right.png"
+    },
+    {
+      "hero": "atlas",
+      "kind": "grab",
+      "direction": "rear_up",
+      "accepted": true,
+      "action": "grapple",
+      "opponentAction": "grabbed",
+      "phase": "wrestling",
+      "clip": "atlas_rear_up",
+      "scale": 0.8666016293055429,
+      "positions": [
+        175,
+        0.54,
+        67.57699155378486,
+        0.54
+      ],
+      "file": "atlas-grab-rear_up.png"
+    },
+    {
+      "hero": "atlas",
+      "kind": "grab",
+      "direction": "rear_down",
+      "accepted": true,
+      "action": "grapple",
+      "opponentAction": "grabbed",
+      "phase": "wrestling",
+      "clip": "atlas_rear_down",
+      "scale": 1,
+      "positions": [
+        175,
+        0.54,
+        229.71122112981496,
+        0.54
+      ],
+      "file": "atlas-grab-rear_down.png"
+    },
+    {
+      "hero": "atlas",
+      "kind": "grab",
+      "direction": "rear_left",
+      "accepted": true,
+      "action": "grapple",
+      "opponentAction": "grabbed",
+      "phase": "wrestling",
+      "clip": "atlas_rear_left",
+      "scale": 1,
+      "positions": [
+        175,
+        0.54,
+        199.083008,
+        0.54
+      ],
+      "file": "atlas-grab-rear_left.png"
+    },
+    {
+      "hero": "atlas",
+      "kind": "grab",
+      "direction": "rear_right",
+      "accepted": true,
+      "action": "grapple",
+      "opponentAction": "grabbed",
+      "phase": "wrestling",
+      "clip": "atlas_rear_right",
+      "scale": 0.9496501366397958,
+      "positions": [
+        175,
+        0.54,
+        330.55199929214723,
+        0.54
+      ],
+      "file": "atlas-grab-rear_right.png"
+    },
+    {
+      "hero": "nova",
+      "kind": "walk",
+      "accepted": true,
+      "action": "walk",
+      "opponentAction": "idle",
+      "phase": "wrestling",
+      "scale": 1,
+      "positions": [
+        201.7499999999999,
+        0.54,
+        244.7499999999999,
+        0.54
+      ],
+      "file": "nova-walk.png"
+    },
+    {
+      "hero": "nova",
+      "kind": "jab",
+      "accepted": true,
+      "action": "strike",
+      "opponentAction": "hurt",
+      "phase": "wrestling",
+      "clip": "jab",
+      "scale": 1,
+      "positions": [
+        175,
+        0.54,
+        242.13333333333333,
+        0.54
+      ],
+      "file": "nova-jab.png"
+    },
+    {
+      "hero": "nova",
+      "kind": "rope",
+      "accepted": true,
+      "action": "run",
+      "opponentAction": "idle",
+      "phase": "wrestling",
+      "scale": 0.885157695476763,
+      "positions": [
+        89.51666666666664,
+        0.54,
+        242,
+        0.54
+      ],
+      "file": "nova-rope.png"
+    },
+    {
+      "hero": "nova",
+      "kind": "corner",
+      "accepted": true,
+      "action": "cornerDive",
+      "opponentAction": "idle",
+      "phase": "wrestling",
+      "scale": 0.775103100688624,
+      "positions": [
+        100.97236786559199,
+        0.21332582386945037,
+        242,
+        0.54
+      ],
+      "file": "nova-corner.png"
+    },
+    {
+      "hero": "nova",
+      "kind": "finisher",
+      "accepted": true,
+      "action": "finisher",
+      "opponentAction": "grabbed",
+      "phase": "wrestling",
+      "clip": "nova_finisher",
+      "scale": 0.8252368772487155,
+      "positions": [
+        175,
+        0.54,
+        60.14032707194343,
+        0.54
+      ],
+      "file": "nova-finisher.png"
+    },
+    {
+      "hero": "nova",
+      "kind": "pin",
+      "accepted": true,
+      "action": "pin",
+      "opponentAction": "held",
+      "phase": "pin",
+      "scale": 1,
+      "positions": [
+        239.44,
+        0.54,
+        242,
+        0.54
+      ],
+      "file": "nova-pin.png"
+    },
+    {
+      "hero": "nova",
+      "kind": "submission",
+      "accepted": true,
+      "action": "submission",
+      "opponentAction": "held",
+      "phase": "submission",
+      "scale": 1,
+      "positions": [
+        215.12,
+        0.54,
+        242,
+        0.54
+      ],
+      "file": "nova-submission.png"
+    },
+    {
+      "hero": "nova",
+      "kind": "grab",
+      "direction": "front_up",
+      "accepted": true,
+      "action": "grapple",
+      "opponentAction": "grabbed",
+      "phase": "wrestling",
+      "clip": "nova_front_up",
+      "scale": 0.9202979019266988,
+      "positions": [
+        175,
+        0.54,
+        76.10749589922915,
+        0.54
+      ],
+      "file": "nova-grab-front_up.png"
+    },
+    {
+      "hero": "nova",
+      "kind": "grab",
+      "direction": "front_down",
+      "accepted": true,
+      "action": "grapple",
+      "opponentAction": "grabbed",
+      "phase": "wrestling",
+      "clip": "nova_front_down",
+      "scale": 1,
+      "positions": [
+        175,
+        0.54,
+        289.65363199999996,
+        0.54
+      ],
+      "file": "nova-grab-front_down.png"
+    },
+    {
+      "hero": "nova",
+      "kind": "grab",
+      "direction": "front_left",
+      "accepted": true,
+      "action": "grapple",
+      "opponentAction": "grabbed",
+      "phase": "wrestling",
+      "clip": "nova_front_left",
+      "scale": 1,
+      "positions": [
+        175,
+        0.54,
+        312.9131991710118,
+        0.54
+      ],
+      "file": "nova-grab-front_left.png"
+    },
+    {
+      "hero": "nova",
+      "kind": "grab",
+      "direction": "front_right",
+      "accepted": true,
+      "action": "grapple",
+      "opponentAction": "grabbed",
+      "phase": "wrestling",
+      "clip": "nova_front_right",
+      "scale": 1,
+      "positions": [
+        175,
+        0.54,
+        303.7960828764685,
+        0.54
+      ],
+      "file": "nova-grab-front_right.png"
+    },
+    {
+      "hero": "nova",
+      "kind": "grab",
+      "direction": "rear_up",
+      "accepted": true,
+      "action": "grapple",
+      "opponentAction": "grabbed",
+      "phase": "wrestling",
+      "clip": "nova_rear_up",
+      "scale": 0.8407224938218233,
+      "positions": [
+        175,
+        0.54,
+        58.985587200000026,
+        0.54
+      ],
+      "file": "nova-grab-rear_up.png"
+    },
+    {
+      "hero": "nova",
+      "kind": "grab",
+      "direction": "rear_down",
+      "accepted": true,
+      "action": "grapple",
+      "opponentAction": "grabbed",
+      "phase": "wrestling",
+      "clip": "nova_rear_down",
+      "scale": 0.8715543949321629,
+      "positions": [
+        175,
+        0.54,
+        68.07810057829045,
+        0.54
+      ],
+      "file": "nova-grab-rear_down.png"
+    },
+    {
+      "hero": "nova",
+      "kind": "grab",
+      "direction": "rear_left",
+      "accepted": true,
+      "action": "grapple",
+      "opponentAction": "grabbed",
+      "phase": "wrestling",
+      "clip": "nova_rear_left",
+      "scale": 1,
+      "positions": [
+        175,
+        0.54,
+        190.4137471591054,
+        0.54
+      ],
+      "file": "nova-grab-rear_left.png"
+    },
+    {
+      "hero": "nova",
+      "kind": "grab",
+      "direction": "rear_right",
+      "accepted": true,
+      "action": "grapple",
+      "opponentAction": "grabbed",
+      "phase": "wrestling",
+      "clip": "nova_rear_right",
+      "scale": 0.7952340841040622,
+      "positions": [
+        175,
+        0.54,
+        365,
+        0.54
+      ],
+      "file": "nova-grab-rear_right.png"
+    }
+  ],
+  "errors": []
+}

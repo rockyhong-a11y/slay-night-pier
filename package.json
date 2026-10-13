@@ -1,6 +1,6 @@
 {
   "name": "slay-night-pier",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -8,12 +8,10 @@
     "build": "vite build",
     "preview": "vite preview --host 0.0.0.0",
     "test": "node --test tests/*.test.js",
-    "qa": "node tools/browser-qa.mjs",
-    "qa:combat": "node tools/combat-qa.mjs",
-    "qa:stage": "node tools/full-stage-qa.mjs",
-    "qa:walk": "node tools/wholebody-walk-qa.mjs",
-    "qa:techniques": "node tools/technique-qa.mjs",
-    "qa:proportions": "node tools/proportion-qa.mjs"
+    "qa": "node tools/ring-ui-qa.mjs && node tools/ring-gameplay-qa.mjs",
+    "qa:ui": "node tools/ring-ui-qa.mjs",
+    "qa:match": "node tools/ring-gameplay-qa.mjs",
+    "qa:visual": "node tools/ring-visual-qa.mjs"
   },
   "devDependencies": {
     "@playwright/test": "^1.56.0",

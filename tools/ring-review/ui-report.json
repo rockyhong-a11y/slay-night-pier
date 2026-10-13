@@ -1,0 +1,1426 @@
+{
+  "baseURL": "http://127.0.0.1:5180/",
+  "started": "2026-10-13T14:18:20.140Z",
+  "checks": [
+    {
+      "name": "Responsive dual HUD and controls 320x568 dark",
+      "passed": true,
+      "dimensions": {
+        "scrollWidth": 320,
+        "innerWidth": 320
+      },
+      "ring": {
+        "x": 9,
+        "y": 141,
+        "width": 302,
+        "height": 272
+      },
+      "buttons": [
+        {
+          "name": "pause",
+          "left": 280,
+          "right": 311,
+          "top": 41.5,
+          "bottom": 72.5
+        },
+        {
+          "name": "joystick",
+          "left": 9,
+          "right": 94,
+          "top": 427,
+          "bottom": 512
+        },
+        {
+          "name": "grab",
+          "left": 112,
+          "right": 208,
+          "top": 424.5,
+          "bottom": 462.5
+        },
+        {
+          "name": "counter",
+          "left": 215,
+          "right": 311,
+          "top": 424.5,
+          "bottom": 462.5
+        },
+        {
+          "name": "strike",
+          "left": 112,
+          "right": 311,
+          "top": 469.5,
+          "bottom": 514.5
+        },
+        {
+          "name": "run",
+          "left": 9,
+          "right": 65.390625,
+          "top": 524,
+          "bottom": 562
+        },
+        {
+          "name": "corner",
+          "left": 70.390625,
+          "right": 126.796875,
+          "top": 524,
+          "bottom": 562
+        },
+        {
+          "name": "pin",
+          "left": 131.796875,
+          "right": 188.1875,
+          "top": 524,
+          "bottom": 562
+        },
+        {
+          "name": "submission",
+          "left": 193.1875,
+          "right": 249.59375,
+          "top": 524,
+          "bottom": 562
+        },
+        {
+          "name": "finisher",
+          "left": 254.59375,
+          "right": 311,
+          "top": 524,
+          "bottom": 562
+        }
+      ]
+    },
+    {
+      "name": "Responsive dual HUD and controls 320x568 light",
+      "passed": true,
+      "dimensions": {
+        "scrollWidth": 320,
+        "innerWidth": 320
+      },
+      "ring": {
+        "x": 9,
+        "y": 141,
+        "width": 302,
+        "height": 272
+      },
+      "buttons": [
+        {
+          "name": "pause",
+          "left": 280,
+          "right": 311,
+          "top": 41.5,
+          "bottom": 72.5
+        },
+        {
+          "name": "joystick",
+          "left": 9,
+          "right": 94,
+          "top": 427,
+          "bottom": 512
+        },
+        {
+          "name": "grab",
+          "left": 112,
+          "right": 208,
+          "top": 424.5,
+          "bottom": 462.5
+        },
+        {
+          "name": "counter",
+          "left": 215,
+          "right": 311,
+          "top": 424.5,
+          "bottom": 462.5
+        },
+        {
+          "name": "strike",
+          "left": 112,
+          "right": 311,
+          "top": 469.5,
+          "bottom": 514.5
+        },
+        {
+          "name": "run",
+          "left": 9,
+          "right": 65.390625,
+          "top": 524,
+          "bottom": 562
+        },
+        {
+          "name": "corner",
+          "left": 70.390625,
+          "right": 126.796875,
+          "top": 524,
+          "bottom": 562
+        },
+        {
+          "name": "pin",
+          "left": 131.796875,
+          "right": 188.1875,
+          "top": 524,
+          "bottom": 562
+        },
+        {
+          "name": "submission",
+          "left": 193.1875,
+          "right": 249.59375,
+          "top": 524,
+          "bottom": 562
+        },
+        {
+          "name": "finisher",
+          "left": 254.59375,
+          "right": 311,
+          "top": 524,
+          "bottom": 562
+        }
+      ]
+    },
+    {
+      "name": "Responsive dual HUD and controls 360x640 dark",
+      "passed": true,
+      "dimensions": {
+        "scrollWidth": 360,
+        "innerWidth": 360
+      },
+      "ring": {
+        "x": 12,
+        "y": 141,
+        "width": 336,
+        "height": 325
+      },
+      "buttons": [
+        {
+          "name": "pause",
+          "left": 317,
+          "right": 348,
+          "top": 41.5,
+          "bottom": 72.5
+        },
+        {
+          "name": "joystick",
+          "left": 12,
+          "right": 97,
+          "top": 480,
+          "bottom": 565
+        },
+        {
+          "name": "grab",
+          "left": 135,
+          "right": 238,
+          "top": 477.5,
+          "bottom": 515.5
+        },
+        {
+          "name": "counter",
+          "left": 245,
+          "right": 348,
+          "top": 477.5,
+          "bottom": 515.5
+        },
+        {
+          "name": "strike",
+          "left": 135,
+          "right": 348,
+          "top": 522.5,
+          "bottom": 567.5
+        },
+        {
+          "name": "run",
+          "left": 12,
+          "right": 75.1875,
+          "top": 577,
+          "bottom": 615
+        },
+        {
+          "name": "corner",
+          "left": 80.1875,
+          "right": 143.390625,
+          "top": 577,
+          "bottom": 615
+        },
+        {
+          "name": "pin",
+          "left": 148.390625,
+          "right": 211.59375,
+          "top": 577,
+          "bottom": 615
+        },
+        {
+          "name": "submission",
+          "left": 216.59375,
+          "right": 279.796875,
+          "top": 577,
+          "bottom": 615
+        },
+        {
+          "name": "finisher",
+          "left": 284.796875,
+          "right": 348,
+          "top": 577,
+          "bottom": 615
+        }
+      ]
+    },
+    {
+      "name": "Responsive dual HUD and controls 360x640 light",
+      "passed": true,
+      "dimensions": {
+        "scrollWidth": 360,
+        "innerWidth": 360
+      },
+      "ring": {
+        "x": 12,
+        "y": 141,
+        "width": 336,
+        "height": 325
+      },
+      "buttons": [
+        {
+          "name": "pause",
+          "left": 317,
+          "right": 348,
+          "top": 41.5,
+          "bottom": 72.5
+        },
+        {
+          "name": "joystick",
+          "left": 12,
+          "right": 97,
+          "top": 480,
+          "bottom": 565
+        },
+        {
+          "name": "grab",
+          "left": 135,
+          "right": 238,
+          "top": 477.5,
+          "bottom": 515.5
+        },
+        {
+          "name": "counter",
+          "left": 245,
+          "right": 348,
+          "top": 477.5,
+          "bottom": 515.5
+        },
+        {
+          "name": "strike",
+          "left": 135,
+          "right": 348,
+          "top": 522.5,
+          "bottom": 567.5
+        },
+        {
+          "name": "run",
+          "left": 12,
+          "right": 75.1875,
+          "top": 577,
+          "bottom": 615
+        },
+        {
+          "name": "corner",
+          "left": 80.1875,
+          "right": 143.390625,
+          "top": 577,
+          "bottom": 615
+        },
+        {
+          "name": "pin",
+          "left": 148.390625,
+          "right": 211.59375,
+          "top": 577,
+          "bottom": 615
+        },
+        {
+          "name": "submission",
+          "left": 216.59375,
+          "right": 279.796875,
+          "top": 577,
+          "bottom": 615
+        },
+        {
+          "name": "finisher",
+          "left": 284.796875,
+          "right": 348,
+          "top": 577,
+          "bottom": 615
+        }
+      ]
+    },
+    {
+      "name": "Responsive dual HUD and controls 393x852 dark",
+      "passed": true,
+      "dimensions": {
+        "scrollWidth": 393,
+        "innerWidth": 393
+      },
+      "ring": {
+        "x": 12,
+        "y": 153,
+        "width": 369,
+        "height": 500
+      },
+      "buttons": [
+        {
+          "name": "pause",
+          "left": 350,
+          "right": 381,
+          "top": 46.5,
+          "bottom": 77.5
+        },
+        {
+          "name": "joystick",
+          "left": 12,
+          "right": 110,
+          "top": 663,
+          "bottom": 761
+        },
+        {
+          "name": "grab",
+          "left": 135,
+          "right": 254.5,
+          "top": 670.5,
+          "bottom": 713.5
+        },
+        {
+          "name": "counter",
+          "left": 261.5,
+          "right": 381,
+          "top": 670.5,
+          "bottom": 713.5
+        },
+        {
+          "name": "strike",
+          "left": 135,
+          "right": 381,
+          "top": 720.5,
+          "bottom": 769.5
+        },
+        {
+          "name": "run",
+          "left": 12,
+          "right": 81.796875,
+          "top": 784,
+          "bottom": 826
+        },
+        {
+          "name": "corner",
+          "left": 86.796875,
+          "right": 156.59375,
+          "top": 784,
+          "bottom": 826
+        },
+        {
+          "name": "pin",
+          "left": 161.59375,
+          "right": 231.390625,
+          "top": 784,
+          "bottom": 826
+        },
+        {
+          "name": "submission",
+          "left": 236.390625,
+          "right": 306.1875,
+          "top": 784,
+          "bottom": 826
+        },
+        {
+          "name": "finisher",
+          "left": 311.1875,
+          "right": 381,
+          "top": 784,
+          "bottom": 826
+        }
+      ]
+    },
+    {
+      "name": "Responsive dual HUD and controls 393x852 light",
+      "passed": true,
+      "dimensions": {
+        "scrollWidth": 393,
+        "innerWidth": 393
+      },
+      "ring": {
+        "x": 12,
+        "y": 153,
+        "width": 369,
+        "height": 500
+      },
+      "buttons": [
+        {
+          "name": "pause",
+          "left": 350,
+          "right": 381,
+          "top": 46.5,
+          "bottom": 77.5
+        },
+        {
+          "name": "joystick",
+          "left": 12,
+          "right": 110,
+          "top": 663,
+          "bottom": 761
+        },
+        {
+          "name": "grab",
+          "left": 135,
+          "right": 254.5,
+          "top": 670.5,
+          "bottom": 713.5
+        },
+        {
+          "name": "counter",
+          "left": 261.5,
+          "right": 381,
+          "top": 670.5,
+          "bottom": 713.5
+        },
+        {
+          "name": "strike",
+          "left": 135,
+          "right": 381,
+          "top": 720.5,
+          "bottom": 769.5
+        },
+        {
+          "name": "run",
+          "left": 12,
+          "right": 81.796875,
+          "top": 784,
+          "bottom": 826
+        },
+        {
+          "name": "corner",
+          "left": 86.796875,
+          "right": 156.59375,
+          "top": 784,
+          "bottom": 826
+        },
+        {
+          "name": "pin",
+          "left": 161.59375,
+          "right": 231.390625,
+          "top": 784,
+          "bottom": 826
+        },
+        {
+          "name": "submission",
+          "left": 236.390625,
+          "right": 306.1875,
+          "top": 784,
+          "bottom": 826
+        },
+        {
+          "name": "finisher",
+          "left": 311.1875,
+          "right": 381,
+          "top": 784,
+          "bottom": 826
+        }
+      ]
+    },
+    {
+      "name": "Responsive dual HUD and controls 430x932 dark",
+      "passed": true,
+      "dimensions": {
+        "scrollWidth": 430,
+        "innerWidth": 430
+      },
+      "ring": {
+        "x": 12,
+        "y": 153,
+        "width": 406,
+        "height": 580
+      },
+      "buttons": [
+        {
+          "name": "pause",
+          "left": 387,
+          "right": 418,
+          "top": 46.5,
+          "bottom": 77.5
+        },
+        {
+          "name": "joystick",
+          "left": 12,
+          "right": 110,
+          "top": 743,
+          "bottom": 841
+        },
+        {
+          "name": "grab",
+          "left": 135,
+          "right": 273,
+          "top": 750.5,
+          "bottom": 793.5
+        },
+        {
+          "name": "counter",
+          "left": 280,
+          "right": 418,
+          "top": 750.5,
+          "bottom": 793.5
+        },
+        {
+          "name": "strike",
+          "left": 135,
+          "right": 418,
+          "top": 800.5,
+          "bottom": 849.5
+        },
+        {
+          "name": "run",
+          "left": 12,
+          "right": 89.1875,
+          "top": 864,
+          "bottom": 906
+        },
+        {
+          "name": "corner",
+          "left": 94.1875,
+          "right": 171.390625,
+          "top": 864,
+          "bottom": 906
+        },
+        {
+          "name": "pin",
+          "left": 176.390625,
+          "right": 253.59375,
+          "top": 864,
+          "bottom": 906
+        },
+        {
+          "name": "submission",
+          "left": 258.59375,
+          "right": 335.796875,
+          "top": 864,
+          "bottom": 906
+        },
+        {
+          "name": "finisher",
+          "left": 340.796875,
+          "right": 417.984375,
+          "top": 864,
+          "bottom": 906
+        }
+      ]
+    },
+    {
+      "name": "Responsive dual HUD and controls 430x932 light",
+      "passed": true,
+      "dimensions": {
+        "scrollWidth": 430,
+        "innerWidth": 430
+      },
+      "ring": {
+        "x": 12,
+        "y": 153,
+        "width": 406,
+        "height": 580
+      },
+      "buttons": [
+        {
+          "name": "pause",
+          "left": 387,
+          "right": 418,
+          "top": 46.5,
+          "bottom": 77.5
+        },
+        {
+          "name": "joystick",
+          "left": 12,
+          "right": 110,
+          "top": 743,
+          "bottom": 841
+        },
+        {
+          "name": "grab",
+          "left": 135,
+          "right": 273,
+          "top": 750.5,
+          "bottom": 793.5
+        },
+        {
+          "name": "counter",
+          "left": 280,
+          "right": 418,
+          "top": 750.5,
+          "bottom": 793.5
+        },
+        {
+          "name": "strike",
+          "left": 135,
+          "right": 418,
+          "top": 800.5,
+          "bottom": 849.5
+        },
+        {
+          "name": "run",
+          "left": 12,
+          "right": 89.1875,
+          "top": 864,
+          "bottom": 906
+        },
+        {
+          "name": "corner",
+          "left": 94.1875,
+          "right": 171.390625,
+          "top": 864,
+          "bottom": 906
+        },
+        {
+          "name": "pin",
+          "left": 176.390625,
+          "right": 253.59375,
+          "top": 864,
+          "bottom": 906
+        },
+        {
+          "name": "submission",
+          "left": 258.59375,
+          "right": 335.796875,
+          "top": 864,
+          "bottom": 906
+        },
+        {
+          "name": "finisher",
+          "left": 340.796875,
+          "right": 417.984375,
+          "top": 864,
+          "bottom": 906
+        }
+      ]
+    },
+    {
+      "name": "Responsive dual HUD and controls 844x390 dark",
+      "passed": true,
+      "dimensions": {
+        "scrollWidth": 844,
+        "innerWidth": 844
+      },
+      "ring": {
+        "x": 14,
+        "y": 133,
+        "width": 551,
+        "height": 234
+      },
+      "buttons": [
+        {
+          "name": "pause",
+          "left": 537,
+          "right": 565,
+          "top": 39,
+          "bottom": 67
+        },
+        {
+          "name": "joystick",
+          "left": 580,
+          "right": 665,
+          "top": 115.5,
+          "bottom": 200.5
+        },
+        {
+          "name": "grab",
+          "left": 680,
+          "right": 752,
+          "top": 111,
+          "bottom": 153
+        },
+        {
+          "name": "counter",
+          "left": 758,
+          "right": 830,
+          "top": 111,
+          "bottom": 153
+        },
+        {
+          "name": "strike",
+          "left": 680,
+          "right": 830,
+          "top": 159,
+          "bottom": 205
+        },
+        {
+          "name": "run",
+          "left": 580,
+          "right": 660,
+          "top": 222,
+          "bottom": 265
+        },
+        {
+          "name": "corner",
+          "left": 665,
+          "right": 745,
+          "top": 222,
+          "bottom": 265
+        },
+        {
+          "name": "pin",
+          "left": 750,
+          "right": 830,
+          "top": 222,
+          "bottom": 265
+        },
+        {
+          "name": "submission",
+          "left": 580,
+          "right": 660,
+          "top": 270,
+          "bottom": 313
+        },
+        {
+          "name": "finisher",
+          "left": 665,
+          "right": 745,
+          "top": 270,
+          "bottom": 313
+        }
+      ]
+    },
+    {
+      "name": "Responsive dual HUD and controls 844x390 light",
+      "passed": true,
+      "dimensions": {
+        "scrollWidth": 844,
+        "innerWidth": 844
+      },
+      "ring": {
+        "x": 14,
+        "y": 133,
+        "width": 551,
+        "height": 234
+      },
+      "buttons": [
+        {
+          "name": "pause",
+          "left": 537,
+          "right": 565,
+          "top": 39,
+          "bottom": 67
+        },
+        {
+          "name": "joystick",
+          "left": 580,
+          "right": 665,
+          "top": 115.5,
+          "bottom": 200.5
+        },
+        {
+          "name": "grab",
+          "left": 680,
+          "right": 752,
+          "top": 111,
+          "bottom": 153
+        },
+        {
+          "name": "counter",
+          "left": 758,
+          "right": 830,
+          "top": 111,
+          "bottom": 153
+        },
+        {
+          "name": "strike",
+          "left": 680,
+          "right": 830,
+          "top": 159,
+          "bottom": 205
+        },
+        {
+          "name": "run",
+          "left": 580,
+          "right": 660,
+          "top": 222,
+          "bottom": 265
+        },
+        {
+          "name": "corner",
+          "left": 665,
+          "right": 745,
+          "top": 222,
+          "bottom": 265
+        },
+        {
+          "name": "pin",
+          "left": 750,
+          "right": 830,
+          "top": 222,
+          "bottom": 265
+        },
+        {
+          "name": "submission",
+          "left": 580,
+          "right": 660,
+          "top": 270,
+          "bottom": 313
+        },
+        {
+          "name": "finisher",
+          "left": 665,
+          "right": 745,
+          "top": 270,
+          "bottom": 313
+        }
+      ]
+    },
+    {
+      "name": "Responsive dual HUD and controls 1280x900 dark",
+      "passed": true,
+      "dimensions": {
+        "scrollWidth": 1280,
+        "innerWidth": 1280
+      },
+      "ring": {
+        "x": 318,
+        "y": 166,
+        "width": 644,
+        "height": 521.5
+      },
+      "buttons": [
+        {
+          "name": "pause",
+          "left": 934,
+          "right": 962,
+          "top": 53,
+          "bottom": 81
+        },
+        {
+          "name": "joystick",
+          "left": 318,
+          "right": 423,
+          "top": 698,
+          "bottom": 803
+        },
+        {
+          "name": "grab",
+          "left": 463,
+          "right": 708.5,
+          "top": 704,
+          "bottom": 751
+        },
+        {
+          "name": "counter",
+          "left": 716.5,
+          "right": 962,
+          "top": 704,
+          "bottom": 751
+        },
+        {
+          "name": "strike",
+          "left": 463,
+          "right": 962,
+          "top": 759,
+          "bottom": 813
+        },
+        {
+          "name": "run",
+          "left": 318,
+          "right": 442,
+          "top": 827.5,
+          "bottom": 870.5
+        },
+        {
+          "name": "corner",
+          "left": 448,
+          "right": 572,
+          "top": 827.5,
+          "bottom": 870.5
+        },
+        {
+          "name": "pin",
+          "left": 578,
+          "right": 702,
+          "top": 827.5,
+          "bottom": 870.5
+        },
+        {
+          "name": "submission",
+          "left": 708,
+          "right": 832,
+          "top": 827.5,
+          "bottom": 870.5
+        },
+        {
+          "name": "finisher",
+          "left": 838,
+          "right": 962,
+          "top": 827.5,
+          "bottom": 870.5
+        }
+      ]
+    },
+    {
+      "name": "Responsive dual HUD and controls 1280x900 light",
+      "passed": true,
+      "dimensions": {
+        "scrollWidth": 1280,
+        "innerWidth": 1280
+      },
+      "ring": {
+        "x": 318,
+        "y": 166,
+        "width": 644,
+        "height": 521.5
+      },
+      "buttons": [
+        {
+          "name": "pause",
+          "left": 934,
+          "right": 962,
+          "top": 53,
+          "bottom": 81
+        },
+        {
+          "name": "joystick",
+          "left": 318,
+          "right": 423,
+          "top": 698,
+          "bottom": 803
+        },
+        {
+          "name": "grab",
+          "left": 463,
+          "right": 708.5,
+          "top": 704,
+          "bottom": 751
+        },
+        {
+          "name": "counter",
+          "left": 716.5,
+          "right": 962,
+          "top": 704,
+          "bottom": 751
+        },
+        {
+          "name": "strike",
+          "left": 463,
+          "right": 962,
+          "top": 759,
+          "bottom": 813
+        },
+        {
+          "name": "run",
+          "left": 318,
+          "right": 442,
+          "top": 827.5,
+          "bottom": 870.5
+        },
+        {
+          "name": "corner",
+          "left": 448,
+          "right": 572,
+          "top": 827.5,
+          "bottom": 870.5
+        },
+        {
+          "name": "pin",
+          "left": 578,
+          "right": 702,
+          "top": 827.5,
+          "bottom": 870.5
+        },
+        {
+          "name": "submission",
+          "left": 708,
+          "right": 832,
+          "top": 827.5,
+          "bottom": 870.5
+        },
+        {
+          "name": "finisher",
+          "left": 838,
+          "right": 962,
+          "top": 827.5,
+          "bottom": 870.5
+        }
+      ]
+    },
+    {
+      "name": "Nova selection creates Atlas opponent",
+      "passed": true
+    },
+    {
+      "name": "Actual touch joystick movement and release",
+      "passed": true
+    },
+    {
+      "name": "Pause freezes simulation and resumes",
+      "passed": true
+    },
+    {
+      "name": "Actual850ms touch long press [data-action=\"strike\"]",
+      "passed": true
+    },
+    {
+      "name": "Actual850ms touch long press [data-action=\"grab\"]",
+      "passed": true
+    },
+    {
+      "name": "Actual850ms touch long press [data-action=\"counter\"]",
+      "passed": true
+    },
+    {
+      "name": "Actual850ms touch long press [data-action=\"run\"]",
+      "passed": true
+    },
+    {
+      "name": "Actual850ms touch long press #joystick",
+      "passed": true
+    },
+    {
+      "name": "Actual850ms touch long press #pause",
+      "passed": true
+    },
+    {
+      "name": "Actual850ms touch long press [data-action=\"corner\"] in legal state fixture",
+      "passed": true
+    },
+    {
+      "name": "Actual850ms touch long press [data-action=\"pin\"] in legal state fixture",
+      "passed": true
+    },
+    {
+      "name": "Actual850ms touch long press [data-action=\"submission\"] in legal state fixture",
+      "passed": true
+    },
+    {
+      "name": "Actual850ms touch long press [data-action=\"finisher\"] in legal state fixture",
+      "passed": true
+    },
+    {
+      "name": "Real submission hold releases on touchEnd",
+      "passed": true
+    },
+    {
+      "name": "Real submission hold releases on touchCancel",
+      "passed": true
+    },
+    {
+      "name": "Real submission hold releases on blur",
+      "passed": true
+    },
+    {
+      "name": "Callout/selection/drag suppression on all ring and ordinary controls",
+      "passed": true,
+      "suppression": [
+        {
+          "selector": "[data-action=\"strike\"]",
+          "userSelect": "none",
+          "touchAction": "pinch-zoom",
+          "events": [
+            {
+              "type": "contextmenu",
+              "prevented": true
+            },
+            {
+              "type": "selectstart",
+              "prevented": true
+            },
+            {
+              "type": "dragstart",
+              "prevented": true
+            }
+          ]
+        },
+        {
+          "selector": "[data-action=\"grab\"]",
+          "userSelect": "none",
+          "touchAction": "pinch-zoom",
+          "events": [
+            {
+              "type": "contextmenu",
+              "prevented": true
+            },
+            {
+              "type": "selectstart",
+              "prevented": true
+            },
+            {
+              "type": "dragstart",
+              "prevented": true
+            }
+          ]
+        },
+        {
+          "selector": "[data-action=\"counter\"]",
+          "userSelect": "none",
+          "touchAction": "pinch-zoom",
+          "events": [
+            {
+              "type": "contextmenu",
+              "prevented": true
+            },
+            {
+              "type": "selectstart",
+              "prevented": true
+            },
+            {
+              "type": "dragstart",
+              "prevented": true
+            }
+          ]
+        },
+        {
+          "selector": "[data-action=\"run\"]",
+          "userSelect": "none",
+          "touchAction": "pinch-zoom",
+          "events": [
+            {
+              "type": "contextmenu",
+              "prevented": true
+            },
+            {
+              "type": "selectstart",
+              "prevented": true
+            },
+            {
+              "type": "dragstart",
+              "prevented": true
+            }
+          ]
+        },
+        {
+          "selector": "[data-action=\"corner\"]",
+          "userSelect": "none",
+          "touchAction": "pinch-zoom",
+          "events": [
+            {
+              "type": "contextmenu",
+              "prevented": true
+            },
+            {
+              "type": "selectstart",
+              "prevented": true
+            },
+            {
+              "type": "dragstart",
+              "prevented": true
+            }
+          ]
+        },
+        {
+          "selector": "[data-action=\"pin\"]",
+          "userSelect": "none",
+          "touchAction": "pinch-zoom",
+          "events": [
+            {
+              "type": "contextmenu",
+              "prevented": true
+            },
+            {
+              "type": "selectstart",
+              "prevented": true
+            },
+            {
+              "type": "dragstart",
+              "prevented": true
+            }
+          ]
+        },
+        {
+          "selector": "[data-action=\"submission\"]",
+          "userSelect": "none",
+          "touchAction": "pinch-zoom",
+          "events": [
+            {
+              "type": "contextmenu",
+              "prevented": true
+            },
+            {
+              "type": "selectstart",
+              "prevented": true
+            },
+            {
+              "type": "dragstart",
+              "prevented": true
+            }
+          ]
+        },
+        {
+          "selector": "[data-action=\"finisher\"]",
+          "userSelect": "none",
+          "touchAction": "pinch-zoom",
+          "events": [
+            {
+              "type": "contextmenu",
+              "prevented": true
+            },
+            {
+              "type": "selectstart",
+              "prevented": true
+            },
+            {
+              "type": "dragstart",
+              "prevented": true
+            }
+          ]
+        },
+        {
+          "selector": "#joystick",
+          "userSelect": "none",
+          "touchAction": "pinch-zoom",
+          "events": [
+            {
+              "type": "contextmenu",
+              "prevented": true
+            },
+            {
+              "type": "selectstart",
+              "prevented": true
+            },
+            {
+              "type": "dragstart",
+              "prevented": true
+            }
+          ]
+        },
+        {
+          "selector": "#pause",
+          "userSelect": "none",
+          "touchAction": "auto",
+          "events": [
+            {
+              "type": "contextmenu",
+              "prevented": true
+            },
+            {
+              "type": "selectstart",
+              "prevented": true
+            },
+            {
+              "type": "dragstart",
+              "prevented": true
+            }
+          ]
+        },
+        {
+          "selector": ".wordmark",
+          "userSelect": "none",
+          "touchAction": "auto",
+          "events": [
+            {
+              "type": "contextmenu",
+              "prevented": true
+            },
+            {
+              "type": "selectstart",
+              "prevented": true
+            },
+            {
+              "type": "dragstart",
+              "prevented": true
+            }
+          ]
+        },
+        {
+          "selector": "#start",
+          "userSelect": "none",
+          "touchAction": "auto",
+          "events": [
+            {
+              "type": "contextmenu",
+              "prevented": true
+            },
+            {
+              "type": "selectstart",
+              "prevented": true
+            },
+            {
+              "type": "dragstart",
+              "prevented": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Native checkbox and help resume remain usable",
+      "passed": true
+    },
+    {
+      "name": "Special keyboard contract dispatches exact actions and hold release",
+      "passed": true
+    },
+    {
+      "name": "Pin count and defender escape context rendered",
+      "passed": true
+    },
+    {
+      "name": "Submission attacker can retain or release the hold",
+      "passed": true
+    },
+    {
+      "name": "Match result dialog renders winner and pin finish",
+      "passed": true
+    },
+    {
+      "name": "Keyboard accessible hero selection",
+      "passed": true
+    },
+    {
+      "name": "Lobby touch scrolling preserved",
+      "passed": true
+    },
+    {
+      "name": "Pinch zoom preserved",
+      "passed": true
+    },
+    {
+      "name": "No JavaScript or asset request errors",
+      "passed": true
+    },
+    {
+      "name": "Targeted latest help close restores canvas focus and result Escape retains rematch choice",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "requests": [],
+  "screenshots": [
+    "/Users/rockyhong/Documents/Codex/2026-10-13/1-1-2-sd-https-rockyhong/artifacts/ring-ui-qa/lobby-320x568-dark.png",
+    "/Users/rockyhong/Documents/Codex/2026-10-13/1-1-2-sd-https-rockyhong/artifacts/ring-ui-qa/ring-320x568-dark.png",
+    "/Users/rockyhong/Documents/Codex/2026-10-13/1-1-2-sd-https-rockyhong/artifacts/ring-ui-qa/lobby-320x568-light.png",
+    "/Users/rockyhong/Documents/Codex/2026-10-13/1-1-2-sd-https-rockyhong/artifacts/ring-ui-qa/ring-320x568-light.png",
+    "/Users/rockyhong/Documents/Codex/2026-10-13/1-1-2-sd-https-rockyhong/artifacts/ring-ui-qa/lobby-360x640-dark.png",
+    "/Users/rockyhong/Documents/Codex/2026-10-13/1-1-2-sd-https-rockyhong/artifacts/ring-ui-qa/ring-360x640-dark.png",
+    "/Users/rockyhong/Documents/Codex/2026-10-13/1-1-2-sd-https-rockyhong/artifacts/ring-ui-qa/lobby-360x640-light.png",
+    "/Users/rockyhong/Documents/Codex/2026-10-13/1-1-2-sd-https-rockyhong/artifacts/ring-ui-qa/ring-360x640-light.png",
+    "/Users/rockyhong/Documents/Codex/2026-10-13/1-1-2-sd-https-rockyhong/artifacts/ring-ui-qa/lobby-393x852-dark.png",
+    "/Users/rockyhong/Documents/Codex/2026-10-13/1-1-2-sd-https-rockyhong/artifacts/ring-ui-qa/ring-393x852-dark.png",
+    "/Users/rockyhong/Documents/Codex/2026-10-13/1-1-2-sd-https-rockyhong/artifacts/ring-ui-qa/lobby-393x852-light.png",
+    "/Users/rockyhong/Documents/Codex/2026-10-13/1-1-2-sd-https-rockyhong/artifacts/ring-ui-qa/ring-393x852-light.png",
+    "/Users/rockyhong/Documents/Codex/2026-10-13/1-1-2-sd-https-rockyhong/artifacts/ring-ui-qa/lobby-430x932-dark.png",
+    "/Users/rockyhong/Documents/Codex/2026-10-13/1-1-2-sd-https-rockyhong/artifacts/ring-ui-qa/ring-430x932-dark.png",
+    "/Users/rockyhong/Documents/Codex/2026-10-13/1-1-2-sd-https-rockyhong/artifacts/ring-ui-qa/lobby-430x932-light.png",
+    "/Users/rockyhong/Documents/Codex/2026-10-13/1-1-2-sd-https-rockyhong/artifacts/ring-ui-qa/ring-430x932-light.png",
+    "/Users/rockyhong/Documents/Codex/2026-10-13/1-1-2-sd-https-rockyhong/artifacts/ring-ui-qa/lobby-844x390-dark.png",
+    "/Users/rockyhong/Documents/Codex/2026-10-13/1-1-2-sd-https-rockyhong/artifacts/ring-ui-qa/ring-844x390-dark.png",
+    "/Users/rockyhong/Documents/Codex/2026-10-13/1-1-2-sd-https-rockyhong/artifacts/ring-ui-qa/lobby-844x390-light.png",
+    "/Users/rockyhong/Documents/Codex/2026-10-13/1-1-2-sd-https-rockyhong/artifacts/ring-ui-qa/ring-844x390-light.png",
+    "/Users/rockyhong/Documents/Codex/2026-10-13/1-1-2-sd-https-rockyhong/artifacts/ring-ui-qa/lobby-1280x900-dark.png",
+    "/Users/rockyhong/Documents/Codex/2026-10-13/1-1-2-sd-https-rockyhong/artifacts/ring-ui-qa/ring-1280x900-dark.png",
+    "/Users/rockyhong/Documents/Codex/2026-10-13/1-1-2-sd-https-rockyhong/artifacts/ring-ui-qa/lobby-1280x900-light.png",
+    "/Users/rockyhong/Documents/Codex/2026-10-13/1-1-2-sd-https-rockyhong/artifacts/ring-ui-qa/ring-1280x900-light.png",
+    "/Users/rockyhong/Documents/Codex/2026-10-13/1-1-2-sd-https-rockyhong/artifacts/ring-ui-qa/pause-mobile.png",
+    "/Users/rockyhong/Documents/Codex/2026-10-13/1-1-2-sd-https-rockyhong/artifacts/ring-ui-qa/help-native-checkbox.png",
+    "/Users/rockyhong/Documents/Codex/2026-10-13/1-1-2-sd-https-rockyhong/artifacts/ring-ui-qa/pin-escape-context.png",
+    "/Users/rockyhong/Documents/Codex/2026-10-13/1-1-2-sd-https-rockyhong/artifacts/ring-ui-qa/result-mobile.png"
+  ],
+  "limitation": "Chromium mobile touch emulation. Physical iOS Safari browser chrome and callouts are not tested.",
+  "finished": "2026-10-13T14:18:42.654Z",
+  "targetedLatest": "2026-10-13T14:19:57.894Z",
+  "status": "PASS",
+  "visualReview": {
+    "reviewer": "browser_qa",
+    "verdict": "ACCEPTED",
+    "inspected": [
+      "lobby-320x568-dark.png",
+      "lobby-393x852-dark.png",
+      "ring-320x568-dark.png",
+      "ring-393x852-dark.png",
+      "ring-844x390-dark.png",
+      "pin-escape-context.png",
+      "result-mobile.png"
+    ],
+    "notes": "Both athletes and controls readable; short portrait permits natural vertical scroll; ring count appears once after scene fix. Physical iOS Safari callout behavior remains outside Chromium emulation."
+  }
+}
