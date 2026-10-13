@@ -1,0 +1,11 @@
+{
+  "nova": "tools/walk-source/sheets/nova-walk-sheet.png",
+  "viper": "tools/walk-source/sheets/viper-walk-sheet.png",
+  "tempest": "tools/walk-source/sheets/tempest-walk-sheet.png",
+  "raven": "tools/walk-source/sheets/raven-walk-sheet.png",
+  "seraph": "tools/walk-source/sheets/seraph-walk-sheet.png",
+  "ember": "tools/walk-source/sheets/ember-walk-sheet.png",
+  "valkyrie": "tools/walk-source/sheets/valkyrie-walk-sheet.png",
+  "lynx": "tools/walk-source/sheets/lynx-walk-sheet.png",
+  "onyx": "tools/walk-source/sheets/onyx-walk-sheet.png"
+}

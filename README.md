@@ -58,7 +58,6 @@ npm run qa
 npm run qa:combat
 npm run qa:stage
 npm run qa:walk
-npm run qa:walk:rig
 npm run qa:techniques
 npm run qa:proportions
 ```
@@ -72,11 +71,11 @@ npm run qa:proportions
 - https://github.com/rockyhong-a11y/slay
 - https://github.com/rockyhong-a11y/slay-beach-volley
 
-원본 SD 아트를 사용하고, **Blender 5.2.2 LTS**에서 보행 리그와 두 캐릭터의 전투 궤적을 제작했습니다. 게임은 Blender에서 60Hz로 샘플링한 `public/assets/motion/combat.json`을 사용합니다. 타격은 준비·접촉·회복 시점을 가지며, 잡기는 기술마다 다른 머리·팔·허리·다리의 잡는 자세와 궤적으로 실제 충돌 시점에 피해를 적용합니다. 편집 가능한 Blender 파일과 재생성 스크립트는 `tools/`에 있습니다.
+원본 SD 아트를 사용하고, **Blender 5.2.2 LTS**에서 전신 보행 시퀀스와 두 캐릭터의 전투 궤적을 제작했습니다. 게임은 Blender에서 60Hz로 샘플링한 `public/assets/motion/combat.json`을 사용합니다. 타격은 준비·접촉·회복 시점을 가지며, 잡기는 기술마다 다른 머리·팔·허리·다리의 잡는 자세와 궤적으로 실제 충돌 시점에 피해를 적용합니다. 편집 가능한 Blender 파일과 재생성 스크립트는 `tools/`에 있습니다.
 
 **Higgsfield**로 펀치·킥·반격뿐 아니라 헤드록, 무릎 백브레이커, 어깨 넘기기, 암드래그, 헤드시저스, 크레이들과 상대방의 기술별 반응 포즈를 생성합니다. 원본 캐릭터와 맞는지 검토한 포즈를 정렬해 전투 스프라이트로 사용하며, Blender의 전투 궤적과 결합합니다. 제작 상세와 원본 출처는 [ASSET_SOURCES.md](docs/ASSET_SOURCES.md)에 기록합니다.
 
-10명 전원의 이동은 실제 이동 거리와 발의 접지를 맞추는 보행 주기를 사용합니다. Blender에서 내보낸 다리 관절과 원본 부츠 텍스처로 세로·대각선 이동에서도 디딘 발의 바닥 위치를 유지합니다. 몸과 머리를 같은 비율로 그려 이동·타격·회전 사이의 가로 압축을 제거했습니다.
+10명 전원의 이동은 12프레임 전신 보행을 사용합니다. Atlas의 Higgsfield 보행 영상과 원본 SD 비율을 보존한 캐릭터별 전신 그림을 Blender에서 렌더합니다. 다리 구분용 색이 있는 Blender 보행 가이드로 양발의 접지·스윙을 확인한 뒤 원래 피부·의상 색으로 복원합니다. 게임은 이동 거리로 걸음 주기를 선택하고, 캐릭터별로 정한 한 배율을 가로·세로에 똑같이 적용합니다. 분리된 머리·몸통·다리를 변형하던 보행 렌더러를 제거했습니다. 정지·이동·타격 전환과 좌우·세로·대각선 이동은 실제 게임 렌더의 비교 영상으로 검수합니다.
 
 [제공된 베어너클 4 영상](https://www.youtube.com/watch?v=Vmbn9ica-Kk)의 접촉 섬광과 짧은 충돌 반응을 참고해 기존 입자·원형 파동·떠오르는 피해 숫자를 교체했습니다. 흰색 접촉핵과 황색·오렌지색 충돌 별, 짧은 속도선과 착지 효과를 사용하며 펀치·킥·피격·반격·낙법은 하나의 합성 타격 샘플을 강도에 맞춰 재생합니다.
 

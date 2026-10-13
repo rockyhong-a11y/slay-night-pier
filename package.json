@@ -11,8 +11,7 @@
     "qa": "node tools/browser-qa.mjs",
     "qa:combat": "node tools/combat-qa.mjs",
     "qa:stage": "node tools/full-stage-qa.mjs",
-    "qa:walk": "node tools/walk-rig-qa.mjs",
-    "qa:walk:rig": "node tools/walk-rig-qa.mjs",
+    "qa:walk": "node tools/wholebody-walk-qa.mjs",
     "qa:techniques": "node tools/technique-qa.mjs",
     "qa:proportions": "node tools/proportion-qa.mjs"
   },

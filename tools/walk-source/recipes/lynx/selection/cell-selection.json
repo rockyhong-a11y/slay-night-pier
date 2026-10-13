@@ -1,0 +1,111 @@
+{
+  "actor": "lynx",
+  "method": "Actual Blender full-resolution compositor; original canvas outside the padded complete-body rectangle and approved edited canvas inside; no resampling or per-pose fit.",
+  "dimensions": [
+    1208,
+    1302
+  ],
+  "sourceCellIndex": 9,
+  "rectangle": [
+    344,
+    855,
+    548,
+    1264
+  ],
+  "original": "tools/walk-source/marked/lynx-walk-markers12.png",
+  "originalSHA256": "e798731da29873f3e462adde1868efff3db83f6e293f62a1f5581604a23672ab",
+  "edited": "tools/walk-source/marked/lynx-markers12-cell9-edit.png",
+  "editedSHA256": "97dbd792c2d0bb8ed8283ba42627c2bee720e1a80487f32d03d06fdfe1fc9d89",
+  "originalBodyBounds": [
+    350,
+    862,
+    541,
+    1255
+  ],
+  "editedBodyBounds": [
+    350,
+    861,
+    542,
+    1258
+  ],
+  "allOriginalBodyBounds": [
+    [
+      31,
+      17,
+      271,
+      403
+    ],
+    [
+      339,
+      17,
+      539,
+      409
+    ],
+    [
+      646,
+      17,
+      837,
+      404
+    ],
+    [
+      958,
+      16,
+      1141,
+      406
+    ],
+    [
+      46,
+      441,
+      262,
+      836
+    ],
+    [
+      332,
+      441,
+      543,
+      837
+    ],
+    [
+      637,
+      441,
+      856,
+      838
+    ],
+    [
+      933,
+      441,
+      1152,
+      838
+    ],
+    [
+      54,
+      862,
+      267,
+      1258
+    ],
+    [
+      350,
+      862,
+      541,
+      1255
+    ],
+    [
+      640,
+      862,
+      854,
+      1256
+    ],
+    [
+      932,
+      863,
+      1159,
+      1256
+    ]
+  ],
+  "otherBodiesIntersectSelection": false,
+  "geometryChanged": false,
+  "resampling": false,
+  "output": "../../../marked/lynx-markers12-cell9-selected.png",
+  "validation": "External pixel comparison and independent phase/anatomy inspection required",
+  "sourceScene": "lynx-whole-cell-selection.blend"
+}

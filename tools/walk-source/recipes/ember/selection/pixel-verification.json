@@ -1,0 +1,78 @@
+{
+  "status": "SELECTED_WHOLE_CELL_INVARIANTS_VERIFIED",
+  "scope": "Exact source selection and other-body preservation; anatomy and chronology require visual review.",
+  "dimensions": [
+    1448,
+    1086
+  ],
+  "rectangle": [
+    398,
+    712,
+    636,
+    1075
+  ],
+  "originalSHA256": "2fe31e2fd9cc7f882b68d1767ea606546b1a43090907ede9af21d13ee894f22c",
+  "editedSHA256": "3984b590cd01084ad4ac1cf410338f72b06eeea2595f7e81d0951b22d7ba5aba",
+  "outputSHA256": "311f0d31936194b6d9f8a0950afcb31594f308385e3c6bb2137cfbf1ca0bd673",
+  "outsideAlphaMaxError": 0,
+  "outsideVisibleRGBMaxError": 0,
+  "insideEditedAlphaMaxError": 0,
+  "insideEditedVisibleRGBMaxError": 0,
+  "other11BodyErrors": [
+    {
+      "index": 0,
+      "alphaMaxError": 0,
+      "visibleRGBMaxError": 0
+    },
+    {
+      "index": 1,
+      "alphaMaxError": 0,
+      "visibleRGBMaxError": 0
+    },
+    {
+      "index": 2,
+      "alphaMaxError": 0,
+      "visibleRGBMaxError": 0
+    },
+    {
+      "index": 3,
+      "alphaMaxError": 0,
+      "visibleRGBMaxError": 0
+    },
+    {
+      "index": 4,
+      "alphaMaxError": 0,
+      "visibleRGBMaxError": 0
+    },
+    {
+      "index": 5,
+      "alphaMaxError": 0,
+      "visibleRGBMaxError": 0
+    },
+    {
+      "index": 6,
+      "alphaMaxError": 0,
+      "visibleRGBMaxError": 0
+    },
+    {
+      "index": 7,
+      "alphaMaxError": 0,
+      "visibleRGBMaxError": 0
+    },
+    {
+      "index": 8,
+      "alphaMaxError": 0,
+      "visibleRGBMaxError": 0
+    },
+    {
+      "index": 10,
+      "alphaMaxError": 0,
+      "visibleRGBMaxError": 0
+    },
+    {
+      "index": 11,
+      "alphaMaxError": 0,
+      "visibleRGBMaxError": 0
+    }
+  ]
+}

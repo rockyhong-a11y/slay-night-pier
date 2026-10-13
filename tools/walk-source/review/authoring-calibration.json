@@ -1,0 +1,303 @@
+{
+  "onyx": {
+    "rawBodyHeight": 342.5,
+    "sourceOrder": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "sourceSHA256": "f8e1fc8fd9687741c7332a7e30ed85499f3f095028c948ada7d20472f0adcac3",
+    "sourcePoseCoverage": {
+      "farLeads": [
+        0,
+        1,
+        2,
+        11
+      ],
+      "nearLeads": [
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "nearSwing": [
+        3
+      ],
+      "farSwing": [
+        10
+      ],
+      "nearSupportFarTrailing": [
+        9
+      ]
+    },
+    "status": "SOURCE_POSE_COVERAGE_ACCEPTED_PENDING_COLOR_RESTORED_RUNTIME",
+    "calibrationWitness": "onyx-candidate-landmark-witness.png"
+  },
+  "tempest": {
+    "rawBodyHeight": 345,
+    "sourceOrder": [
+      0,
+      10,
+      11,
+      2,
+      3,
+      1,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "sourceSHA256": "7194efa1a27e9a7c654467cbceb9b6528e6c43d09a14e2d659f8aa453f8e2f33",
+    "sourcePoseCoverage": {
+      "farLeads": [
+        0,
+        10,
+        11
+      ],
+      "nearLeads": [
+        1,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "nearSwing": [
+        2,
+        3
+      ],
+      "farSwing": [
+        9
+      ]
+    },
+    "status": "SOURCE_POSE_COVERAGE_ACCEPTED_PENDING_COLOR_RESTORED_RUNTIME",
+    "calibrationWitness": "tempest-candidate-landmark-witness.png",
+    "calibrationNote": "Forehead/chin skin core and chin-waist agree; crown/ponytail outline is~7.3% higher. Retain one uniform bank scale, no hair/core separate scaling."
+  },
+  "seraph": {
+    "rawBodyHeight": 320,
+    "sourceOrder": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "sourceSHA256": "35b61d4e9422cab58d987ef89fe6f77416aba57d76a37eadf19ea8032f71060c",
+    "sourcePoseCoverage": {
+      "farLeads": [
+        0,
+        1,
+        2,
+        10,
+        11
+      ],
+      "nearLeads": [
+        4,
+        5,
+        6
+      ],
+      "nearSwing": [
+        3
+      ],
+      "farSwing": [
+        7,
+        8,
+        9
+      ]
+    },
+    "status": "SOURCE_POSE_COVERAGE_ACCEPTED_PENDING_COLOR_RESTORED_RUNTIME",
+    "calibrationWitness": "seraph-candidate-landmark-witness.png"
+  },
+  "raven": {
+    "rawBodyHeight": 320,
+    "sourceOrder": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "sourceSHA256": "9194637d31fc2dab5068f01e239094602eda61b9e5fb77f555d57dabba780caa",
+    "sourcePoseCoverage": {
+      "farLeads": [
+        0,
+        1,
+        2,
+        9,
+        10,
+        11
+      ],
+      "nearLeads": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "nearSwing": [
+        3
+      ],
+      "farSwing": [
+        8
+      ]
+    },
+    "status": "SOURCE_POSE_COVERAGE_ACCEPTED_PENDING_COLOR_RESTORED_RUNTIME",
+    "calibrationWitness": "raven-candidate-landmark-witness.png"
+  },
+  "ember": {
+    "rawBodyHeight": 325,
+    "sourceOrder": [
+      0,
+      10,
+      11,
+      3,
+      1,
+      2,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "sourceSHA256": "2fe31e2fd9cc7f882b68d1767ea606546b1a43090907ede9af21d13ee894f22c",
+    "sourcePoseCoverage": {
+      "farLeads": [
+        0,
+        10,
+        11
+      ],
+      "nearLeads": [
+        1,
+        2,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "nearSwing": [
+        3
+      ],
+      "farSwing": [
+        9
+      ],
+      "cell9": "ONLY the edited9 must be composited; original9 incorrectly lifts near again."
+    },
+    "status": "CELL9_CORRECTION_VERIFIED_PENDING_BLENDER_COMPOSITE_COLOR_RESTORED_RUNTIME",
+    "calibrationWitness": "ember-candidate-landmark-witness.png",
+    "requiredCell9Replacement": "artifacts/walk-redo/ember-markers12-cell9-edit.png"
+  },
+  "valkyrie": {
+    "rawBodyHeight": 330,
+    "sourceOrder": [
+      0,
+      10,
+      11,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      8,
+      9,
+      7
+    ],
+    "sourceSHA256": "b129123951edaf465ad0a6be2bf0f37a0ac881b38c965b10562e6913f72c38c6",
+    "sourcePoseCoverage": {
+      "farLeads": [
+        0,
+        7,
+        10,
+        11
+      ],
+      "nearLeads": [
+        4,
+        5,
+        6,
+        8
+      ],
+      "nearSwing": [
+        1,
+        2,
+        3
+      ],
+      "farSwing": [
+        9
+      ]
+    },
+    "status": "SOURCE_POSE_COVERAGE_ACCEPTED_PENDING_COLOR_RESTORED_RUNTIME",
+    "calibrationWitness": "valkyrie-candidate-landmark-witness.png"
+  },
+  "lynx": {
+    "rawBodyHeight": 350,
+    "sourceOrder": [
+      0,
+      11,
+      3,
+      1,
+      2,
+      4,
+      5,
+      6,
+      7,
+      8,
+      10,
+      9
+    ],
+    "sourceSHA256": "e798731da29873f3e462adde1868efff3db83f6e293f62a1f5581604a23672ab",
+    "sourcePoseCoverage": {
+      "farLeads": [
+        0,
+        11
+      ],
+      "nearLeads": [
+        1,
+        2,
+        4,
+        5,
+        6,
+        7,
+        8,
+        10
+      ],
+      "nearSwing": [
+        3
+      ],
+      "farSwing": [
+        9
+      ],
+      "cell9": "ONLY the edited9 must be composited; original9 incorrectly lifts near again."
+    },
+    "status": "CELL9_CORRECTION_VERIFIED_PENDING_BLENDER_COMPOSITE_COLOR_RESTORED_RUNTIME",
+    "calibrationWitness": "lynx-candidate-landmark-witness.png",
+    "requiredCell9Replacement": "artifacts/walk-redo/lynx-markers12-cell9-edit.png"
+  }
+}

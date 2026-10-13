@@ -1,0 +1,131 @@
+{
+  "status": "COLOR_ALPHA_INVARIANTS_VERIFIED",
+  "scope": "Structural pixel invariants only; marker membership and anatomy require visual review.",
+  "actor": "lynx",
+  "dimensions": [
+    1208,
+    1302
+  ],
+  "sourceSHA256": "94213ab007c30448cb65f7debfb61e78b554902b91cd160e4ba1b5037f8b5948",
+  "restoredSHA256": "bbbec48ea1cc261e2ac67a2ec877153ea65e5c3767a1c71ab4e88bf367b9542d",
+  "maskSHA256": "f23082962454d1844828a274e99ca59fd08cdb215c78fd7035407fdfc4b5635b",
+  "markerPixels": 84398,
+  "alphaMaxError": 0,
+  "alphaChangedPixels": 0,
+  "silhouetteAt180ChangedPixels": 0,
+  "nonMarkerMaxRGBErrorAllAlpha": 0,
+  "nonMarkerMaxRGBErrorVisible": 0,
+  "nonMarkerMaxRGBErrorOpaque": 0,
+  "nonMarkerChangedVisibleRGBPixels": 0,
+  "nonMarkerChangedOpaqueRGBPixels": 0,
+  "invisibleRGBNote": "Blender may normalize unobservable RGB beneath zero alpha; exact alpha and visible RGB outside the selected marker mask are required.",
+  "markerRGBMedian": [
+    241.0,
+    169.0,
+    109.0
+  ],
+  "settings": {
+    "method": "Actual Blender compositor at exact source resolution; original sRGB plate + raw-channel marker masks + sampled canonical skin ramp + original alpha passthrough. No pixel-array writes or image geometry edits.",
+    "actor": "lynx",
+    "markerSet": "green-magenta",
+    "targetMaterial": "skin",
+    "input": "tools/walk-source/marked/lynx-markers12-cell9-selected.png",
+    "inputSHA256": "94213ab007c30448cb65f7debfb61e78b554902b91cd160e4ba1b5037f8b5948",
+    "canonicalReference": "tools/walk-source/references/lynx-idle.png",
+    "canonicalReferenceSHA256": "ccc4fd4467eb13266ca941244259a7a8f83c2526426981033773dd1a0727a997",
+    "dimensions": [
+      1208,
+      1302
+    ],
+    "rows": 3,
+    "cols": 4,
+    "lowerBodyBandFraction": 0.43,
+    "paletteSampleCount": 4989,
+    "paletteSRGB8Quantiles": {
+      "0.1": [
+        173.0,
+        113.0,
+        75.0
+      ],
+      "0.25": [
+        193.0,
+        123.0,
+        86.0
+      ],
+      "0.5": [
+        239.0,
+        167.0,
+        103.0
+      ],
+      "0.9": [
+        243.0,
+        173.0,
+        118.0
+      ]
+    },
+    "skinRampSRGB8": [
+      {
+        "intensity": 0.0,
+        "RGB": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "intensity": 0.2,
+        "RGB": [
+          47.8,
+          33.4,
+          20.6
+        ]
+      },
+      {
+        "intensity": 0.55,
+        "RGB": [
+          173.0,
+          113.0,
+          75.0
+        ]
+      },
+      {
+        "intensity": 0.78,
+        "RGB": [
+          193.0,
+          123.0,
+          86.0
+        ]
+      },
+      {
+        "intensity": 0.95,
+        "RGB": [
+          239.0,
+          167.0,
+          103.0
+        ]
+      },
+      {
+        "intensity": 1.0,
+        "RGB": [
+          243.0,
+          173.0,
+          118.0
+        ]
+      }
+    ],
+    "markerThresholds": {
+      "minimumDominantChannel8": 40,
+      "green_R_over_G": 0.65,
+      "green_B_over_G": 0.55,
+      "magenta_minRB_over_maxRB": 0.55,
+      "magenta_G_over_maxRB": 0.15
+    },
+    "geometryChanged": false,
+    "alphaValidation": "External source/output pixel comparison still required",
+    "outputs": [
+      "../../sheets/lynx-walk-sheet.png",
+      "lynx-color-mask-witness.png",
+      "lynx-marker-color-restore.blend"
+    ]
+  }
+}

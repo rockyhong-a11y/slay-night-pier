@@ -1,0 +1,56 @@
+[
+  {
+    "actor": "nova",
+    "collection": "nova_complete_walk",
+    "camera": "nova_walk_camera",
+    "authoringOffsetX": 0.0
+  },
+  {
+    "actor": "viper",
+    "collection": "viper_complete_walk",
+    "camera": "viper_walk_camera",
+    "authoringOffsetX": 400.0
+  },
+  {
+    "actor": "tempest",
+    "collection": "tempest_complete_walk",
+    "camera": "tempest_walk_camera",
+    "authoringOffsetX": 800.0
+  },
+  {
+    "actor": "raven",
+    "collection": "raven_complete_walk",
+    "camera": "raven_walk_camera",
+    "authoringOffsetX": 1200.0
+  },
+  {
+    "actor": "seraph",
+    "collection": "seraph_complete_walk",
+    "camera": "seraph_walk_camera",
+    "authoringOffsetX": 1600.0
+  },
+  {
+    "actor": "ember",
+    "collection": "ember_complete_walk",
+    "camera": "ember_walk_camera",
+    "authoringOffsetX": 2000.0
+  },
+  {
+    "actor": "valkyrie",
+    "collection": "valkyrie_complete_walk",
+    "camera": "valkyrie_walk_camera",
+    "authoringOffsetX": 2400.0
+  },
+  {
+    "actor": "lynx",
+    "collection": "lynx_complete_walk",
+    "camera": "lynx_walk_camera",
+    "authoringOffsetX": 2800.0
+  },
+  {
+    "actor": "onyx",
+    "collection": "onyx_complete_walk",
+    "camera": "onyx_walk_camera",
+    "authoringOffsetX": 3200.0
+  }
+]

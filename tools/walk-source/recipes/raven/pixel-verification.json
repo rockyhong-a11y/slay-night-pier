@@ -1,0 +1,131 @@
+{
+  "status": "COLOR_ALPHA_INVARIANTS_VERIFIED",
+  "scope": "Structural pixel invariants only; marker membership and anatomy require visual review.",
+  "actor": "raven",
+  "dimensions": [
+    1448,
+    1086
+  ],
+  "sourceSHA256": "9194637d31fc2dab5068f01e239094602eda61b9e5fb77f555d57dabba780caa",
+  "restoredSHA256": "7ca73f3c115dbc2fc3ce04336872108eba1f7c654c68cfda9f8bfc14f7afee20",
+  "maskSHA256": "294b23254787fbddb303471cedc21ce8ee7ab38ab72e1313b5918f66865bf09a",
+  "markerPixels": 77370,
+  "alphaMaxError": 0,
+  "alphaChangedPixels": 0,
+  "silhouetteAt180ChangedPixels": 0,
+  "nonMarkerMaxRGBErrorAllAlpha": 9,
+  "nonMarkerMaxRGBErrorVisible": 0,
+  "nonMarkerMaxRGBErrorOpaque": 0,
+  "nonMarkerChangedVisibleRGBPixels": 0,
+  "nonMarkerChangedOpaqueRGBPixels": 0,
+  "invisibleRGBNote": "Blender may normalize unobservable RGB beneath zero alpha; exact alpha and visible RGB outside the selected marker mask are required.",
+  "markerRGBMedian": [
+    28.0,
+    27.0,
+    33.0
+  ],
+  "settings": {
+    "method": "Actual Blender compositor at exact source resolution; original sRGB plate + raw-channel marker masks + sampled canonical skin ramp + original alpha passthrough. No pixel-array writes or image geometry edits.",
+    "actor": "raven",
+    "markerSet": "green-magenta",
+    "targetMaterial": "pants",
+    "input": "tools/walk-source/marked/raven-walk-markers12.png",
+    "inputSHA256": "9194637d31fc2dab5068f01e239094602eda61b9e5fb77f555d57dabba780caa",
+    "canonicalReference": "tools/walk-source/references/raven-idle.png",
+    "canonicalReferenceSHA256": "ee9b20d42842867c3c79ad513d9c04f44bf8745653251db0ebbd4c6883cea293",
+    "dimensions": [
+      1448,
+      1086
+    ],
+    "rows": 3,
+    "cols": 4,
+    "lowerBodyBandFraction": 0.52,
+    "paletteSampleCount": 3532,
+    "paletteSRGB8Quantiles": {
+      "0.1": [
+        25.0,
+        24.0,
+        29.0
+      ],
+      "0.25": [
+        27.75,
+        27.0,
+        33.0
+      ],
+      "0.5": [
+        44.0,
+        43.0,
+        49.0
+      ],
+      "0.9": [
+        48.0,
+        48.0,
+        53.0
+      ]
+    },
+    "skinRampSRGB8": [
+      {
+        "intensity": 0.0,
+        "RGB": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "intensity": 0.2,
+        "RGB": [
+          8.8,
+          8.6,
+          9.8
+        ]
+      },
+      {
+        "intensity": 0.55,
+        "RGB": [
+          25.0,
+          24.0,
+          29.0
+        ]
+      },
+      {
+        "intensity": 0.78,
+        "RGB": [
+          27.75,
+          27.0,
+          33.0
+        ]
+      },
+      {
+        "intensity": 0.95,
+        "RGB": [
+          44.0,
+          43.0,
+          49.0
+        ]
+      },
+      {
+        "intensity": 1.0,
+        "RGB": [
+          48.0,
+          48.0,
+          53.0
+        ]
+      }
+    ],
+    "markerThresholds": {
+      "minimumDominantChannel8": 40,
+      "green_R_over_G": 0.65,
+      "green_B_over_G": 0.55,
+      "magenta_minRB_over_maxRB": 0.55,
+      "magenta_G_over_maxRB": 0.35
+    },
+    "geometryChanged": false,
+    "alphaValidation": "External source/output pixel comparison still required",
+    "outputs": [
+      "../../sheets/raven-walk-sheet.png",
+      "raven-color-mask-witness.png",
+      "raven-marker-color-restore.blend"
+    ]
+  }
+}

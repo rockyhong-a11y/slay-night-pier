@@ -1,0 +1,298 @@
+{
+  "version": 2,
+  "atlas": {
+    "provider": "Higgsfield Genjutsu",
+    "jobId": "d52d9b49-c6df-437e-8c6b-9a859b85a2d8",
+    "videoURL": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jx4IFW1oMtuHLRGsebq6Lj642q/hf_20261013_081957_d52d9b49-c6df-437e-8c6b-9a859b85a2d8.mp4",
+    "sourceFrames": [
+      {
+        "path": "tools/walk-source/atlas-frames/frame-032.png",
+        "sha256": "0c4be543e7f9718fc1acb8cee4dbad607868e3dd2da93b57b029caf5642b4ef3"
+      },
+      {
+        "path": "tools/walk-source/atlas-frames/frame-035.png",
+        "sha256": "87ea8d4152abb51364abb4917e9dc235adad6669de658c4e57df3dd112749cc9"
+      },
+      {
+        "path": "tools/walk-source/atlas-frames/frame-037.png",
+        "sha256": "fb527c6451f5acc3764a59ed1e426cf9ecd5a1f287fbe817c8e4f3f65bd3d144"
+      },
+      {
+        "path": "tools/walk-source/atlas-frames/frame-040.png",
+        "sha256": "5ab1097de782d769b7ec9f38482883591915128a3b1e14e4f2766abf47560d67"
+      },
+      {
+        "path": "tools/walk-source/atlas-frames/frame-043.png",
+        "sha256": "e841330cb91e04ecdd197f31efe4d7d61c8ef15302e1702f03caa379b0df3637"
+      },
+      {
+        "path": "tools/walk-source/atlas-frames/frame-045.png",
+        "sha256": "cc0c606f4a410d116e7ec0cdbe40c621c4632715d072a7857718983eebdabb89"
+      },
+      {
+        "path": "tools/walk-source/atlas-frames/frame-048.png",
+        "sha256": "f15b3b562cc3ef5cadcb38506ab944622d33b4f0a2a6784b435a931f5ea341df"
+      },
+      {
+        "path": "tools/walk-source/atlas-frames/frame-051.png",
+        "sha256": "2fd9a8bfe0ccbabb9933dd5730a6bd343758490a9bebe229d2fc8c8a7884e867"
+      },
+      {
+        "path": "tools/walk-source/atlas-frames/frame-053.png",
+        "sha256": "6002e67f011def4392633bd8b4252ad90e04e67997c32db27d71d6a0a3fa53b2"
+      },
+      {
+        "path": "tools/walk-source/atlas-frames/frame-056.png",
+        "sha256": "b9cd8f2162cc9c598848d076f28b9899a15250bdf369d3227be48fe3f883b258"
+      },
+      {
+        "path": "tools/walk-source/atlas-frames/frame-059.png",
+        "sha256": "0c6ba0d81b4b8d68991d5dc86a0772871bf4c82204a447a29294cb6d83081e79"
+      },
+      {
+        "path": "tools/walk-source/atlas-frames/frame-061.png",
+        "sha256": "bfe4b86ef56d7168246d961c353902e6ee9e9b242763b62c6ed90ed6d33d6043"
+      }
+    ],
+    "sourceBodyReference": 757,
+    "sourceGroundPivot": [
+      496,
+      875
+    ],
+    "drivingVideo": "tools/walk-source/driving-reference/walk-reference.mp4",
+    "characterReference": "tools/walk-source/references/atlas-idle.png",
+    "generation": "One explicitly approved free motion transfer; uploaded original SD art and an original Blender mannequin video."
+  },
+  "otherCharacters": {
+    "nova": {
+      "provider": "built-in image_gen",
+      "selectedRevision": 2,
+      "path": "tools/walk-source/sheets/nova-walk-sheet.png",
+      "sha256": "11f1d7b2a1a86f53dd511d183195895913839df3a61282845ba83a07cc19bd7d"
+    },
+    "viper": {
+      "provider": "built-in image_gen",
+      "selectedRevision": 2,
+      "path": "tools/walk-source/sheets/viper-walk-sheet.png",
+      "sha256": "68d79320a06c04661fdb6d6b50d658d117d1544ba7f608f54b2b5832d0ed42ac"
+    },
+    "tempest": {
+      "provider": "built-in image_gen; actual Blender color-only restoration and complete-body scene bake",
+      "selectedRevision": "four-key seed -> twelve marked full-body poses -> reviewed optional complete cell9 -> restored source",
+      "path": "tools/walk-source/sheets/tempest-walk-sheet.png",
+      "sha256": "bffedd27f72a7d4fc802a058a581320fe6d00d7b30bdcef30e5fc3635a0bb0a3",
+      "markedMaster": "tools/walk-source/marked/tempest-walk-markers12.png",
+      "markedMasterSHA256": "7194efa1a27e9a7c654467cbceb9b6528e6c43d09a14e2d659f8aa453f8e2f33",
+      "fourKeySeed": "tools/walk-source/marked/tempest-four-key-markers.png",
+      "fourKeySeedSHA256": "cf622dc848e1d3519487fc3f876ba2bccf515d9fedef9f905235ca6724cd3137",
+      "recipe": {
+        "actor": "tempest",
+        "input": "tools/walk-source/marked/tempest-walk-markers12.png",
+        "inputSHA256": "7194efa1a27e9a7c654467cbceb9b6528e6c43d09a14e2d659f8aa453f8e2f33",
+        "reference": "tools/walk-source/references/tempest-idle.png",
+        "markers": "green-magenta",
+        "material": "skin",
+        "rows": 3,
+        "cols": 4,
+        "lowerBand": 0.52,
+        "restoredSheet": "tools/walk-source/sheets/tempest-walk-sheet.png",
+        "restoredSHA256": "bffedd27f72a7d4fc802a058a581320fe6d00d7b30bdcef30e5fc3635a0bb0a3",
+        "settings": "tools/walk-source/recipes/tempest/restore-settings.json",
+        "proof": "tools/walk-source/recipes/tempest/pixel-verification.json",
+        "selection": null
+      }
+    },
+    "raven": {
+      "provider": "built-in image_gen; actual Blender color-only restoration and complete-body scene bake",
+      "selectedRevision": "four-key seed -> twelve marked full-body poses -> reviewed optional complete cell9 -> restored source",
+      "path": "tools/walk-source/sheets/raven-walk-sheet.png",
+      "sha256": "7ca73f3c115dbc2fc3ce04336872108eba1f7c654c68cfda9f8bfc14f7afee20",
+      "markedMaster": "tools/walk-source/marked/raven-walk-markers12.png",
+      "markedMasterSHA256": "9194637d31fc2dab5068f01e239094602eda61b9e5fb77f555d57dabba780caa",
+      "fourKeySeed": "tools/walk-source/marked/raven-four-key-markers.png",
+      "fourKeySeedSHA256": "dd353309fbca1f2c106a488f44edb49fac5f8bb7df9226f4b62a7f1855853c9c",
+      "recipe": {
+        "actor": "raven",
+        "input": "tools/walk-source/marked/raven-walk-markers12.png",
+        "inputSHA256": "9194637d31fc2dab5068f01e239094602eda61b9e5fb77f555d57dabba780caa",
+        "reference": "tools/walk-source/references/raven-idle.png",
+        "markers": "green-magenta",
+        "material": "pants",
+        "rows": 3,
+        "cols": 4,
+        "lowerBand": 0.52,
+        "restoredSheet": "tools/walk-source/sheets/raven-walk-sheet.png",
+        "restoredSHA256": "7ca73f3c115dbc2fc3ce04336872108eba1f7c654c68cfda9f8bfc14f7afee20",
+        "settings": "tools/walk-source/recipes/raven/restore-settings.json",
+        "proof": "tools/walk-source/recipes/raven/pixel-verification.json",
+        "selection": null
+      }
+    },
+    "seraph": {
+      "provider": "built-in image_gen; actual Blender color-only restoration and complete-body scene bake",
+      "selectedRevision": "four-key seed -> twelve marked full-body poses -> reviewed optional complete cell9 -> restored source",
+      "path": "tools/walk-source/sheets/seraph-walk-sheet.png",
+      "sha256": "0a2acdea0fe4ff1f5fc88986eda7878d6328f436d61426edd701f8099015aab0",
+      "markedMaster": "tools/walk-source/marked/seraph-walk-markers12.png",
+      "markedMasterSHA256": "35b61d4e9422cab58d987ef89fe6f77416aba57d76a37eadf19ea8032f71060c",
+      "fourKeySeed": "tools/walk-source/marked/seraph-four-key-markers.png",
+      "fourKeySeedSHA256": "8edf3a29b8aac641186871ad2c7d20df3bfecb1e27569bc495f63750aa96151e",
+      "recipe": {
+        "actor": "seraph",
+        "input": "tools/walk-source/marked/seraph-walk-markers12.png",
+        "inputSHA256": "35b61d4e9422cab58d987ef89fe6f77416aba57d76a37eadf19ea8032f71060c",
+        "reference": "tools/walk-source/references/seraph-idle.png",
+        "markers": "green-magenta",
+        "material": "skin",
+        "rows": 3,
+        "cols": 4,
+        "lowerBand": 0.52,
+        "restoredSheet": "tools/walk-source/sheets/seraph-walk-sheet.png",
+        "restoredSHA256": "0a2acdea0fe4ff1f5fc88986eda7878d6328f436d61426edd701f8099015aab0",
+        "settings": "tools/walk-source/recipes/seraph/restore-settings.json",
+        "proof": "tools/walk-source/recipes/seraph/pixel-verification.json",
+        "selection": null
+      }
+    },
+    "ember": {
+      "provider": "built-in image_gen; actual Blender color-only restoration and complete-body scene bake",
+      "selectedRevision": "four-key seed -> twelve marked full-body poses -> reviewed optional complete cell9 -> restored source",
+      "path": "tools/walk-source/sheets/ember-walk-sheet.png",
+      "sha256": "e9d827b416466c463888e64c40ab397f1974c86346b31791f9063f60d0abdcad",
+      "markedMaster": "tools/walk-source/marked/ember-walk-markers12.png",
+      "markedMasterSHA256": "2fe31e2fd9cc7f882b68d1767ea606546b1a43090907ede9af21d13ee894f22c",
+      "fourKeySeed": "tools/walk-source/marked/ember-four-key-markers.png",
+      "fourKeySeedSHA256": "6a889d28a5e4e996e893a0212d309dfaf2acd9f0a81b446d68ce4c01dd477701",
+      "recipe": {
+        "actor": "ember",
+        "input": "tools/walk-source/marked/ember-markers12-cell9-selected.png",
+        "inputSHA256": "311f0d31936194b6d9f8a0950afcb31594f308385e3c6bb2137cfbf1ca0bd673",
+        "reference": "tools/walk-source/references/ember-idle.png",
+        "markers": "green-magenta",
+        "material": "skin",
+        "rows": 3,
+        "cols": 4,
+        "lowerBand": 0.52,
+        "restoredSheet": "tools/walk-source/sheets/ember-walk-sheet.png",
+        "restoredSHA256": "e9d827b416466c463888e64c40ab397f1974c86346b31791f9063f60d0abdcad",
+        "settings": "tools/walk-source/recipes/ember/restore-settings.json",
+        "proof": "tools/walk-source/recipes/ember/pixel-verification.json",
+        "selection": {
+          "original": "tools/walk-source/marked/ember-walk-markers12.png",
+          "edited": "tools/walk-source/marked/ember-markers12-cell9-edit.png",
+          "selectedInput": "tools/walk-source/marked/ember-markers12-cell9-selected.png",
+          "index": 9,
+          "rows": 3,
+          "cols": 4,
+          "padding": 6,
+          "selectionBounds": [
+            398,
+            712,
+            636,
+            1075
+          ],
+          "proof": "tools/walk-source/recipes/ember/selection/pixel-verification.json",
+          "receipt": "tools/walk-source/recipes/ember/selection/cell-selection.json",
+          "scene": "tools/walk-source/recipes/ember/selection/ember-whole-cell-selection.blend"
+        }
+      }
+    },
+    "valkyrie": {
+      "provider": "built-in image_gen; actual Blender color-only restoration and complete-body scene bake",
+      "selectedRevision": "four-key seed -> twelve marked full-body poses -> reviewed optional complete cell9 -> restored source",
+      "path": "tools/walk-source/sheets/valkyrie-walk-sheet.png",
+      "sha256": "ccb40333ab5fc9557ea5f9505466ec5eea51470909b84b144f46e1cff406ebca",
+      "markedMaster": "tools/walk-source/marked/valkyrie-walk-markers12.png",
+      "markedMasterSHA256": "b129123951edaf465ad0a6be2bf0f37a0ac881b38c965b10562e6913f72c38c6",
+      "fourKeySeed": "tools/walk-source/marked/valkyrie-four-key-markers.png",
+      "fourKeySeedSHA256": "a3ddeb23b6af9ff3c780edf4cf098869893c6057d9a75884594864c91ccaf1a0",
+      "recipe": {
+        "actor": "valkyrie",
+        "input": "tools/walk-source/marked/valkyrie-walk-markers12.png",
+        "inputSHA256": "b129123951edaf465ad0a6be2bf0f37a0ac881b38c965b10562e6913f72c38c6",
+        "reference": "tools/walk-source/references/valkyrie-idle.png",
+        "markers": "green-magenta",
+        "material": "skin",
+        "rows": 3,
+        "cols": 4,
+        "lowerBand": 0.52,
+        "restoredSheet": "tools/walk-source/sheets/valkyrie-walk-sheet.png",
+        "restoredSHA256": "ccb40333ab5fc9557ea5f9505466ec5eea51470909b84b144f46e1cff406ebca",
+        "settings": "tools/walk-source/recipes/valkyrie/restore-settings.json",
+        "proof": "tools/walk-source/recipes/valkyrie/pixel-verification.json",
+        "selection": null
+      }
+    },
+    "lynx": {
+      "provider": "built-in image_gen; actual Blender color-only restoration and complete-body scene bake",
+      "selectedRevision": "four-key seed -> twelve marked full-body poses -> reviewed optional complete cell9 -> restored source",
+      "path": "tools/walk-source/sheets/lynx-walk-sheet.png",
+      "sha256": "bbbec48ea1cc261e2ac67a2ec877153ea65e5c3767a1c71ab4e88bf367b9542d",
+      "markedMaster": "tools/walk-source/marked/lynx-walk-markers12.png",
+      "markedMasterSHA256": "e798731da29873f3e462adde1868efff3db83f6e293f62a1f5581604a23672ab",
+      "fourKeySeed": "tools/walk-source/marked/lynx-four-key-markers.png",
+      "fourKeySeedSHA256": "d93689a5a09475f4d6d6168c5bfdadc355f95e09795998aa985f2aca5640bcd4",
+      "recipe": {
+        "actor": "lynx",
+        "input": "tools/walk-source/marked/lynx-markers12-cell9-selected.png",
+        "inputSHA256": "94213ab007c30448cb65f7debfb61e78b554902b91cd160e4ba1b5037f8b5948",
+        "reference": "tools/walk-source/references/lynx-idle.png",
+        "markers": "green-magenta",
+        "material": "skin",
+        "rows": 3,
+        "cols": 4,
+        "lowerBand": 0.43,
+        "restoredSheet": "tools/walk-source/sheets/lynx-walk-sheet.png",
+        "restoredSHA256": "bbbec48ea1cc261e2ac67a2ec877153ea65e5c3767a1c71ab4e88bf367b9542d",
+        "settings": "tools/walk-source/recipes/lynx/restore-settings.json",
+        "proof": "tools/walk-source/recipes/lynx/pixel-verification.json",
+        "selection": {
+          "original": "tools/walk-source/marked/lynx-walk-markers12.png",
+          "edited": "tools/walk-source/marked/lynx-markers12-cell9-edit.png",
+          "selectedInput": "tools/walk-source/marked/lynx-markers12-cell9-selected.png",
+          "index": 9,
+          "rows": 3,
+          "cols": 4,
+          "padding": 6,
+          "selectionBounds": [
+            344,
+            855,
+            548,
+            1264
+          ],
+          "proof": "tools/walk-source/recipes/lynx/selection/pixel-verification.json",
+          "receipt": "tools/walk-source/recipes/lynx/selection/cell-selection.json",
+          "scene": "tools/walk-source/recipes/lynx/selection/lynx-whole-cell-selection.blend"
+        }
+      }
+    },
+    "onyx": {
+      "provider": "built-in image_gen; actual Blender color-only restoration and complete-body scene bake",
+      "selectedRevision": "four-key seed -> twelve marked full-body poses -> reviewed optional complete cell9 -> restored source",
+      "path": "tools/walk-source/sheets/onyx-walk-sheet.png",
+      "sha256": "5800baef40224d4a1ed204e325c1c22e6b067a7ccf2730ac288155c0fae05107",
+      "markedMaster": "tools/walk-source/marked/onyx-walk-markers12.png",
+      "markedMasterSHA256": "f8e1fc8fd9687741c7332a7e30ed85499f3f095028c948ada7d20472f0adcac3",
+      "fourKeySeed": "tools/walk-source/marked/onyx-four-key-markers.png",
+      "fourKeySeedSHA256": "b033a4658202a886dec4681e51b8583e398b0d3961a3c880dad9bc96bbfb778b",
+      "recipe": {
+        "actor": "onyx",
+        "input": "tools/walk-source/marked/onyx-walk-markers12.png",
+        "inputSHA256": "f8e1fc8fd9687741c7332a7e30ed85499f3f095028c948ada7d20472f0adcac3",
+        "reference": "tools/walk-source/references/onyx-idle.png",
+        "markers": "blue-red",
+        "material": "skin",
+        "rows": 3,
+        "cols": 4,
+        "lowerBand": 0.52,
+        "restoredSheet": "tools/walk-source/sheets/onyx-walk-sheet.png",
+        "restoredSHA256": "5800baef40224d4a1ed204e325c1c22e6b067a7ccf2730ac288155c0fae05107",
+        "settings": "tools/walk-source/recipes/onyx/restore-settings.json",
+        "proof": "tools/walk-source/recipes/onyx/pixel-verification.json",
+        "selection": null
+      }
+    }
+  },
+  "sourcePixelPolicy": "Complete-body silhouettes; one uniform actor reference; explicit whole-frame chronology. Marker restoration changes RGB only, exact source alpha and visible non-marker pixels. Selective9 replaces one complete body and preserves all other11. No part warp, independent-axis scale, pose-bbox fit, or shape edits.",
+  "prompts": "tools/walk-source/prompt-records.json"
+}

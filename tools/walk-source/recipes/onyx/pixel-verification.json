@@ -1,0 +1,131 @@
+{
+  "status": "COLOR_ALPHA_INVARIANTS_VERIFIED",
+  "scope": "Structural pixel invariants only; marker membership and anatomy require visual review.",
+  "actor": "onyx",
+  "dimensions": [
+    1448,
+    1086
+  ],
+  "sourceSHA256": "f8e1fc8fd9687741c7332a7e30ed85499f3f095028c948ada7d20472f0adcac3",
+  "restoredSHA256": "5800baef40224d4a1ed204e325c1c22e6b067a7ccf2730ac288155c0fae05107",
+  "maskSHA256": "fb6d786ae6a10c87d34cce49b1205a79579bcca229d42f69ab9945f67ee70930",
+  "markerPixels": 58432,
+  "alphaMaxError": 0,
+  "alphaChangedPixels": 0,
+  "silhouetteAt180ChangedPixels": 0,
+  "nonMarkerMaxRGBErrorAllAlpha": 17,
+  "nonMarkerMaxRGBErrorVisible": 0,
+  "nonMarkerMaxRGBErrorOpaque": 0,
+  "nonMarkerChangedVisibleRGBPixels": 0,
+  "nonMarkerChangedOpaqueRGBPixels": 0,
+  "invisibleRGBNote": "Blender may normalize unobservable RGB beneath zero alpha; exact alpha and visible RGB outside the selected marker mask are required.",
+  "markerRGBMedian": [
+    217.0,
+    139.0,
+    95.0
+  ],
+  "settings": {
+    "method": "Actual Blender compositor at exact source resolution; original sRGB plate + raw-channel marker masks + sampled canonical skin ramp + original alpha passthrough. No pixel-array writes or image geometry edits.",
+    "actor": "onyx",
+    "markerSet": "blue-red",
+    "targetMaterial": "skin",
+    "input": "tools/walk-source/marked/onyx-walk-markers12.png",
+    "inputSHA256": "f8e1fc8fd9687741c7332a7e30ed85499f3f095028c948ada7d20472f0adcac3",
+    "canonicalReference": "tools/walk-source/references/onyx-idle.png",
+    "canonicalReferenceSHA256": "cf66325e481de025de02f6f09940b598a520e0e5255cb5faccf6fb110d8819fc",
+    "dimensions": [
+      1448,
+      1086
+    ],
+    "rows": 3,
+    "cols": 4,
+    "lowerBodyBandFraction": 0.52,
+    "paletteSampleCount": 7128,
+    "paletteSRGB8Quantiles": {
+      "0.1": [
+        160.0,
+        96.0,
+        60.0
+      ],
+      "0.25": [
+        180.0,
+        117.0,
+        81.0
+      ],
+      "0.5": [
+        215.0,
+        134.0,
+        85.0
+      ],
+      "0.9": [
+        218.0,
+        140.0,
+        98.0
+      ]
+    },
+    "skinRampSRGB8": [
+      {
+        "intensity": 0.0,
+        "RGB": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "intensity": 0.2,
+        "RGB": [
+          43.0,
+          26.8,
+          17.0
+        ]
+      },
+      {
+        "intensity": 0.55,
+        "RGB": [
+          160.0,
+          96.0,
+          60.0
+        ]
+      },
+      {
+        "intensity": 0.78,
+        "RGB": [
+          180.0,
+          117.0,
+          81.0
+        ]
+      },
+      {
+        "intensity": 0.95,
+        "RGB": [
+          215.0,
+          134.0,
+          85.0
+        ]
+      },
+      {
+        "intensity": 1.0,
+        "RGB": [
+          218.0,
+          140.0,
+          98.0
+        ]
+      }
+    ],
+    "markerThresholds": {
+      "minimumDominantChannel8": 40,
+      "blue_R_over_B": 0.45,
+      "blue_G_over_B": 0.65,
+      "red_G_over_R": 0.35,
+      "red_B_over_R": 0.35
+    },
+    "geometryChanged": false,
+    "alphaValidation": "External source/output pixel comparison still required",
+    "outputs": [
+      "../../sheets/onyx-walk-sheet.png",
+      "onyx-color-mask-witness.png",
+      "onyx-marker-color-restore.blend"
+    ]
+  }
+}

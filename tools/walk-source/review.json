@@ -1,0 +1,238 @@
+{
+  "status": "ACCEPTED_FOR_ARTISTIC_RELEASE",
+  "artisticReleaseApproved": true,
+  "reviewer": "browser_qa independent actual Canvas/Blender visual inspection",
+  "reviewedAt": "2026-10-13T11:39:13.409624+00:00",
+  "report": "artifacts/walk-redo/approved-independent-art-review/report.json",
+  "runtimeEvidence": "artifacts/walk-redo/approved-runtime-qa/report.json",
+  "method": "Inspected final9 actual Blender cycle128 boards and final Canvas recordings: all120 phase drawings at128 body reference, all10 idle/walk/strike/return sequences, mirrored/depth/diagonal/slow direction witnesses. Checked connected thigh-to-knee-to-boot identity, opposing foot contacts, lifted/support poses, core head/trunk ratios and costume colors. Source coordinates/marker identity and final source-to-render hashes corroborate, but do not substitute for, these visual checks. No per-frame box or axis normalization is used.",
+  "actors": [
+    {
+      "id": "atlas",
+      "verdict": "ACCEPTED",
+      "rawBodyReference": 757,
+      "sourceOrder": [
+        32,
+        35,
+        37,
+        40,
+        43,
+        45,
+        48,
+        51,
+        53,
+        56,
+        59,
+        61
+      ],
+      "runtimeWalkImageVersion": "68841849f01d7d57",
+      "renderedBankBodyReference": 302.8
+    },
+    {
+      "id": "nova",
+      "verdict": "ACCEPTED",
+      "rawBodyReference": 428.57142857142856,
+      "sourceOrder": [
+        0,
+        2,
+        1,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "runtimeWalkImageVersion": "aaf26aaeb646abab",
+      "renderedBankBodyReference": 314.1818181818182,
+      "selectedSourceSHA256": "11f1d7b2a1a86f53dd511d183195895913839df3a61282845ba83a07cc19bd7d"
+    },
+    {
+      "id": "viper",
+      "verdict": "ACCEPTED",
+      "rawBodyReference": 400.0,
+      "sourceOrder": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        10,
+        9,
+        11
+      ],
+      "runtimeWalkImageVersion": "fd36b4b5dbff09af",
+      "renderedBankBodyReference": 314.1818181818182,
+      "selectedSourceSHA256": "68d79320a06c04661fdb6d6b50d658d117d1544ba7f608f54b2b5832d0ed42ac"
+    },
+    {
+      "id": "tempest",
+      "verdict": "ACCEPTED",
+      "rawBodyReference": 345.0,
+      "sourceOrder": [
+        0,
+        10,
+        11,
+        2,
+        3,
+        1,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "runtimeWalkImageVersion": "6419fde7221267a8",
+      "renderedBankBodyReference": 314.1818181818182,
+      "selectedSourceSHA256": "bffedd27f72a7d4fc802a058a581320fe6d00d7b30bdcef30e5fc3635a0bb0a3"
+    },
+    {
+      "id": "raven",
+      "verdict": "ACCEPTED",
+      "rawBodyReference": 320.0,
+      "sourceOrder": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "runtimeWalkImageVersion": "82845dd8633fb7e5",
+      "renderedBankBodyReference": 314.1818181818182,
+      "selectedSourceSHA256": "7ca73f3c115dbc2fc3ce04336872108eba1f7c654c68cfda9f8bfc14f7afee20"
+    },
+    {
+      "id": "seraph",
+      "verdict": "ACCEPTED",
+      "rawBodyReference": 320.0,
+      "sourceOrder": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "runtimeWalkImageVersion": "e6f9f8ded4cac37b",
+      "renderedBankBodyReference": 314.1818181818182,
+      "selectedSourceSHA256": "0a2acdea0fe4ff1f5fc88986eda7878d6328f436d61426edd701f8099015aab0"
+    },
+    {
+      "id": "ember",
+      "verdict": "ACCEPTED",
+      "rawBodyReference": 325.0,
+      "sourceOrder": [
+        0,
+        10,
+        11,
+        3,
+        1,
+        2,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "runtimeWalkImageVersion": "46d1569fb489b1f1",
+      "renderedBankBodyReference": 314.1818181818182,
+      "selectedSourceSHA256": "e9d827b416466c463888e64c40ab397f1974c86346b31791f9063f60d0abdcad"
+    },
+    {
+      "id": "valkyrie",
+      "verdict": "ACCEPTED",
+      "rawBodyReference": 330.0,
+      "sourceOrder": [
+        0,
+        10,
+        11,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        8,
+        9,
+        7
+      ],
+      "runtimeWalkImageVersion": "b0720115fc100537",
+      "renderedBankBodyReference": 314.1818181818182,
+      "selectedSourceSHA256": "ccb40333ab5fc9557ea5f9505466ec5eea51470909b84b144f46e1cff406ebca"
+    },
+    {
+      "id": "lynx",
+      "verdict": "ACCEPTED",
+      "rawBodyReference": 350.0,
+      "sourceOrder": [
+        0,
+        11,
+        3,
+        1,
+        2,
+        4,
+        5,
+        6,
+        7,
+        8,
+        10,
+        9
+      ],
+      "runtimeWalkImageVersion": "80956a283abd64fe",
+      "renderedBankBodyReference": 314.1818181818182,
+      "selectedSourceSHA256": "bbbec48ea1cc261e2ac67a2ec877153ea65e5c3767a1c71ab4e88bf367b9542d"
+    },
+    {
+      "id": "onyx",
+      "verdict": "ACCEPTED",
+      "rawBodyReference": 342.5,
+      "sourceOrder": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "runtimeWalkImageVersion": "cf59b69cb1bfa246",
+      "renderedBankBodyReference": 314.1818181818182,
+      "selectedSourceSHA256": "5800baef40224d4a1ed204e325c1c22e6b067a7ccf2730ac288155c0fae05107"
+    }
+  ],
+  "residualVisualCharacteristics": [
+    "Walking stands taller than the crouched original idle; whole-body bounding height is therefore not forced equal across poses.",
+    "Tempest/Seraph ponytail flow/volume varies from canonical idle, while measured face/chin/waist core is maintained.",
+    "Passing keys and frame cadence remain stylized; a few lifted keys are more pronounced than the continuous Atlas reference.",
+    "A brief translucent complete-pose crossfade is visible during strike transitions; it resolves to the current combat pose and is not persistent detached limb artwork."
+  ],
+  "limitations": "This approval is for visible artwork and gameplay-scale motion readability. It does not certify perfect3D world-space sole locking, biological bone-length identity from2D silhouettes, or byte-identical generated head/torso RGB.",
+  "revisionPolicy": "Approved source hashes and packed image versions must be preserved during import. This approval supersedes rejected mixed-part rigs, earlier frozen-leg sheets and uncorrected Ember/Lynx source9."
+}

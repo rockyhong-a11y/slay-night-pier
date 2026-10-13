@@ -1,0 +1,357 @@
+{
+  "anatomyAcceptance": false,
+  "status": "RENDER_INTEGRITY_ONLY",
+  "actors": {
+    "nova": {
+      "frames": 12,
+      "renderSize": [
+        384,
+        384
+      ],
+      "renderBodyHeight": 314.1818181818182,
+      "rawReference": 428.57142857142856,
+      "cycleWorldDistance": 70.0,
+      "minimumOpaqueMarginPixels": 17,
+      "PNG_SHA256": [
+        "f58d1fe4669d439075acd6c7496368e572399f9462ee1bff02fb6a2c2fbe112f",
+        "1f9c144e0d8bc6bebfe6a2c76649abf4f517b8202e0dab54d3acc8ce9dd6dab0",
+        "e55432a2bdae507eb57049f296d7320029461cc95ace6de08480794a204548ed",
+        "79d4be0539dcb9b5dacaf9a241d0c287bef895cb2d628acc032961e7ee6fb48f",
+        "82a8fa2f3d0d4db0d0f886adb8cbb8e34ac61b790a07d439e65d7deaf6c5951d",
+        "b8fdeb2fdbfd018d1a4973dc7b447e0863ccf0461341fe5884a40158222e365e",
+        "a4155fd7c5986dc98671c9b822299f146924ce790c381bce53365777ed3c3b6e",
+        "3f665e74efc631b5a9063a9659eb4996481353d810f12f595c7a777cc8869cf3",
+        "07c1081ea08cb3004235d186605b74417f9492267e4e18c69c059eb960ab475f",
+        "4ca367c6233c08292d55661c215d55ba54137e0af84c3b48c1232c94e716bbc7",
+        "180eea72333e285d7099958e45c0c7af1fe6964fe63390af637a76f6c731617f",
+        "d82c071bd59a786006de9f16e20d0c1dc27c172c34a69c9117edd8c76b517436"
+      ],
+      "frameOrder": [
+        0,
+        2,
+        1,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ]
+    },
+    "viper": {
+      "frames": 12,
+      "renderSize": [
+        384,
+        384
+      ],
+      "renderBodyHeight": 314.1818181818182,
+      "rawReference": 400.0,
+      "cycleWorldDistance": 70.0,
+      "minimumOpaqueMarginPixels": 17,
+      "PNG_SHA256": [
+        "dc21f9843fbc43176a652a57a991592cd9696e34bb86ac989e733a920af4fd45",
+        "62f93d05bf664fb31217b2ea687f1d2a3cbf3d81dbe45fb0a8cb264aa3750894",
+        "6386c5851186ac1b8a99f4ceab9d6d5f491cb2b2e3c06b8ea002b79b0e888825",
+        "24c616d301d2c6680fb64bd4c58962a92ed07f09fe22a874494f7aa701a011a9",
+        "2c7a7147d41cb6bfe3023890cf99dab11847dd49d194cf7d500fcffca8c9e907",
+        "758e02962f44b29e07afb9f8f04f746d3675f53dcd3ba2399a97ea62ae279c92",
+        "3643eed500a9146094057433532ab81013f080d62f924ff4b1fcf4d6fa525375",
+        "073569540d0625aff3ef510fd5c3ff501d547440ffe2bbdb65ad34ac3e5ebd94",
+        "59a94c9c3fa2a656980ed995bdedcc9a9f282ca8bb6065f5529ab1acde45fbc2",
+        "5b016749a4c1e4006a512bb3d9f246199bee4d16fc87dc1c96021c41012c151c",
+        "351ed4f2f35bd43681ec51a24e574917118dc326d191316fd5dbbe414409ab9a",
+        "fc453c081500ed16dba6f79ea4dc1345a4b458b49ba04ca38306123584c9c463"
+      ],
+      "frameOrder": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        10,
+        9,
+        11
+      ]
+    },
+    "tempest": {
+      "frames": 12,
+      "renderSize": [
+        384,
+        384
+      ],
+      "renderBodyHeight": 314.1818181818182,
+      "rawReference": 345.0,
+      "cycleWorldDistance": 70.0,
+      "minimumOpaqueMarginPixels": 8,
+      "PNG_SHA256": [
+        "4479f67a27b277ce1297aba3d4ed4fa01d96ac2482390cb7ed2a6a0bb86aae56",
+        "66d6db75e6caedf7b51a23877b1fe8e925fd111eb96b8b1830933cd8cdc59e79",
+        "34ad4d400431bf05fa818f94b5310d71364117dc278b531ce73c058db3995848",
+        "e745f8c38b408856741f7e2c6d2d02eb99a92336ab2429a59a4e56e39febb498",
+        "e813c6f1b4d6d67d1c3f2220f7ba81e484539e135d48cef48822796cfb9be8fd",
+        "327e7190eae543cb805ac26ce53b5b4d3978f6aa3309e9898b16810b3ccbc249",
+        "9e06a2906aff9976f34374ac7354654b806866cde3e5c30b9bfadf7075774fc5",
+        "a7dbb5721bb39ba3078f22f283d3fbf6a36c8c93f4ea3c7b248530593c7e11b3",
+        "e536df842056876168de5a7c2de33f56e3bc29ba402d7f4158c2190df9595c19",
+        "29046c60d1d7bc7c38f7c3088d8a0052cbfcdcb03647f88487bd1a759d793b78",
+        "04ccf781163a6706b71678f6e9e8ad5badbf82c08e763fe682e3f23dbeef85e4",
+        "342c06b90e18d0a1baafdb28ec3191888feb1123cb585eb32611d2f6e10537f1"
+      ],
+      "frameOrder": [
+        0,
+        10,
+        11,
+        2,
+        3,
+        1,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    "raven": {
+      "frames": 12,
+      "renderSize": [
+        384,
+        384
+      ],
+      "renderBodyHeight": 314.1818181818182,
+      "rawReference": 320.0,
+      "cycleWorldDistance": 70.0,
+      "minimumOpaqueMarginPixels": 10,
+      "PNG_SHA256": [
+        "4d67ae8ca4ed04129f8785787da36729f4fbb17422f3435a2f173dfffa9944d9",
+        "331683387d644eef59771bc94f705ad100311af1736866103d86d15b32f7150f",
+        "5e82cb5f4ab7f39cca36dd828450bebba29db36696c3a493b3d9c589ae0aff9d",
+        "306d41ed4fb1470222402153dd45cf02bd1d40b38ea5a6adfb629c6f2b1170bc",
+        "4bb4bcedeb027150036ab34434f581b9d56f8089cf7ed1d2145f6d1e2354893e",
+        "7e67ca01e2a0b8550cc9658b3ec852a27ec5a23084280dd2f77d5f29f8f372ca",
+        "5623d1f836097a5dc8cc06892ba973954a91acbdf8e3c7faaefdc2c2f3690679",
+        "2af3f21acba7742e5662675847cba33f1f4fb2c2d0d77060178cf763a9bc0537",
+        "be7605ba14c4b8076a6b70dc6d8ea2e4f98302b36f4acf40962f6d6fef9b35d5",
+        "689a40403e928b32bd91c13c0d066dbf78752bbdc7c2b5db45e48561a8adb591",
+        "150ccd275c0c78649a998f7c7aca367ae0bebc58b1244e11f42e8351ecdd9ed3",
+        "ebf76889a3f327271fef6c5137a124a1c8dd37ed2fa152280f0a47dbfbe58bcf"
+      ],
+      "frameOrder": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ]
+    },
+    "seraph": {
+      "frames": 12,
+      "renderSize": [
+        384,
+        384
+      ],
+      "renderBodyHeight": 314.1818181818182,
+      "rawReference": 320.0,
+      "cycleWorldDistance": 70.0,
+      "minimumOpaqueMarginPixels": 10,
+      "PNG_SHA256": [
+        "fab8d1200369fde587a612d4e0413a780f68ef31c30e00aa94edaf4259667aa7",
+        "0d68b7afe535b8cae2ebbfd672be9fc6db4a4ad652fb7708cbc8bd327c49a38d",
+        "7074062b1ae97ec0101834744071a48f371bcdbccab60221479f2324e887da42",
+        "34e03e195efeb533bae31e1a765037e319f5ad3eea69373088e18097451b573d",
+        "977d75084fad85d766e73eeec3e7b3be681aefdcdb83ff5df5ae52e265e60dc4",
+        "4037951898842ecfd1ea3a14073102af38e3c7517315e25196e0f65e81a2b348",
+        "63ea43ccf482ebdadc972e7aec3408bf4d7542ac40a415d603a3420a3be216cd",
+        "d0cd85d2231b0b581473e5698ac86e82006c296a29445c00275b4ae079de7e66",
+        "2e2e6daecd009641f432742f7cf8f05e393663edf4be2b980f4679331e1b08c7",
+        "303d745b51eba4cb83d9b5e0fd37245fc2fe5c114abb9f3bd47ea1b8b65c65a4",
+        "d907f1b621adef9f6ba65b40647ab8e7b3a3326a8b069d3d1eeb6843e3f9bcab",
+        "758f2310dc4128c62df253e048a690590957a5c0d2cde47f6d653fff7589dd44"
+      ],
+      "frameOrder": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ]
+    },
+    "ember": {
+      "frames": 12,
+      "renderSize": [
+        384,
+        384
+      ],
+      "renderBodyHeight": 314.1818181818182,
+      "rawReference": 325.0,
+      "cycleWorldDistance": 70.0,
+      "minimumOpaqueMarginPixels": 16,
+      "PNG_SHA256": [
+        "fa9c9452028187f48475241b5fe5404692cbe7b8df237cc4a65795f311c26186",
+        "80e765b824b1f45bc5ed0242d74b31d0f8b340466361e0c2f49c861e9e320895",
+        "56d3804e5b29f55dbe2cd058b8797286346bb8db175bce55af88c0b22fea7017",
+        "091c9fcfbd949bbbeaa5ca245a923963561ffe5f5cb86433f216b4b1c7c9b5ca",
+        "3ca1889864fb7e7bb899aad98b76da43247c50f8108be9c842be6da889e1e17c",
+        "bdc5e42b21891d600b6394253c0c1639971f71e6acd2a0f8cee15be9a97fcd35",
+        "d46d6dd2e92cca6f929fc559df8b73d6786cf617ef26274047af56ed1816f72d",
+        "1cef13245860e32ab444b23372e1316b1f47b1d2b99bd0334c2d5fee16f0aeab",
+        "d0dd2e74b8e285cb4f7f7dd5f18956db0ca5a8b29e205029191a1b5428c18b48",
+        "ece7909073deaf4e73debbc402ee205e337f38c939bc825acdf663c2d6021bfe",
+        "9ca3908c43470f20097d41240785688c72954fed0f613fe15b86979c973d11a2",
+        "eff0c067f6a1fbe9bf2560d2d4160dc389d04b2e81e5116352c833bc71a09a18"
+      ],
+      "frameOrder": [
+        0,
+        10,
+        11,
+        3,
+        1,
+        2,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    "valkyrie": {
+      "frames": 12,
+      "renderSize": [
+        384,
+        384
+      ],
+      "renderBodyHeight": 314.1818181818182,
+      "rawReference": 330.0,
+      "cycleWorldDistance": 70.0,
+      "minimumOpaqueMarginPixels": 16,
+      "PNG_SHA256": [
+        "b2bb6b19b066d693e11371c357989f4d22d41c01cfb2846a9b06686f66702637",
+        "38e343898fcba471dd9e1a60282f8c865115babe5f1a702514944bdbc24d220c",
+        "33ae21fe330a2c95c9ea87ebce0c313a38865e224529ffa908f3af3c0c2f25b8",
+        "8824b269468f6d73097626165008d939edc423da94d99bbb02a45b11bd215e0e",
+        "6fdc9be88df0aa219f3465695276b97ccde6ffa40d1d419bdfeb4be3cc590456",
+        "ca6b6f28041b5cfc2cd7c381d101748240714b4a71f6fdbcf84c79fbe7f46f7c",
+        "d3686b133da9dcbb1d44875bed18c5650544ba334603f8eb8e5653abf60524ff",
+        "5e2eddc7c9c8e963a1271e3eb1787f538c9f7ec2fc52c1e29082d42ed9ed5c14",
+        "fa98d93791fb6d54577f017b60e19bd0b31fc35f26f6646feda4d7eeb92aaad6",
+        "5830bd073d982dd3152e141879ba1b01fd1116450fd242aa71e25d835ae55bfa",
+        "4a7fe76210febccb399b9b55c0fc877abf89326e19c3ccd45c572ab7f4eb7976",
+        "c70795d24310b721216831fc7e4deae4ad8c5a44771d15573fb967cfaff62dd0"
+      ],
+      "frameOrder": [
+        0,
+        10,
+        11,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        8,
+        9,
+        7
+      ]
+    },
+    "lynx": {
+      "frames": 12,
+      "renderSize": [
+        384,
+        384
+      ],
+      "renderBodyHeight": 314.1818181818182,
+      "rawReference": 350.0,
+      "cycleWorldDistance": 70.0,
+      "minimumOpaqueMarginPixels": 3,
+      "PNG_SHA256": [
+        "f71d915598ea7218b0f76919b417334b15a4c4a45e592070ff4b0d8283c297bd",
+        "b67fee2c523d83c333a1e449ab81cc58e6ceb037158546505dce68dc2adc7bfe",
+        "cd7bc79eb70dc7050df8a5ec1282c5b35f7388f7365fb35a99610593567fac64",
+        "5d2fd6d81d0d37301b281695215dde9de2cbc9c252fee656a68227cb5802967a",
+        "050309b90477f92112a4e1e9815fbc2faf3f1b8f8ffafb702518fd69cde8314d",
+        "3ffb7ddb909191b7c0786cf9a618280f8fd8d6193feb645b9ff4501bdcb68cbd",
+        "1f019ba7c5efe0026ad06bce3946a0d578482fe35ac4625488ca5ac92c65102f",
+        "47d66c92a523f2283e899a9655919bfe1a8aee9f08cc47e97912a79a9e84f827",
+        "8ec5e96aef72999c923a7567cd468f77a4f8590e02150918a9a0186868d2592c",
+        "c129484134ba62bec6a8b81439b2d146019728aac67194f1ff677cf9318ab320",
+        "4611cc9e839b780fe3e011efb4a2a0c597808cc3e00ed82f83d5e505c7a44943",
+        "07dd1fd0fb2a244d80391eada7faeeac7a8fc80b792c789b32a4abeab484eb09"
+      ],
+      "frameOrder": [
+        0,
+        11,
+        3,
+        1,
+        2,
+        4,
+        5,
+        6,
+        7,
+        8,
+        10,
+        9
+      ]
+    },
+    "onyx": {
+      "frames": 12,
+      "renderSize": [
+        384,
+        384
+      ],
+      "renderBodyHeight": 314.1818181818182,
+      "rawReference": 342.5,
+      "cycleWorldDistance": 70.0,
+      "minimumOpaqueMarginPixels": 15,
+      "PNG_SHA256": [
+        "9b6b67478e428955576d40e265b087410245c036af0da4cbc208d5c876137a3c",
+        "f78b7674a9ebe9a8758c1204d4db00ce1df10bcd33236441c8d3ab10a7239176",
+        "ddcd3923ab0e3b65c5d9262c246e9a7b7408f09d348f22146ca74cbf1830a464",
+        "808f64d15a331aca2f1acaf9a7a9852aa3ed403858216e7fd73a66ea7b3d84aa",
+        "2e34ec5cf24825e142f2845d91ef4375d6e057f79f7314a1e7b44b6b82f5dd74",
+        "c79f31be53fd7b844c9640a9e71cad76acb0ef54b81427e74dc98812a671f9d8",
+        "3a5c26d9465237872a2bdcef57d5e8a88fce8d72332080bf9ba32d2b0f08ef27",
+        "cbe0573efaa445fbfc3ff465ccf8630d4e701fc66de6f36c8bd8a26474eba33f",
+        "7a6d7d66b05217a49412c27564f0b966dc31a5d0e8b2a63620de1eca29d90271",
+        "796806bb2bc9b7637089f3e91692905b196a1a42e1271a62320155bf797afbb8",
+        "9e73aa644bfa3308543f21eff755fa2274919b1a6df4425608d9b554b35b9299",
+        "f173a5df503bf8bce9bbfe91e25da284e61cf15c4f4571ad110a1a80e8c6a253"
+      ],
+      "frameOrder": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ]
+    }
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "actor": "ember",
+  "method": "Actual Blender full-resolution compositor; original canvas outside the padded complete-body rectangle and approved edited canvas inside; no resampling or per-pose fit.",
+  "dimensions": [
+    1448,
+    1086
+  ],
+  "sourceCellIndex": 9,
+  "rectangle": [
+    398,
+    712,
+    636,
+    1075
+  ],
+  "original": "tools/walk-source/marked/ember-walk-markers12.png",
+  "originalSHA256": "2fe31e2fd9cc7f882b68d1767ea606546b1a43090907ede9af21d13ee894f22c",
+  "edited": "tools/walk-source/marked/ember-markers12-cell9-edit.png",
+  "editedSHA256": "3984b590cd01084ad4ac1cf410338f72b06eeea2595f7e81d0951b22d7ba5aba",
+  "originalBodyBounds": [
+    408,
+    718,
+    630,
+    1069
+  ],
+  "editedBodyBounds": [
+    404,
+    719,
+    625,
+    1068
+  ],
+  "allOriginalBodyBounds": [
+    [
+      34,
+      6,
+      252,
+      348
+    ],
+    [
+      404,
+      6,
+      614,
+      347
+    ],
+    [
+      779,
+      5,
+      989,
+      348
+    ],
+    [
+      1156,
+      5,
+      1366,
+      346
+    ],
+    [
+      42,
+      363,
+      255,
+      705
+    ],
+    [
+      406,
+      363,
+      618,
+      705
+    ],
+    [
+      775,
+      363,
+      1000,
+      708
+    ],
+    [
+      1160,
+      363,
+      1372,
+      707
+    ],
+    [
+      38,
+      717,
+      265,
+      1070
+    ],
+    [
+      408,
+      718,
+      630,
+      1069
+    ],
+    [
+      774,
+      716,
+      995,
+      1070
+    ],
+    [
+      1154,
+      717,
+      1376,
+      1067
+    ]
+  ],
+  "otherBodiesIntersectSelection": false,
+  "geometryChanged": false,
+  "resampling": false,
+  "output": "../../../marked/ember-markers12-cell9-selected.png",
+  "validation": "External pixel comparison and independent phase/anatomy inspection required",
+  "sourceScene": "ember-whole-cell-selection.blend"
+}

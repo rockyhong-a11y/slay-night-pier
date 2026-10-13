@@ -1,0 +1,819 @@
+{
+  "status": "SEVEN_SOURCE_POSE_COVERAGE_AND_ONE_BANK_CALIBRATION_REVIEWED",
+  "releaseApproved": false,
+  "method": "Direct color-traced whole-body12 sources, fresh alpha crown/manual chin/waist/forehead source-coordinate witnesses, and one globally scaled all7 idle/walk/jab128 board. No per-frame body-box normalization or axis/head/torso scaling. Source order only rearranges complete original drawings.",
+  "precision": "Alpha crown threshold180; selected raster edges±.5px; semantic chin/waist/forehead points~±2rawpx. Different hair volume/view projection affects silhouette widths; face/torso and actual128 appearance are primary.",
+  "measurements": [
+    {
+      "id": "onyx",
+      "rawBodyReference": 342.5,
+      "globalScaleToCanonical": 0.7883211678832117,
+      "canonicalPoints": {
+        "chinNeck": [
+          121,
+          113
+        ],
+        "hipProxy": [
+          91,
+          172
+        ],
+        "crown": [
+          92,
+          5
+        ],
+        "headMidLeft": [
+          43,
+          59
+        ],
+        "headMidRight": [
+          159,
+          59
+        ]
+      },
+      "candidateExtractedPoints": {
+        "crown": 25,
+        "chin": 162,
+        "waist": 234,
+        "chinX": 230,
+        "waistX": 195
+      },
+      "candidateSourceSheetCell0Points": {
+        "crownY": 3,
+        "chin": [
+          223,
+          140
+        ],
+        "waist": [
+          188,
+          212
+        ]
+      },
+      "head": {
+        "canonical": 108,
+        "candidate": 137,
+        "scaled": 108.0,
+        "deltaPercent": 0.0
+      },
+      "chinWaist": {
+        "canonical": 59,
+        "candidate": 72,
+        "scaled": 56.759124087591246,
+        "deltaPercent": -3.798094766794502
+      },
+      "hairMidContour": {
+        "canonicalRaw": 117,
+        "candidateRaw": 156,
+        "candidateRow": 94,
+        "canonicalRow": 59,
+        "deltaPercent": 5.109489051094895,
+        "meaning": "Hair/style contour; never used alone as skull/face width."
+      }
+    },
+    {
+      "id": "tempest",
+      "rawBodyReference": 345,
+      "globalScaleToCanonical": 0.782608695652174,
+      "canonicalPoints": {
+        "chinNeck": [
+          122,
+          121
+        ],
+        "hipProxy": [
+          107,
+          173
+        ],
+        "crown": [
+          92,
+          5
+        ],
+        "headMidLeft": [
+          39,
+          63
+        ],
+        "headMidRight": [
+          167,
+          63
+        ]
+      },
+      "candidateExtractedPoints": {
+        "crown": 28,
+        "chin": 187,
+        "waist": 255,
+        "chinX": 242,
+        "waistX": 210,
+        "foreheadY": 112,
+        "foreheadX": 277,
+        "canonicalForeheadY": 62,
+        "canonicalForeheadX": 143
+      },
+      "candidateSourceSheetCell0Points": {
+        "crownY": 13,
+        "chin": [
+          177,
+          172
+        ],
+        "waist": [
+          145,
+          240
+        ],
+        "forehead": [
+          212,
+          97
+        ]
+      },
+      "head": {
+        "canonical": 116,
+        "candidate": 159,
+        "scaled": 124.43478260869566,
+        "deltaPercent": 7.271364317841078
+      },
+      "chinWaist": {
+        "canonical": 52,
+        "candidate": 68,
+        "scaled": 53.21739130434783,
+        "deltaPercent": 2.341137123745818
+      },
+      "foreheadChin": {
+        "canonical": 59,
+        "candidate": 75,
+        "scaled": 58.69565217391305,
+        "deltaPercent": -0.5158437730287346
+      },
+      "hairMidContour": {
+        "canonicalRaw": 129,
+        "candidateRaw": 184,
+        "candidateRow": 108,
+        "canonicalRow": 63,
+        "deltaPercent": 11.627906976744185,
+        "meaning": "Hair/style contour; never used alone as skull/face width."
+      }
+    },
+    {
+      "id": "seraph",
+      "rawBodyReference": 320,
+      "globalScaleToCanonical": 0.84375,
+      "canonicalPoints": {
+        "chinNeck": [
+          121,
+          119
+        ],
+        "hipProxy": [
+          97,
+          176
+        ],
+        "foreheadSkin": [
+          145,
+          68
+        ],
+        "crown": [
+          79,
+          5
+        ],
+        "headMidLeft": [
+          16,
+          62
+        ],
+        "headMidRight": [
+          158,
+          62
+        ]
+      },
+      "candidateExtractedPoints": {
+        "crown": 31,
+        "chin": 166,
+        "waist": 232,
+        "chinX": 226,
+        "waistX": 208,
+        "foreheadY": 105,
+        "foreheadX": 248,
+        "canonicalForeheadY": 68,
+        "canonicalForeheadX": 145
+      },
+      "candidateSourceSheetCell0Points": {
+        "crownY": 4,
+        "chin": [
+          220,
+          139
+        ],
+        "waist": [
+          202,
+          205
+        ],
+        "forehead": [
+          242,
+          78
+        ]
+      },
+      "head": {
+        "canonical": 114,
+        "candidate": 135,
+        "scaled": 113.90625,
+        "deltaPercent": -0.0822368421052655
+      },
+      "chinWaist": {
+        "canonical": 57,
+        "candidate": 66,
+        "scaled": 55.6875,
+        "deltaPercent": -2.3026315789473673
+      },
+      "foreheadChin": {
+        "canonical": 51,
+        "candidate": 61,
+        "scaled": 51.46875,
+        "deltaPercent": 0.9191176470588314
+      },
+      "hairMidContour": {
+        "canonicalRaw": 143,
+        "candidateRaw": 181,
+        "candidateRow": 98,
+        "canonicalRow": 62,
+        "deltaPercent": 6.796328671328666,
+        "meaning": "Hair/style contour; never used alone as skull/face width."
+      }
+    },
+    {
+      "id": "raven",
+      "rawBodyReference": 320,
+      "globalScaleToCanonical": 0.84375,
+      "canonicalPoints": {
+        "chinNeck": [
+          122,
+          108
+        ],
+        "hipProxy": [
+          99,
+          172
+        ],
+        "crown": [
+          104,
+          5
+        ],
+        "headMidLeft": [
+          52,
+          56
+        ],
+        "headMidRight": [
+          163,
+          56
+        ]
+      },
+      "candidateExtractedPoints": {
+        "crown": 31,
+        "chin": 152,
+        "waist": 226,
+        "chinX": 223,
+        "waistX": 207
+      },
+      "candidateSourceSheetCell0Points": {
+        "crownY": 7,
+        "chin": [
+          211,
+          128
+        ],
+        "waist": [
+          195,
+          202
+        ]
+      },
+      "head": {
+        "canonical": 103,
+        "candidate": 121,
+        "scaled": 102.09375,
+        "deltaPercent": -0.8798543689320426
+      },
+      "chinWaist": {
+        "canonical": 64,
+        "candidate": 74,
+        "scaled": 62.4375,
+        "deltaPercent": -2.44140625
+      },
+      "hairMidContour": {
+        "canonicalRaw": 112,
+        "candidateRaw": 139,
+        "candidateRow": 92,
+        "canonicalRow": 56,
+        "deltaPercent": 4.715401785714279,
+        "meaning": "Hair/style contour; never used alone as skull/face width."
+      }
+    },
+    {
+      "id": "ember",
+      "rawBodyReference": 325,
+      "globalScaleToCanonical": 0.8307692307692308,
+      "canonicalPoints": {
+        "chinNeck": [
+          130,
+          98
+        ],
+        "hipProxy": [
+          99,
+          158
+        ],
+        "crown": [
+          112,
+          5
+        ],
+        "headMidLeft": [
+          38,
+          52
+        ],
+        "headMidRight": [
+          162,
+          52
+        ]
+      },
+      "candidateExtractedPoints": {
+        "crown": 38,
+        "chin": 150,
+        "waist": 222,
+        "chinX": 252,
+        "waistX": 202
+      },
+      "candidateSourceSheetCell0Points": {
+        "crownY": 6,
+        "chin": [
+          195,
+          118
+        ],
+        "waist": [
+          145,
+          190
+        ]
+      },
+      "head": {
+        "canonical": 93,
+        "candidate": 112,
+        "scaled": 93.04615384615386,
+        "deltaPercent": 0.04962779156327812
+      },
+      "chinWaist": {
+        "canonical": 60,
+        "candidate": 72,
+        "scaled": 59.815384615384616,
+        "deltaPercent": -0.3076923076923088
+      },
+      "hairMidContour": {
+        "canonicalRaw": 125,
+        "candidateRaw": 156,
+        "candidateRow": 94,
+        "canonicalRow": 52,
+        "deltaPercent": 3.6799999999999944,
+        "meaning": "Hair/style contour; never used alone as skull/face width."
+      }
+    },
+    {
+      "id": "valkyrie",
+      "rawBodyReference": 330,
+      "globalScaleToCanonical": 0.8181818181818182,
+      "canonicalPoints": {
+        "chinNeck": [
+          115,
+          109
+        ],
+        "hipProxy": [
+          89,
+          165
+        ],
+        "crown": [
+          86,
+          5
+        ],
+        "headMidLeft": [
+          25,
+          57
+        ],
+        "headMidRight": [
+          145,
+          57
+        ]
+      },
+      "candidateExtractedPoints": {
+        "crown": 33,
+        "chin": 160,
+        "waist": 227,
+        "chinX": 226,
+        "waistX": 205
+      },
+      "candidateSourceSheetCell0Points": {
+        "crownY": 12,
+        "chin": [
+          225,
+          139
+        ],
+        "waist": [
+          204,
+          206
+        ]
+      },
+      "head": {
+        "canonical": 104,
+        "candidate": 127,
+        "scaled": 103.90909090909092,
+        "deltaPercent": -0.08741258741257196
+      },
+      "chinWaist": {
+        "canonical": 56,
+        "candidate": 67,
+        "scaled": 54.81818181818182,
+        "deltaPercent": -2.110389610389607
+      },
+      "hairMidContour": {
+        "canonicalRaw": 121,
+        "candidateRaw": 148,
+        "candidateRow": 96,
+        "canonicalRow": 57,
+        "deltaPercent": 0.07513148009015147,
+        "meaning": "Hair/style contour; never used alone as skull/face width."
+      }
+    },
+    {
+      "id": "lynx",
+      "rawBodyReference": 350,
+      "globalScaleToCanonical": 0.7714285714285715,
+      "canonicalPoints": {
+        "chinNeck": [
+          108,
+          107
+        ],
+        "hipProxy": [
+          75,
+          165
+        ],
+        "crown": [
+          88,
+          5
+        ],
+        "headMidLeft": [
+          30,
+          56
+        ],
+        "headMidRight": [
+          146,
+          56
+        ]
+      },
+      "candidateExtractedPoints": {
+        "crown": 42,
+        "chin": 174,
+        "waist": 250,
+        "chinX": 253,
+        "waistX": 222
+      },
+      "candidateSourceSheetCell0Points": {
+        "crownY": 17,
+        "chin": [
+          173,
+          149
+        ],
+        "waist": [
+          142,
+          225
+        ]
+      },
+      "head": {
+        "canonical": 102,
+        "candidate": 132,
+        "scaled": 101.82857142857144,
+        "deltaPercent": -0.1680672268907446
+      },
+      "chinWaist": {
+        "canonical": 58,
+        "candidate": 76,
+        "scaled": 58.62857142857143,
+        "deltaPercent": 1.0837438423645374
+      },
+      "hairMidContour": {
+        "canonicalRaw": 117,
+        "candidateRaw": 163,
+        "candidateRow": 108,
+        "canonicalRow": 56,
+        "deltaPercent": 7.472527472527468,
+        "meaning": "Hair/style contour; never used alone as skull/face width."
+      }
+    }
+  ],
+  "authoring": {
+    "onyx": {
+      "rawBodyHeight": 342.5,
+      "sourceOrder": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "sourceSHA256": "f8e1fc8fd9687741c7332a7e30ed85499f3f095028c948ada7d20472f0adcac3",
+      "sourcePoseCoverage": {
+        "farLeads": [
+          0,
+          1,
+          2,
+          11
+        ],
+        "nearLeads": [
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "nearSwing": [
+          3
+        ],
+        "farSwing": [
+          10
+        ],
+        "nearSupportFarTrailing": [
+          9
+        ]
+      },
+      "status": "SOURCE_POSE_COVERAGE_ACCEPTED_PENDING_COLOR_RESTORED_RUNTIME",
+      "calibrationWitness": "onyx-candidate-landmark-witness.png"
+    },
+    "tempest": {
+      "rawBodyHeight": 345,
+      "sourceOrder": [
+        0,
+        10,
+        11,
+        2,
+        3,
+        1,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "sourceSHA256": "7194efa1a27e9a7c654467cbceb9b6528e6c43d09a14e2d659f8aa453f8e2f33",
+      "sourcePoseCoverage": {
+        "farLeads": [
+          0,
+          10,
+          11
+        ],
+        "nearLeads": [
+          1,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "nearSwing": [
+          2,
+          3
+        ],
+        "farSwing": [
+          9
+        ]
+      },
+      "status": "SOURCE_POSE_COVERAGE_ACCEPTED_PENDING_COLOR_RESTORED_RUNTIME",
+      "calibrationWitness": "tempest-candidate-landmark-witness.png",
+      "calibrationNote": "Forehead/chin skin core and chin-waist agree; crown/ponytail outline is~7.3% higher. Retain one uniform bank scale, no hair/core separate scaling."
+    },
+    "seraph": {
+      "rawBodyHeight": 320,
+      "sourceOrder": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "sourceSHA256": "35b61d4e9422cab58d987ef89fe6f77416aba57d76a37eadf19ea8032f71060c",
+      "sourcePoseCoverage": {
+        "farLeads": [
+          0,
+          1,
+          2,
+          10,
+          11
+        ],
+        "nearLeads": [
+          4,
+          5,
+          6
+        ],
+        "nearSwing": [
+          3
+        ],
+        "farSwing": [
+          7,
+          8,
+          9
+        ]
+      },
+      "status": "SOURCE_POSE_COVERAGE_ACCEPTED_PENDING_COLOR_RESTORED_RUNTIME",
+      "calibrationWitness": "seraph-candidate-landmark-witness.png"
+    },
+    "raven": {
+      "rawBodyHeight": 320,
+      "sourceOrder": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "sourceSHA256": "9194637d31fc2dab5068f01e239094602eda61b9e5fb77f555d57dabba780caa",
+      "sourcePoseCoverage": {
+        "farLeads": [
+          0,
+          1,
+          2,
+          9,
+          10,
+          11
+        ],
+        "nearLeads": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "nearSwing": [
+          3
+        ],
+        "farSwing": [
+          8
+        ]
+      },
+      "status": "SOURCE_POSE_COVERAGE_ACCEPTED_PENDING_COLOR_RESTORED_RUNTIME",
+      "calibrationWitness": "raven-candidate-landmark-witness.png"
+    },
+    "ember": {
+      "rawBodyHeight": 325,
+      "sourceOrder": [
+        0,
+        10,
+        11,
+        3,
+        1,
+        2,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "sourceSHA256": "2fe31e2fd9cc7f882b68d1767ea606546b1a43090907ede9af21d13ee894f22c",
+      "sourcePoseCoverage": {
+        "farLeads": [
+          0,
+          10,
+          11
+        ],
+        "nearLeads": [
+          1,
+          2,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "nearSwing": [
+          3
+        ],
+        "farSwing": [
+          9
+        ],
+        "cell9": "ONLY the edited9 must be composited; original9 incorrectly lifts near again."
+      },
+      "status": "CELL9_CORRECTION_VERIFIED_PENDING_BLENDER_COMPOSITE_COLOR_RESTORED_RUNTIME",
+      "calibrationWitness": "ember-candidate-landmark-witness.png",
+      "requiredCell9Replacement": "artifacts/walk-redo/ember-markers12-cell9-edit.png"
+    },
+    "valkyrie": {
+      "rawBodyHeight": 330,
+      "sourceOrder": [
+        0,
+        10,
+        11,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        8,
+        9,
+        7
+      ],
+      "sourceSHA256": "b129123951edaf465ad0a6be2bf0f37a0ac881b38c965b10562e6913f72c38c6",
+      "sourcePoseCoverage": {
+        "farLeads": [
+          0,
+          7,
+          10,
+          11
+        ],
+        "nearLeads": [
+          4,
+          5,
+          6,
+          8
+        ],
+        "nearSwing": [
+          1,
+          2,
+          3
+        ],
+        "farSwing": [
+          9
+        ]
+      },
+      "status": "SOURCE_POSE_COVERAGE_ACCEPTED_PENDING_COLOR_RESTORED_RUNTIME",
+      "calibrationWitness": "valkyrie-candidate-landmark-witness.png"
+    },
+    "lynx": {
+      "rawBodyHeight": 350,
+      "sourceOrder": [
+        0,
+        11,
+        3,
+        1,
+        2,
+        4,
+        5,
+        6,
+        7,
+        8,
+        10,
+        9
+      ],
+      "sourceSHA256": "e798731da29873f3e462adde1868efff3db83f6e293f62a1f5581604a23672ab",
+      "sourcePoseCoverage": {
+        "farLeads": [
+          0,
+          11
+        ],
+        "nearLeads": [
+          1,
+          2,
+          4,
+          5,
+          6,
+          7,
+          8,
+          10
+        ],
+        "nearSwing": [
+          3
+        ],
+        "farSwing": [
+          9
+        ],
+        "cell9": "ONLY the edited9 must be composited; original9 incorrectly lifts near again."
+      },
+      "status": "CELL9_CORRECTION_VERIFIED_PENDING_BLENDER_COMPOSITE_COLOR_RESTORED_RUNTIME",
+      "calibrationWitness": "lynx-candidate-landmark-witness.png",
+      "requiredCell9Replacement": "artifacts/walk-redo/lynx-markers12-cell9-edit.png"
+    }
+  },
+  "all7Source128Review": "/private/tmp/slay-qa-markers12-headmatch-all7/all7-idle-walk-jab-128.png directly viewed. All7 heads/trunks remain coherent at the chosen single-bank references. Walking stands taller than the crouched canonical idle, as expected; no pose-height box fitting is used.",
+  "cell9Edits": "Ember/Lynx edited9 both now GREENnear planted support and MAGENTAfar lifted boot, confirmed continuous marker thigh→knee→boot. Moderate raw38–56px lift remains a clear illustrative swing key; smooth natural cadence requires actual12 runtime playback after composition.",
+  "onyxPaletteRestoration": "Directly viewed /private/tmp/slay-onyx-markers12-restored/onyx-color-restored.png: original purple boots/shorts/upper retained, marker thighs become natural canonical skin, contact shapes unchanged. Independent engine pixel verification reports alpha0error and visible nonmarkerRGB0error.",
+  "remainingChecks": [
+    "Blender compositeONLY corrected9 while other11sourceRGBA stay exact",
+    "Color-only marker restoration preserves geometry/alpha/outfit",
+    "Final Bpy bankactual128 body and chronological locomotion/strike review"
+  ],
+  "evidence": [
+    "authoring-calibration.json",
+    "/private/tmp/slay-qa-markers12-headmatch-all7/all7-idle-walk-jab-128.png",
+    "ember-edited-cell9-witness.png",
+    "lynx-edited-cell9-witness.png",
+    "onyx-candidate-landmark-witness.png",
+    "tempest-candidate-landmark-witness.png",
+    "seraph-candidate-landmark-witness.png",
+    "raven-candidate-landmark-witness.png",
+    "ember-candidate-landmark-witness.png",
+    "valkyrie-candidate-landmark-witness.png",
+    "lynx-candidate-landmark-witness.png"
+  ]
+}

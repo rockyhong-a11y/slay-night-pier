@@ -2,10 +2,41 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { Game, advanceGait, spriteGeometry, sampleMotion } from '../src/game.js';
-import { updateFootContacts, legPose } from '../src/walk-rig.js';
 
 const sprites = JSON.parse(readFileSync(new URL('../public/assets/sprites/manifest.json', import.meta.url)));
-const walking = JSON.parse(readFileSync(new URL('../tools/walk-motion.json', import.meta.url)));
+const wholeBodyWalk = (bodyHeight = 270) => ({
+  mode: 'wholeBody', image: '/assets/sprites/whole-body-test.webp', imageVersion: 'test-version',
+  bodyHeight, cycleDistance: 60,
+  frames: Array.from({ length: 8 }, (_, i) => {
+    const width = 130 + i * 9, height = 300 - i * 3, pivot = [51, height - 7];
+    return { rect: [i * 220, 0, width, height], pivot,
+      centerPivot: [pivot[0], pivot[1] - bodyHeight / 2] };
+  }),
+  // A migrated record can retain old data without drawing or updating that rig.
+  rig: { obsolete: true },
+});
+const recordDrawing = () => {
+  const calls = [], scales = [], alphaStack = [];
+  const ctx = new Proxy({ globalAlpha: 1,
+    save() { alphaStack.push(this.globalAlpha); },
+    restore() { this.globalAlpha = alphaStack.pop(); },
+    drawImage(...args) { calls.push({ args, alpha: this.globalAlpha }); },
+    scale(x, y) { scales.push([x, y]); },
+    createRadialGradient() { return { addColorStop() {} }; },
+  }, { get(target, key) { return key in target ? target[key] : () => {}; } });
+  return { ctx, calls, scales };
+};
+const wholeBodyDrawing = () => {
+  const game = new Game({ reducedMotion: true });
+  game.start();
+  const actor = game.state.player;
+  const drawing = recordDrawing();
+  const sprite = { metadata: { ...sprites[actor.id], walk: wholeBodyWalk() },
+    walk: { kind: 'whole-body' }, combat: { kind: 'combat' }, rig: { kind: 'obsolete-rig' } };
+  game.ctx = drawing.ctx;
+  game.sprites.set(actor.id, sprite);
+  return { game, actor, sprite, ...drawing };
+};
 const simulate = (input, slices = 120) => {
   const game = new Game();
   game.manifest = sprites;
@@ -51,60 +82,129 @@ test('leftward movement mirrors forward steps while an opponent retreat reverses
   assert.ok(Math.abs(retreat.gaitPhase - .8) < 1e-9);
 });
 
-test('tagging back to a previously walking hero creates contacts at the new arrival position', () => {
-  const game = simulate(1);
-  const atlas = game.state.player;
-  assert.ok(atlas.gaitFeet?.left);
-  assert.equal(game.tag(), true);
-  game.setMove(0, 1);
-  for (let i = 0; i < 240; i++) game.step(1 / 60);
-  const arrival = { x: game.state.player.x, y: game.state.player.y };
-  assert.equal(game.tag(), true);
-  assert.equal(game.state.player, atlas);
-  assert.equal(atlas.x, arrival.x);
-  assert.equal(atlas.y, arrival.y);
-  assert.equal(atlas.gaitFeet, null);
-  assert.equal(atlas.gaitLegPose, null);
-  assert.equal(atlas.gaitMoving, false);
-  game.setMove(1, 0);
-  game.step(1 / 60);
-  const pose = legPose(atlas, sprites.atlas.walk.rig, atlas.gaitPlaneSlope);
-  for (const [side, leg] of Object.entries(pose)) {
-    if (!leg.planted) continue;
-    assert.ok(Math.abs(leg.renderWorld.x - atlas.gaitFeet[side].x) < 1e-8);
-    assert.ok(Math.abs(leg.renderWorld.y - atlas.gaitFeet[side].y) < 1e-8);
-    assert.ok(Math.abs(leg.renderWorld.y - arrival.y) < .03);
+test('whole-body walking selects one complete frame with a uniform standing-reference scale', () => {
+  const game = new Game(), { ctx, calls } = recordDrawing();
+  game.ctx = ctx; ctx.globalAlpha = .63;
+  for (const [id, character] of Object.entries(sprites)) {
+    const metadata = wholeBodyWalk(character.combat.bodyHeight);
+    const image = { id }, sprite = { metadata: { walk: metadata }, walk: image, rig: {} };
+    for (const boss of [false, true]) for (const phase of [0, .124, .125, .28, .999, -.25, 1.25]) {
+      const height = 128 * (boss ? 1.15 : 1), cycle = metadata.cycleDistance * (boss ? 1.15 : 1);
+      const actor = { id, boss, gaitTravel: phase * cycle, gaitFeet: { stale: true } };
+      calls.length = 0;
+      game.drawWalk(sprite, actor, height);
+      const wrapped = ((phase % 1) + 1) % 1, index = Math.floor(wrapped * metadata.frames.length);
+      const frame = metadata.frames[index], geometry = spriteGeometry(frame, metadata.bodyHeight, height);
+      assert.equal(calls.length, 1, `${id}: adjacent drawings and old body parts are absent`);
+      assert.equal(calls[0].args[0], image);
+      assert.deepEqual(calls[0].args.slice(1), [...geometry.rect, geometry.x, geometry.y, geometry.width, geometry.height]);
+      assert.equal(calls[0].alpha, .63);
+      assert.equal(actor.gaitFrame, index);
+      assert.ok(Math.abs(geometry.width / frame.rect[2] - geometry.height / frame.rect[3]) < 1e-12);
+      assert.ok(Math.abs(geometry.y + frame.pivot[1] * geometry.scale - height / 2) < 1e-10);
+    }
   }
   game.destroy();
 });
 
-test('all ten Blender walking rigs preserve body lengths, scales, alternating soles, and planted world contacts', () => {
-  assert.equal(Object.keys(walking.characters).length, 10);
-  const references = new Set();
-  for (const [id, clip] of Object.entries(walking.characters)) {
-    assert.equal(clip.frames.length, 12, id);
-    references.add(clip.referenceWorldHeight);
-    const groups = new Map();
-    for (const frame of clip.frames) {
-      assert.ok(Math.abs(Math.hypot(...frame.joints.headTop.map((v,i) => v-frame.joints.neck[i])) - 90) < 1e-4, id);
-      assert.ok(Math.abs(Math.hypot(...frame.joints.neck.map((v,i) => v-frame.joints.pelvis[i])) - 90) < 1e-4, id);
-      for (const scale of Object.values(frame.scales)) assert.deepEqual(scale, [1,1,1], id);
-      for (const [footName, foot] of Object.entries(frame.feet)) {
-        if (!foot.planted) continue;
-        assert.ok(Math.abs(foot.z) < .001, `${id} ${footName} sole stays on the ground`);
-        const cycle = Math.floor(frame.phase + (footName === 'right' ? .5 : 0));
-        const key = `${footName}:${cycle}`;
-        if (!groups.has(key)) groups.set(key, []);
-        groups.get(key).push(foot.worldX);
-      }
-    }
-    for (const contacts of groups.values()) assert.ok(Math.max(...contacts)-Math.min(...contacts) < .001, `${id} planted foot cannot slide`);
-    assert.equal(new Set(clip.frames.map(frame => frame.contactFoot)).size, 2, id);
-  }
-  assert.equal(references.size, 1, 'long hair cannot resize a character’s torso');
+test('whole-body gait uses actual projected travel and ignores retained mesh metadata', () => {
+  const game = new Game();
+  const actor = game.state.player;
+  game.manifest = { [actor.id]: { walk: wholeBodyWalk() } };
+  const laneScale = (game.floorY(1) - game.floorY(0)) / (game.width / 420);
+  game.updateWalking(actor, 0, .04, .1);
+  game.updateWalking(actor, 3, -.02, .1);
+  const expected = .04 * laneScale + Math.hypot(3, -.02 * laneScale);
+  assert.ok(Math.abs(actor.walkDistance - expected) < 1e-10);
+  assert.ok(Number.isFinite(actor.gaitPhase));
+  assert.ok(actor.gaitFeet == null);
+  assert.ok(actor.gaitLegPose == null);
+  const phase = actor.gaitPhase, travel = actor.gaitTravel;
+  game.updateWalking(actor, 0, 0, .1);
+  assert.equal(actor.gaitMoving, false);
+  assert.equal(actor.gaitPhase, phase);
+  assert.equal(actor.gaitTravel, travel);
+  game.destroy();
 });
 
-test('walking and combat cells share an isotropic authored body reference and a consistent floor pivot', () => {
+test('whole-body walking enters and leaves without ghosting an old walking image over idle, charge, or strike', () => {
+  const { game, actor, sprite, calls, scales } = wholeBodyDrawing();
+  for (const facing of [-1, 1]) for (const next of ['idle', 'charge', 'strike']) {
+    actor.facing = facing; actor.action = 'walk'; actor.gaitMoving = true; actor.gaitTravel = 17;
+    actor.renderWasWalking = false; actor.renderPose = 'idle'; actor.renderPoseFrom = 'idle';
+    game.state.time += 1;
+    calls.length = 0;
+    game.drawFighter(actor);
+    assert.equal(calls.length, 1);
+    assert.equal(calls[0].args[0], sprite.walk);
+    assert.equal(calls[0].alpha, 1);
+    actor.action = next; actor.gaitMoving = false; actor.chargeReady = next === 'charge';
+    game.state.time += .005;
+    const pose = next === 'charge' ? 'charge' : next === 'strike' ? 'jab' : 'idle';
+    calls.length = 0;
+    const transform = next === 'strike' ? { pose, x: 0, z: 0, angle: 0, scaleX: .2, scaleY: 3 } : null;
+    game.drawFighter(actor, transform);
+    assert.equal(calls.length, 1, `old walking image cannot overlay ${next}`);
+    assert.equal(calls[0].args[0], sprite.combat);
+    assert.deepEqual(calls[0].args.slice(1, 5), sprite.metadata.combat.poses[pose].rect);
+    assert.equal(calls[0].alpha, 1);
+    assert.equal(actor.renderWasWalking, false);
+    assert.equal(actor.renderPoseFromWalk, false);
+  }
+  assert.ok(scales.every(([x, y]) => Math.abs(x) === 1 && y === 1));
+  game.destroy();
+});
+
+test('an explicitly requested pose overrides a moving fighter and clears stale walking fades', () => {
+  const { game, actor, sprite, calls } = wholeBodyDrawing();
+  actor.action = 'walk'; actor.gaitMoving = true; actor.renderWasWalking = true;
+  actor.renderPoseFromWalk = true; actor.renderPose = 'idle'; actor.renderPoseFrom = 'hurt';
+  game.drawFighter(actor, null, actor, 'jab');
+  assert.equal(calls.length, 1);
+  assert.equal(calls[0].args[0], sprite.combat);
+  assert.deepEqual(calls[0].args.slice(1, 5), sprite.metadata.combat.poses.jab.rect);
+  assert.equal(calls[0].alpha, 1);
+  assert.equal(actor.renderWasWalking, false);
+  assert.equal(actor.renderPoseFromWalk, false);
+  game.destroy();
+});
+
+test('whole-body tag arrivals reset old travel and visual phase before resuming at the new location', () => {
+  const game = new Game();
+  game.manifest = Object.fromEntries(Object.entries(sprites).map(([id, data]) => [id, { ...data, walk: wholeBodyWalk() }]));
+  game.start();
+  for (const enemy of game.state.enemies) { enemy.x = 600; enemy.cooldown = 100; }
+  const atlas = game.state.player;
+  game.setMove(1, 0);
+  for (let i = 0; i < 12; i++) game.step(1 / 60);
+  assert.ok(atlas.gaitTravel > 0);
+  assert.equal(game.tag(), true);
+  game.setMove(0, 1);
+  for (let i = 0; i < 48; i++) game.step(1 / 60);
+  const arrival = { x: game.state.player.x, y: game.state.player.y };
+  game.state.tagCooldown = 0;
+  atlas.renderWasWalking = atlas.renderPoseFromWalk = true;
+  assert.equal(game.tag(), true);
+  assert.deepEqual({ x: atlas.x, y: atlas.y }, arrival);
+  assert.equal(atlas.walkDistance, 0);
+  assert.equal(atlas.gaitTravel, 0);
+  assert.equal(atlas.gaitPhase, 0);
+  assert.equal(atlas.renderWasWalking, false);
+  assert.equal(atlas.renderPoseFromWalk, false);
+  assert.ok(atlas.gaitFeet == null);
+  game.setMove(-1, 0);
+  game.step(1 / 60);
+  assert.equal(atlas.facing, -1);
+  assert.ok(atlas.gaitPhase > 0 && atlas.gaitPhase < .1);
+  assert.ok(atlas.gaitFeet == null);
+  game.pause();
+  const phase = atlas.gaitPhase;
+  game.step(1);
+  assert.equal(atlas.gaitPhase, phase);
+  game.destroy();
+});
+
+test('authored walking and combat raster cells retain their pixel aspect and floor pivots', () => {
   for (const [id, actor] of Object.entries(sprites)) {
     for (const frame of actor.walk.frames) {
       const geometry = spriteGeometry(frame, actor.walk.bodyHeight, 128);
@@ -147,36 +247,4 @@ test('a paired landing draws its actual contact pose fully opaque and never squa
   assert.deepEqual(drawings[0].args.slice(1,5),sprites[enemy.id].combat.poses[pose.pose].rect);
   assert.ok(scales.every(([x,y])=>Math.abs(x)===1 && y===1));
   game.destroy();
-});
-
-test('every character keeps its real rendered soles planted through all headings, slow sticks, and changing directions', () => {
-  for(const [id,metadata] of Object.entries(sprites)) {
-    const rig=metadata.walk.rig;
-    for(const laneScale of [140,162,220]) for(const speed of [.2,1]) {
-      for(const heading of [[1,0],[-1,0],[0,1],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1],'curve']) {
-        const actor={id,x:200,y:.5,facing:1,walkDistance:0,gaitTravel:0,gaitMoving:false};
-        const contacts=new Map();
-        for(let step=0;step<180;step++) {
-          const vector=heading==='curve' ? [Math.cos(step*.032),Math.sin(step*.032)] : heading;
-          const norm=Math.hypot(...vector),dx=vector[0]/norm*80*speed/120,dy=vector[1]/norm*80*speed/120/laneScale;
-          actor.x+=dx;actor.y+=dy;
-          if(Math.abs(vector[0])>.2)actor.facing=vector[0]>0?1:-1;
-          advanceGait(actor,dx,dy,1/120,metadata.walk.cycleDistance,laneScale);
-          updateFootContacts(actor,rig,laneScale,128);
-          const pose=legPose(actor,rig,laneScale,128);
-          for(const [side,leg] of Object.entries(pose)) {
-            assert.ok(Math.abs(Math.hypot(...leg.knee.map((v,i)=>v-leg.hip[i]))-rig.parts['thigh'+leg.suffix].length)<1e-8,id);
-            assert.ok(Math.abs(Math.hypot(...leg.ankle.map((v,i)=>v-leg.knee[i]))-rig.parts['shin'+leg.suffix].length)<1e-8,id);
-            if(!leg.planted)continue;
-            const foot=actor.gaitFeet[side],key=side+':'+foot.cycle;
-            assert.ok(Math.abs(leg.renderWorld.x-foot.x)<1e-8,`${id} actual raster shoe X matches world contact`);
-            assert.ok(Math.abs(leg.renderWorld.y-foot.y)<1e-8,`${id} actual raster sole matches its ground lane`);
-            if(!contacts.has(key))contacts.set(key,{x:foot.x,y:foot.y});
-            const start=contacts.get(key);
-            assert.ok(Math.abs(start.x-foot.x)<1e-9 && Math.abs(start.y-foot.y)<1e-9,`${id} stance cannot skate on ${heading}`);
-          }
-        }
-      }
-    }
-  }
 });

@@ -1,0 +1,104 @@
+{
+  "method": "Actual Blender compositor at exact source resolution; original sRGB plate + raw-channel marker masks + sampled canonical skin ramp + original alpha passthrough. No pixel-array writes or image geometry edits.",
+  "actor": "seraph",
+  "markerSet": "green-magenta",
+  "targetMaterial": "skin",
+  "input": "tools/walk-source/marked/seraph-walk-markers12.png",
+  "inputSHA256": "35b61d4e9422cab58d987ef89fe6f77416aba57d76a37eadf19ea8032f71060c",
+  "canonicalReference": "tools/walk-source/references/seraph-idle.png",
+  "canonicalReferenceSHA256": "fde42ef6f75964953494a3eac9f598e1ef5e14836397e7b85cecef6fab98647f",
+  "dimensions": [
+    1448,
+    1086
+  ],
+  "rows": 3,
+  "cols": 4,
+  "lowerBodyBandFraction": 0.52,
+  "paletteSampleCount": 6746,
+  "paletteSRGB8Quantiles": {
+    "0.1": [
+      166.0,
+      130.0,
+      99.0
+    ],
+    "0.25": [
+      195.0,
+      155.0,
+      121.0
+    ],
+    "0.5": [
+      236.0,
+      194.0,
+      159.0
+    ],
+    "0.9": [
+      252.0,
+      216.0,
+      180.0
+    ]
+  },
+  "skinRampSRGB8": [
+    {
+      "intensity": 0.0,
+      "RGB": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "intensity": 0.2,
+      "RGB": [
+        47.2,
+        38.8,
+        31.8
+      ]
+    },
+    {
+      "intensity": 0.55,
+      "RGB": [
+        166.0,
+        130.0,
+        99.0
+      ]
+    },
+    {
+      "intensity": 0.78,
+      "RGB": [
+        195.0,
+        155.0,
+        121.0
+      ]
+    },
+    {
+      "intensity": 0.95,
+      "RGB": [
+        236.0,
+        194.0,
+        159.0
+      ]
+    },
+    {
+      "intensity": 1.0,
+      "RGB": [
+        252.0,
+        216.0,
+        180.0
+      ]
+    }
+  ],
+  "markerThresholds": {
+    "minimumDominantChannel8": 40,
+    "green_R_over_G": 0.65,
+    "green_B_over_G": 0.55,
+    "magenta_minRB_over_maxRB": 0.85,
+    "magenta_G_over_maxRB": 0.35
+  },
+  "geometryChanged": false,
+  "alphaValidation": "External source/output pixel comparison still required",
+  "outputs": [
+    "../../sheets/seraph-walk-sheet.png",
+    "seraph-color-mask-witness.png",
+    "seraph-marker-color-restore.blend"
+  ]
+}

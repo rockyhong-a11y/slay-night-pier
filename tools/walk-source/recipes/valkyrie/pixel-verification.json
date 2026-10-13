@@ -1,0 +1,131 @@
+{
+  "status": "COLOR_ALPHA_INVARIANTS_VERIFIED",
+  "scope": "Structural pixel invariants only; marker membership and anatomy require visual review.",
+  "actor": "valkyrie",
+  "dimensions": [
+    1448,
+    1086
+  ],
+  "sourceSHA256": "b129123951edaf465ad0a6be2bf0f37a0ac881b38c965b10562e6913f72c38c6",
+  "restoredSHA256": "ccb40333ab5fc9557ea5f9505466ec5eea51470909b84b144f46e1cff406ebca",
+  "maskSHA256": "669f91d67f9d3a68b5ba823ba06b5601c00a297ec1e99316e88d20c8c6aed282",
+  "markerPixels": 58795,
+  "alphaMaxError": 0,
+  "alphaChangedPixels": 0,
+  "silhouetteAt180ChangedPixels": 0,
+  "nonMarkerMaxRGBErrorAllAlpha": 11,
+  "nonMarkerMaxRGBErrorVisible": 0,
+  "nonMarkerMaxRGBErrorOpaque": 0,
+  "nonMarkerChangedVisibleRGBPixels": 0,
+  "nonMarkerChangedOpaqueRGBPixels": 0,
+  "invisibleRGBNote": "Blender may normalize unobservable RGB beneath zero alpha; exact alpha and visible RGB outside the selected marker mask are required.",
+  "markerRGBMedian": [
+    243.0,
+    183.0,
+    136.0
+  ],
+  "settings": {
+    "method": "Actual Blender compositor at exact source resolution; original sRGB plate + raw-channel marker masks + sampled canonical skin ramp + original alpha passthrough. No pixel-array writes or image geometry edits.",
+    "actor": "valkyrie",
+    "markerSet": "green-magenta",
+    "targetMaterial": "skin",
+    "input": "tools/walk-source/marked/valkyrie-walk-markers12.png",
+    "inputSHA256": "b129123951edaf465ad0a6be2bf0f37a0ac881b38c965b10562e6913f72c38c6",
+    "canonicalReference": "tools/walk-source/references/valkyrie-idle.png",
+    "canonicalReferenceSHA256": "23a73016dd683faf8596d60686b873a99c1f5caa2a22d5b8832ab551d0d89ffe",
+    "dimensions": [
+      1448,
+      1086
+    ],
+    "rows": 3,
+    "cols": 4,
+    "lowerBodyBandFraction": 0.52,
+    "paletteSampleCount": 8561,
+    "paletteSRGB8Quantiles": {
+      "0.1": [
+        160.0,
+        116.0,
+        74.0
+      ],
+      "0.25": [
+        213.0,
+        145.0,
+        107.0
+      ],
+      "0.5": [
+        247.0,
+        188.0,
+        140.0
+      ],
+      "0.9": [
+        252.0,
+        210.0,
+        153.0
+      ]
+    },
+    "skinRampSRGB8": [
+      {
+        "intensity": 0.0,
+        "RGB": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "intensity": 0.2,
+        "RGB": [
+          49.4,
+          37.6,
+          28.0
+        ]
+      },
+      {
+        "intensity": 0.55,
+        "RGB": [
+          160.0,
+          116.0,
+          74.0
+        ]
+      },
+      {
+        "intensity": 0.78,
+        "RGB": [
+          213.0,
+          145.0,
+          107.0
+        ]
+      },
+      {
+        "intensity": 0.95,
+        "RGB": [
+          247.0,
+          188.0,
+          140.0
+        ]
+      },
+      {
+        "intensity": 1.0,
+        "RGB": [
+          252.0,
+          210.0,
+          153.0
+        ]
+      }
+    ],
+    "markerThresholds": {
+      "minimumDominantChannel8": 40,
+      "green_R_over_G": 0.65,
+      "green_B_over_G": 0.55,
+      "magenta_minRB_over_maxRB": 0.85,
+      "magenta_G_over_maxRB": 0.35
+    },
+    "geometryChanged": false,
+    "alphaValidation": "External source/output pixel comparison still required",
+    "outputs": [
+      "../../sheets/valkyrie-walk-sheet.png",
+      "valkyrie-color-mask-witness.png",
+      "valkyrie-marker-color-restore.blend"
+    ]
+  }
+}

@@ -1,0 +1,2008 @@
+{
+  "method": "Actual alpha>180 masks, all silhouettes uniformly compared at 270px authored body reference. Bands are opaque silhouette extents, not inferred bone metadata; hair/guard hands may contribute. Source head/torso opaque masks measured separately in their real authored axes. No runtime/source pixels or metadata changed.",
+  "bandFloorHeightRanges": {
+    "headUpper": [
+      0.62,
+      1.2
+    ],
+    "chest": [
+      0.45,
+      0.62
+    ],
+    "hips": [
+      0.28,
+      0.45
+    ],
+    "lowerLegs": [
+      0,
+      0.28
+    ]
+  },
+  "actors": {
+    "raven": {
+      "idle": {
+        "visibleHeightAt270": 266.0,
+        "visibleWidthAt270": 183.0,
+        "bands": {
+          "headUpper": {
+            "spanAt270": 182.0,
+            "meanOpaqueWidthAt270": 104.94,
+            "opaqueAreaAt270": 11229.0
+          },
+          "chest": {
+            "spanAt270": 183.0,
+            "meanOpaqueWidthAt270": 162.91,
+            "opaqueAreaAt270": 7494.0
+          },
+          "hips": {
+            "spanAt270": 140.0,
+            "meanOpaqueWidthAt270": 85.0,
+            "opaqueAreaAt270": 3825.0
+          },
+          "lowerLegs": {
+            "spanAt270": 152.0,
+            "meanOpaqueWidthAt270": 61.11,
+            "opaqueAreaAt270": 4644.0
+          }
+        }
+      },
+      "jab": {
+        "visibleHeightAt270": 267.0,
+        "visibleWidthAt270": 213.0,
+        "bands": {
+          "headUpper": {
+            "spanAt270": 211.0,
+            "meanOpaqueWidthAt270": 102.16,
+            "opaqueAreaAt270": 10931.0
+          },
+          "chest": {
+            "spanAt270": 213.0,
+            "meanOpaqueWidthAt270": 147.07,
+            "opaqueAreaAt270": 6765.0
+          },
+          "hips": {
+            "spanAt270": 116.0,
+            "meanOpaqueWidthAt270": 75.29,
+            "opaqueAreaAt270": 3388.0
+          },
+          "lowerLegs": {
+            "spanAt270": 153.0,
+            "meanOpaqueWidthAt270": 60.43,
+            "opaqueAreaAt270": 4593.0
+          }
+        }
+      },
+      "walkFrames": {
+        "0": {
+          "visibleHeightAt270": 259.23,
+          "visibleWidthAt270": 107.42,
+          "bands": {
+            "headUpper": {
+              "spanAt270": 102.98,
+              "meanOpaqueWidthAt270": 80.27,
+              "opaqueAreaAt270": 7553.52
+            },
+            "chest": {
+              "spanAt270": 102.98,
+              "meanOpaqueWidthAt270": 84.44,
+              "opaqueAreaAt270": 3898.14
+            },
+            "hips": {
+              "spanAt270": 79.01,
+              "meanOpaqueWidthAt270": 66.63,
+              "opaqueAreaAt270": 3076.11
+            },
+            "lowerLegs": {
+              "spanAt270": 106.53,
+              "meanOpaqueWidthAt270": 58.21,
+              "opaqueAreaAt270": 4392.3
+            }
+          }
+        },
+        "3": {
+          "visibleHeightAt270": 259.23,
+          "visibleWidthAt270": 102.98,
+          "bands": {
+            "headUpper": {
+              "spanAt270": 102.98,
+              "meanOpaqueWidthAt270": 80.27,
+              "opaqueAreaAt270": 7553.52
+            },
+            "chest": {
+              "spanAt270": 102.98,
+              "meanOpaqueWidthAt270": 78.96,
+              "opaqueAreaAt270": 3645.14
+            },
+            "hips": {
+              "spanAt270": 79.01,
+              "meanOpaqueWidthAt270": 67.69,
+              "opaqueAreaAt270": 3124.97
+            },
+            "lowerLegs": {
+              "spanAt270": 79.9,
+              "meanOpaqueWidthAt270": 49.86,
+              "opaqueAreaAt270": 3762.58
+            }
+          }
+        },
+        "6": {
+          "visibleHeightAt270": 259.23,
+          "visibleWidthAt270": 123.4,
+          "bands": {
+            "headUpper": {
+              "spanAt270": 102.98,
+              "meanOpaqueWidthAt270": 80.27,
+              "opaqueAreaAt270": 7553.52
+            },
+            "chest": {
+              "spanAt270": 102.98,
+              "meanOpaqueWidthAt270": 84.18,
+              "opaqueAreaAt270": 3886.31
+            },
+            "hips": {
+              "spanAt270": 92.33,
+              "meanOpaqueWidthAt270": 71.45,
+              "opaqueAreaAt270": 3298.36
+            },
+            "lowerLegs": {
+              "spanAt270": 123.4,
+              "meanOpaqueWidthAt270": 69.35,
+              "opaqueAreaAt270": 5233.24
+            }
+          }
+        },
+        "9": {
+          "visibleHeightAt270": 259.23,
+          "visibleWidthAt270": 110.97,
+          "bands": {
+            "headUpper": {
+              "spanAt270": 102.98,
+              "meanOpaqueWidthAt270": 80.27,
+              "opaqueAreaAt270": 7553.52
+            },
+            "chest": {
+              "spanAt270": 110.97,
+              "meanOpaqueWidthAt270": 94.86,
+              "opaqueAreaAt270": 4378.9
+            },
+            "hips": {
+              "spanAt270": 79.01,
+              "meanOpaqueWidthAt270": 69.13,
+              "opaqueAreaAt270": 3191.18
+            },
+            "lowerLegs": {
+              "spanAt270": 92.33,
+              "meanOpaqueWidthAt270": 58.45,
+              "opaqueAreaAt270": 4410.43
+            }
+          }
+        }
+      },
+      "sourcePartMasks": {
+        "head": {
+          "view": "right",
+          "sourceRect": [
+            784,
+            39,
+            212,
+            196
+          ],
+          "opaqueCrossWidthAt270": 99.51,
+          "opaqueAlongHeightAt270": 91.93
+        },
+        "body": {
+          "view": "down",
+          "sourceRect": [
+            61,
+            487,
+            158,
+            178
+          ],
+          "opaqueCrossWidthAt270": 79.85,
+          "opaqueAlongHeightAt270": 90.09
+        }
+      },
+      "headCrownBand": {
+        "idle": {
+          "spanAt270": 129.0,
+          "opaqueAreaAt270": 7123.0
+        },
+        "jab": {
+          "spanAt270": 127.0,
+          "opaqueAreaAt270": 7146.0
+        },
+        "walk": {
+          "spanAt270": 99.43,
+          "opaqueAreaAt270": 5241.12
+        }
+      }
+    },
+    "valkyrie": {
+      "idle": {
+        "visibleHeightAt270": 266.0,
+        "visibleWidthAt270": 147.0,
+        "bands": {
+          "headUpper": {
+            "spanAt270": 134.0,
+            "meanOpaqueWidthAt270": 100.06,
+            "opaqueAreaAt270": 10706.0
+          },
+          "chest": {
+            "spanAt270": 135.0,
+            "meanOpaqueWidthAt270": 95.0,
+            "opaqueAreaAt270": 4370.0
+          },
+          "hips": {
+            "spanAt270": 95.0,
+            "meanOpaqueWidthAt270": 68.29,
+            "opaqueAreaAt270": 3073.0
+          },
+          "lowerLegs": {
+            "spanAt270": 147.0,
+            "meanOpaqueWidthAt270": 53.21,
+            "opaqueAreaAt270": 4044.0
+          }
+        }
+      },
+      "jab": {
+        "visibleHeightAt270": 266.0,
+        "visibleWidthAt270": 200.0,
+        "bands": {
+          "headUpper": {
+            "spanAt270": 182.0,
+            "meanOpaqueWidthAt270": 99.11,
+            "opaqueAreaAt270": 10605.0
+          },
+          "chest": {
+            "spanAt270": 168.0,
+            "meanOpaqueWidthAt270": 93.13,
+            "opaqueAreaAt270": 4284.0
+          },
+          "hips": {
+            "spanAt270": 93.0,
+            "meanOpaqueWidthAt270": 66.84,
+            "opaqueAreaAt270": 3008.0
+          },
+          "lowerLegs": {
+            "spanAt270": 153.0,
+            "meanOpaqueWidthAt270": 55.2,
+            "opaqueAreaAt270": 4195.0
+          }
+        }
+      },
+      "walkFrames": {
+        "0": {
+          "visibleHeightAt270": 268.11,
+          "visibleWidthAt270": 130.5,
+          "bands": {
+            "headUpper": {
+              "spanAt270": 130.5,
+              "meanOpaqueWidthAt270": 94.04,
+              "opaqueAreaAt270": 9601.11
+            },
+            "chest": {
+              "spanAt270": 97.65,
+              "meanOpaqueWidthAt270": 70.51,
+              "opaqueAreaAt270": 3255.01
+            },
+            "hips": {
+              "spanAt270": 73.69,
+              "meanOpaqueWidthAt270": 59.58,
+              "opaqueAreaAt270": 2750.61
+            },
+            "lowerLegs": {
+              "spanAt270": 107.42,
+              "meanOpaqueWidthAt270": 59.64,
+              "opaqueAreaAt270": 4500.27
+            }
+          }
+        },
+        "3": {
+          "visibleHeightAt270": 268.11,
+          "visibleWidthAt270": 130.5,
+          "bands": {
+            "headUpper": {
+              "spanAt270": 130.5,
+              "meanOpaqueWidthAt270": 94.04,
+              "opaqueAreaAt270": 9601.11
+            },
+            "chest": {
+              "spanAt270": 97.65,
+              "meanOpaqueWidthAt270": 59.09,
+              "opaqueAreaAt270": 2727.75
+            },
+            "hips": {
+              "spanAt270": 73.69,
+              "meanOpaqueWidthAt270": 60.81,
+              "opaqueAreaAt270": 2807.35
+            },
+            "lowerLegs": {
+              "spanAt270": 81.68,
+              "meanOpaqueWidthAt270": 51.07,
+              "opaqueAreaAt270": 3854.0
+            }
+          }
+        },
+        "6": {
+          "visibleHeightAt270": 268.11,
+          "visibleWidthAt270": 134.94,
+          "bands": {
+            "headUpper": {
+              "spanAt270": 130.5,
+              "meanOpaqueWidthAt270": 94.04,
+              "opaqueAreaAt270": 9601.11
+            },
+            "chest": {
+              "spanAt270": 97.65,
+              "meanOpaqueWidthAt270": 69.86,
+              "opaqueAreaAt270": 3225.07
+            },
+            "hips": {
+              "spanAt270": 90.55,
+              "meanOpaqueWidthAt270": 66.31,
+              "opaqueAreaAt270": 3061.13
+            },
+            "lowerLegs": {
+              "spanAt270": 125.18,
+              "meanOpaqueWidthAt270": 72.07,
+              "opaqueAreaAt270": 5438.16
+            }
+          }
+        },
+        "9": {
+          "visibleHeightAt270": 268.11,
+          "visibleWidthAt270": 130.5,
+          "bands": {
+            "headUpper": {
+              "spanAt270": 130.5,
+              "meanOpaqueWidthAt270": 94.04,
+              "opaqueAreaAt270": 9601.11
+            },
+            "chest": {
+              "spanAt270": 105.64,
+              "meanOpaqueWidthAt270": 82.65,
+              "opaqueAreaAt270": 3815.38
+            },
+            "hips": {
+              "spanAt270": 74.57,
+              "meanOpaqueWidthAt270": 62.64,
+              "opaqueAreaAt270": 2891.68
+            },
+            "lowerLegs": {
+              "spanAt270": 94.1,
+              "meanOpaqueWidthAt270": 59.87,
+              "opaqueAreaAt270": 4517.61
+            }
+          }
+        }
+      },
+      "sourcePartMasks": {
+        "head": {
+          "view": "right",
+          "sourceRect": [
+            778,
+            43,
+            227,
+            199
+          ],
+          "opaqueCrossWidthAt270": 103.65,
+          "opaqueAlongHeightAt270": 90.75
+        },
+        "body": {
+          "view": "down",
+          "sourceRect": [
+            63,
+            456,
+            155,
+            189
+          ],
+          "opaqueCrossWidthAt270": 74.25,
+          "opaqueAlongHeightAt270": 90.17
+        }
+      },
+      "headCrownBand": {
+        "idle": {
+          "spanAt270": 132.0,
+          "opaqueAreaAt270": 7438.0
+        },
+        "jab": {
+          "spanAt270": 131.0,
+          "opaqueAreaAt270": 7370.0
+        },
+        "walk": {
+          "spanAt270": 128.73,
+          "opaqueAreaAt270": 6549.44
+        }
+      }
+    },
+    "nova": {
+      "idle": {
+        "visibleHeightAt270": 266.0,
+        "visibleWidthAt270": 174.0,
+        "bands": {
+          "headUpper": {
+            "spanAt270": 162.0,
+            "meanOpaqueWidthAt270": 96.92,
+            "opaqueAreaAt270": 10370.0
+          },
+          "chest": {
+            "spanAt270": 164.0,
+            "meanOpaqueWidthAt270": 132.98,
+            "opaqueAreaAt270": 6117.0
+          },
+          "hips": {
+            "spanAt270": 130.0,
+            "meanOpaqueWidthAt270": 78.64,
+            "opaqueAreaAt270": 3539.0
+          },
+          "lowerLegs": {
+            "spanAt270": 153.0,
+            "meanOpaqueWidthAt270": 56.01,
+            "opaqueAreaAt270": 4257.0
+          }
+        }
+      },
+      "jab": {
+        "visibleHeightAt270": 263.0,
+        "visibleWidthAt270": 214.0,
+        "bands": {
+          "headUpper": {
+            "spanAt270": 204.0,
+            "meanOpaqueWidthAt270": 98.94,
+            "opaqueAreaAt270": 10191.0
+          },
+          "chest": {
+            "spanAt270": 209.0,
+            "meanOpaqueWidthAt270": 129.2,
+            "opaqueAreaAt270": 5943.0
+          },
+          "hips": {
+            "spanAt270": 118.0,
+            "meanOpaqueWidthAt270": 75.33,
+            "opaqueAreaAt270": 3390.0
+          },
+          "lowerLegs": {
+            "spanAt270": 165.0,
+            "meanOpaqueWidthAt270": 63.03,
+            "opaqueAreaAt270": 4790.0
+          }
+        }
+      },
+      "walkFrames": {
+        "0": {
+          "visibleHeightAt270": 258.34,
+          "visibleWidthAt270": 102.98,
+          "bands": {
+            "headUpper": {
+              "spanAt270": 97.65,
+              "meanOpaqueWidthAt270": 75.06,
+              "opaqueAreaAt270": 6997.1
+            },
+            "chest": {
+              "spanAt270": 98.54,
+              "meanOpaqueWidthAt270": 77.27,
+              "opaqueAreaAt270": 3567.12
+            },
+            "hips": {
+              "spanAt270": 72.8,
+              "meanOpaqueWidthAt270": 59.48,
+              "opaqueAreaAt270": 2745.88
+            },
+            "lowerLegs": {
+              "spanAt270": 102.98,
+              "meanOpaqueWidthAt270": 57.13,
+              "opaqueAreaAt270": 4311.12
+            }
+          }
+        },
+        "3": {
+          "visibleHeightAt270": 258.34,
+          "visibleWidthAt270": 99.43,
+          "bands": {
+            "headUpper": {
+              "spanAt270": 97.65,
+              "meanOpaqueWidthAt270": 75.06,
+              "opaqueAreaAt270": 6997.1
+            },
+            "chest": {
+              "spanAt270": 98.54,
+              "meanOpaqueWidthAt270": 69.86,
+              "opaqueAreaAt270": 3225.07
+            },
+            "hips": {
+              "spanAt270": 72.8,
+              "meanOpaqueWidthAt270": 60.74,
+              "opaqueAreaAt270": 2804.2
+            },
+            "lowerLegs": {
+              "spanAt270": 78.12,
+              "meanOpaqueWidthAt270": 48.7,
+              "opaqueAreaAt270": 3675.09
+            }
+          }
+        },
+        "6": {
+          "visibleHeightAt270": 258.34,
+          "visibleWidthAt270": 121.62,
+          "bands": {
+            "headUpper": {
+              "spanAt270": 97.65,
+              "meanOpaqueWidthAt270": 75.06,
+              "opaqueAreaAt270": 6997.1
+            },
+            "chest": {
+              "spanAt270": 98.54,
+              "meanOpaqueWidthAt270": 77.08,
+              "opaqueAreaAt270": 3558.45
+            },
+            "hips": {
+              "spanAt270": 88.78,
+              "meanOpaqueWidthAt270": 65.58,
+              "opaqueAreaAt270": 3027.24
+            },
+            "lowerLegs": {
+              "spanAt270": 121.62,
+              "meanOpaqueWidthAt270": 69.16,
+              "opaqueAreaAt270": 5219.06
+            }
+          }
+        },
+        "9": {
+          "visibleHeightAt270": 258.34,
+          "visibleWidthAt270": 108.31,
+          "bands": {
+            "headUpper": {
+              "spanAt270": 97.65,
+              "meanOpaqueWidthAt270": 75.06,
+              "opaqueAreaAt270": 6997.1
+            },
+            "chest": {
+              "spanAt270": 108.31,
+              "meanOpaqueWidthAt270": 89.51,
+              "opaqueAreaAt270": 4132.21
+            },
+            "hips": {
+              "spanAt270": 75.46,
+              "meanOpaqueWidthAt270": 62.4,
+              "opaqueAreaAt270": 2880.65
+            },
+            "lowerLegs": {
+              "spanAt270": 92.33,
+              "meanOpaqueWidthAt270": 56.96,
+              "opaqueAreaAt270": 4298.51
+            }
+          }
+        }
+      },
+      "sourcePartMasks": {
+        "head": {
+          "view": "right",
+          "sourceRect": [
+            801,
+            44,
+            190,
+            181
+          ],
+          "opaqueCrossWidthAt270": 95.13,
+          "opaqueAlongHeightAt270": 91.06
+        },
+        "body": {
+          "view": "down",
+          "sourceRect": [
+            68,
+            490,
+            142,
+            172
+          ],
+          "opaqueCrossWidthAt270": 73.95,
+          "opaqueAlongHeightAt270": 89.3
+        }
+      },
+      "headCrownBand": {
+        "idle": {
+          "spanAt270": 122.0,
+          "opaqueAreaAt270": 6708.0
+        },
+        "jab": {
+          "spanAt270": 122.0,
+          "opaqueAreaAt270": 6373.0
+        },
+        "walk": {
+          "spanAt270": 94.99,
+          "opaqueAreaAt270": 4951.09
+        }
+      }
+    },
+    "viper": {
+      "idle": {
+        "visibleHeightAt270": 266.0,
+        "visibleWidthAt270": 168.0,
+        "bands": {
+          "headUpper": {
+            "spanAt270": 155.0,
+            "meanOpaqueWidthAt270": 94.54,
+            "opaqueAreaAt270": 10116.0
+          },
+          "chest": {
+            "spanAt270": 168.0,
+            "meanOpaqueWidthAt270": 127.7,
+            "opaqueAreaAt270": 5874.0
+          },
+          "hips": {
+            "spanAt270": 135.0,
+            "meanOpaqueWidthAt270": 79.98,
+            "opaqueAreaAt270": 3599.0
+          },
+          "lowerLegs": {
+            "spanAt270": 140.0,
+            "meanOpaqueWidthAt270": 57.72,
+            "opaqueAreaAt270": 4387.0
+          }
+        }
+      },
+      "jab": {
+        "visibleHeightAt270": 265.0,
+        "visibleWidthAt270": 197.0,
+        "bands": {
+          "headUpper": {
+            "spanAt270": 180.0,
+            "meanOpaqueWidthAt270": 93.68,
+            "opaqueAreaAt270": 9836.0
+          },
+          "chest": {
+            "spanAt270": 197.0,
+            "meanOpaqueWidthAt270": 129.63,
+            "opaqueAreaAt270": 5963.0
+          },
+          "hips": {
+            "spanAt270": 131.0,
+            "meanOpaqueWidthAt270": 83.53,
+            "opaqueAreaAt270": 3759.0
+          },
+          "lowerLegs": {
+            "spanAt270": 149.0,
+            "meanOpaqueWidthAt270": 61.07,
+            "opaqueAreaAt270": 4641.0
+          }
+        }
+      },
+      "walkFrames": {
+        "0": {
+          "visibleHeightAt270": 260.12,
+          "visibleWidthAt270": 114.52,
+          "bands": {
+            "headUpper": {
+              "spanAt270": 104.76,
+              "meanOpaqueWidthAt270": 78.18,
+              "opaqueAreaAt270": 7357.28
+            },
+            "chest": {
+              "spanAt270": 100.32,
+              "meanOpaqueWidthAt270": 85.55,
+              "opaqueAreaAt270": 3949.36
+            },
+            "hips": {
+              "spanAt270": 63.92,
+              "meanOpaqueWidthAt270": 45.58,
+              "opaqueAreaAt270": 2104.33
+            },
+            "lowerLegs": {
+              "spanAt270": 106.53,
+              "meanOpaqueWidthAt270": 59.9,
+              "opaqueAreaAt270": 4519.98
+            }
+          }
+        },
+        "3": {
+          "visibleHeightAt270": 260.12,
+          "visibleWidthAt270": 110.08,
+          "bands": {
+            "headUpper": {
+              "spanAt270": 104.76,
+              "meanOpaqueWidthAt270": 78.21,
+              "opaqueAreaAt270": 7359.64
+            },
+            "chest": {
+              "spanAt270": 98.54,
+              "meanOpaqueWidthAt270": 78.76,
+              "opaqueAreaAt270": 3635.69
+            },
+            "hips": {
+              "spanAt270": 60.37,
+              "meanOpaqueWidthAt270": 46.8,
+              "opaqueAreaAt270": 2160.29
+            },
+            "lowerLegs": {
+              "spanAt270": 80.79,
+              "meanOpaqueWidthAt270": 49.78,
+              "opaqueAreaAt270": 3756.27
+            }
+          }
+        },
+        "6": {
+          "visibleHeightAt270": 260.12,
+          "visibleWidthAt270": 123.4,
+          "bands": {
+            "headUpper": {
+              "spanAt270": 104.76,
+              "meanOpaqueWidthAt270": 78.18,
+              "opaqueAreaAt270": 7357.28
+            },
+            "chest": {
+              "spanAt270": 100.32,
+              "meanOpaqueWidthAt270": 84.29,
+              "opaqueAreaAt270": 3891.04
+            },
+            "hips": {
+              "spanAt270": 79.01,
+              "meanOpaqueWidthAt270": 53.73,
+              "opaqueAreaAt270": 2480.27
+            },
+            "lowerLegs": {
+              "spanAt270": 123.4,
+              "meanOpaqueWidthAt270": 72.46,
+              "opaqueAreaAt270": 5468.11
+            }
+          }
+        },
+        "9": {
+          "visibleHeightAt270": 260.12,
+          "visibleWidthAt270": 110.08,
+          "bands": {
+            "headUpper": {
+              "spanAt270": 104.76,
+              "meanOpaqueWidthAt270": 78.18,
+              "opaqueAreaAt270": 7357.28
+            },
+            "chest": {
+              "spanAt270": 109.2,
+              "meanOpaqueWidthAt270": 92.06,
+              "opaqueAreaAt270": 4249.65
+            },
+            "hips": {
+              "spanAt270": 65.7,
+              "meanOpaqueWidthAt270": 48.69,
+              "opaqueAreaAt270": 2247.77
+            },
+            "lowerLegs": {
+              "spanAt270": 93.22,
+              "meanOpaqueWidthAt270": 58.79,
+              "opaqueAreaAt270": 4436.43
+            }
+          }
+        }
+      },
+      "sourcePartMasks": {
+        "head": {
+          "view": "right",
+          "sourceRect": [
+            804,
+            14,
+            218,
+            190
+          ],
+          "opaqueCrossWidthAt270": 104.87,
+          "opaqueAlongHeightAt270": 91.7
+        },
+        "body": {
+          "view": "down",
+          "sourceRect": [
+            72,
+            484,
+            148,
+            197
+          ],
+          "opaqueCrossWidthAt270": 60.68,
+          "opaqueAlongHeightAt270": 89.96
+        }
+      },
+      "headCrownBand": {
+        "idle": {
+          "spanAt270": 123.0,
+          "opaqueAreaAt270": 7109.0
+        },
+        "jab": {
+          "spanAt270": 122.0,
+          "opaqueAreaAt270": 6918.0
+        },
+        "walk": {
+          "spanAt270": 104.76,
+          "opaqueAreaAt270": 5315.21
+        }
+      }
+    },
+    "ember": {
+      "idle": {
+        "visibleHeightAt270": 267.0,
+        "visibleWidthAt270": 170.0,
+        "bands": {
+          "headUpper": {
+            "spanAt270": 163.0,
+            "meanOpaqueWidthAt270": 110.54,
+            "opaqueAreaAt270": 11828.0
+          },
+          "chest": {
+            "spanAt270": 160.0,
+            "meanOpaqueWidthAt270": 117.61,
+            "opaqueAreaAt270": 5410.0
+          },
+          "hips": {
+            "spanAt270": 109.0,
+            "meanOpaqueWidthAt270": 81.0,
+            "opaqueAreaAt270": 3645.0
+          },
+          "lowerLegs": {
+            "spanAt270": 167.0,
+            "meanOpaqueWidthAt270": 56.93,
+            "opaqueAreaAt270": 4327.0
+          }
+        }
+      },
+      "jab": {
+        "visibleHeightAt270": 272.0,
+        "visibleWidthAt270": 220.0,
+        "bands": {
+          "headUpper": {
+            "spanAt270": 213.0,
+            "meanOpaqueWidthAt270": 115.21,
+            "opaqueAreaAt270": 13019.0
+          },
+          "chest": {
+            "spanAt270": 131.0,
+            "meanOpaqueWidthAt270": 85.67,
+            "opaqueAreaAt270": 3941.0
+          },
+          "hips": {
+            "spanAt270": 104.0,
+            "meanOpaqueWidthAt270": 75.73,
+            "opaqueAreaAt270": 3408.0
+          },
+          "lowerLegs": {
+            "spanAt270": 165.0,
+            "meanOpaqueWidthAt270": 57.92,
+            "opaqueAreaAt270": 4402.0
+          }
+        }
+      },
+      "walkFrames": {
+        "0": {
+          "visibleHeightAt270": 260.12,
+          "visibleWidthAt270": 115.41,
+          "bands": {
+            "headUpper": {
+              "spanAt270": 113.63,
+              "meanOpaqueWidthAt270": 86.42,
+              "opaqueAreaAt270": 8132.81
+            },
+            "chest": {
+              "spanAt270": 102.98,
+              "meanOpaqueWidthAt270": 77.77,
+              "opaqueAreaAt270": 3589.97
+            },
+            "hips": {
+              "spanAt270": 75.46,
+              "meanOpaqueWidthAt270": 60.01,
+              "opaqueAreaAt270": 2770.31
+            },
+            "lowerLegs": {
+              "spanAt270": 106.53,
+              "meanOpaqueWidthAt270": 57.55,
+              "opaqueAreaAt270": 4342.65
+            }
+          }
+        },
+        "3": {
+          "visibleHeightAt270": 260.12,
+          "visibleWidthAt270": 114.52,
+          "bands": {
+            "headUpper": {
+              "spanAt270": 113.63,
+              "meanOpaqueWidthAt270": 86.42,
+              "opaqueAreaAt270": 8132.81
+            },
+            "chest": {
+              "spanAt270": 102.98,
+              "meanOpaqueWidthAt270": 72.9,
+              "opaqueAreaAt270": 3365.35
+            },
+            "hips": {
+              "spanAt270": 75.46,
+              "meanOpaqueWidthAt270": 61.17,
+              "opaqueAreaAt270": 2823.9
+            },
+            "lowerLegs": {
+              "spanAt270": 78.12,
+              "meanOpaqueWidthAt270": 48.07,
+              "opaqueAreaAt270": 3627.02
+            }
+          }
+        },
+        "6": {
+          "visibleHeightAt270": 260.12,
+          "visibleWidthAt270": 130.5,
+          "bands": {
+            "headUpper": {
+              "spanAt270": 113.63,
+              "meanOpaqueWidthAt270": 86.42,
+              "opaqueAreaAt270": 8132.81
+            },
+            "chest": {
+              "spanAt270": 102.98,
+              "meanOpaqueWidthAt270": 78.41,
+              "opaqueAreaAt270": 3619.92
+            },
+            "hips": {
+              "spanAt270": 88.78,
+              "meanOpaqueWidthAt270": 66.65,
+              "opaqueAreaAt270": 3076.89
+            },
+            "lowerLegs": {
+              "spanAt270": 121.62,
+              "meanOpaqueWidthAt270": 69.26,
+              "opaqueAreaAt270": 5226.15
+            }
+          }
+        },
+        "9": {
+          "visibleHeightAt270": 260.12,
+          "visibleWidthAt270": 122.51,
+          "bands": {
+            "headUpper": {
+              "spanAt270": 113.63,
+              "meanOpaqueWidthAt270": 86.42,
+              "opaqueAreaAt270": 8132.81
+            },
+            "chest": {
+              "spanAt270": 110.97,
+              "meanOpaqueWidthAt270": 90.96,
+              "opaqueAreaAt270": 4199.2
+            },
+            "hips": {
+              "spanAt270": 75.46,
+              "meanOpaqueWidthAt270": 62.98,
+              "opaqueAreaAt270": 2907.45
+            },
+            "lowerLegs": {
+              "spanAt270": 89.66,
+              "meanOpaqueWidthAt270": 57.59,
+              "opaqueAreaAt270": 4345.8
+            }
+          }
+        }
+      },
+      "sourcePartMasks": {
+        "head": {
+          "view": "right",
+          "sourceRect": [
+            775,
+            28,
+            222,
+            192
+          ],
+          "opaqueCrossWidthAt270": 109.9,
+          "opaqueAlongHeightAt270": 95.41
+        },
+        "body": {
+          "view": "down",
+          "sourceRect": [
+            55,
+            485,
+            152,
+            179
+          ],
+          "opaqueCrossWidthAt270": 76.32,
+          "opaqueAlongHeightAt270": 89.65
+        }
+      },
+      "headCrownBand": {
+        "idle": {
+          "spanAt270": 154.0,
+          "opaqueAreaAt270": 7689.0
+        },
+        "jab": {
+          "spanAt270": 139.0,
+          "opaqueAreaAt270": 7970.0
+        },
+        "walk": {
+          "spanAt270": 109.2,
+          "opaqueAreaAt270": 5366.44
+        }
+      }
+    },
+    "atlas": {
+      "idle": {
+        "visibleHeightAt270": 266.0,
+        "visibleWidthAt270": 166.0,
+        "bands": {
+          "headUpper": {
+            "spanAt270": 137.0,
+            "meanOpaqueWidthAt270": 99.92,
+            "opaqueAreaAt270": 10691.0
+          },
+          "chest": {
+            "spanAt270": 136.0,
+            "meanOpaqueWidthAt270": 115.63,
+            "opaqueAreaAt270": 5319.0
+          },
+          "hips": {
+            "spanAt270": 133.0,
+            "meanOpaqueWidthAt270": 85.98,
+            "opaqueAreaAt270": 3869.0
+          },
+          "lowerLegs": {
+            "spanAt270": 166.0,
+            "meanOpaqueWidthAt270": 73.92,
+            "opaqueAreaAt270": 5618.0
+          }
+        }
+      },
+      "jab": {
+        "visibleHeightAt270": 269.0,
+        "visibleWidthAt270": 206.0,
+        "bands": {
+          "headUpper": {
+            "spanAt270": 173.0,
+            "meanOpaqueWidthAt270": 90.61,
+            "opaqueAreaAt270": 9876.0
+          },
+          "chest": {
+            "spanAt270": 161.0,
+            "meanOpaqueWidthAt270": 107.52,
+            "opaqueAreaAt270": 4946.0
+          },
+          "hips": {
+            "spanAt270": 108.0,
+            "meanOpaqueWidthAt270": 78.91,
+            "opaqueAreaAt270": 3551.0
+          },
+          "lowerLegs": {
+            "spanAt270": 179.0,
+            "meanOpaqueWidthAt270": 76.99,
+            "opaqueAreaAt270": 5851.0
+          }
+        }
+      },
+      "walkFrames": {
+        "0": {
+          "visibleHeightAt270": 272.55,
+          "visibleWidthAt270": 111.86,
+          "bands": {
+            "headUpper": {
+              "spanAt270": 109.2,
+              "meanOpaqueWidthAt270": 76.92,
+              "opaqueAreaAt270": 8262.85
+            },
+            "chest": {
+              "spanAt270": 86.11,
+              "meanOpaqueWidthAt270": 69.66,
+              "opaqueAreaAt270": 3215.61
+            },
+            "hips": {
+              "spanAt270": 73.69,
+              "meanOpaqueWidthAt270": 58.78,
+              "opaqueAreaAt270": 2713.56
+            },
+            "lowerLegs": {
+              "spanAt270": 110.08,
+              "meanOpaqueWidthAt270": 60.55,
+              "opaqueAreaAt270": 4568.84
+            }
+          }
+        },
+        "3": {
+          "visibleHeightAt270": 272.55,
+          "visibleWidthAt270": 109.2,
+          "bands": {
+            "headUpper": {
+              "spanAt270": 109.2,
+              "meanOpaqueWidthAt270": 76.94,
+              "opaqueAreaAt270": 8264.43
+            },
+            "chest": {
+              "spanAt270": 71.91,
+              "meanOpaqueWidthAt270": 58.41,
+              "opaqueAreaAt270": 2696.22
+            },
+            "hips": {
+              "spanAt270": 73.69,
+              "meanOpaqueWidthAt270": 59.91,
+              "opaqueAreaAt270": 2765.58
+            },
+            "lowerLegs": {
+              "spanAt270": 87.0,
+              "meanOpaqueWidthAt270": 55.2,
+              "opaqueAreaAt270": 4165.32
+            }
+          }
+        },
+        "6": {
+          "visibleHeightAt270": 272.55,
+          "visibleWidthAt270": 129.61,
+          "bands": {
+            "headUpper": {
+              "spanAt270": 109.2,
+              "meanOpaqueWidthAt270": 76.92,
+              "opaqueAreaAt270": 8262.85
+            },
+            "chest": {
+              "spanAt270": 88.78,
+              "meanOpaqueWidthAt270": 68.65,
+              "opaqueAreaAt270": 3169.11
+            },
+            "hips": {
+              "spanAt270": 99.43,
+              "meanOpaqueWidthAt270": 66.19,
+              "opaqueAreaAt270": 3055.62
+            },
+            "lowerLegs": {
+              "spanAt270": 129.61,
+              "meanOpaqueWidthAt270": 76.15,
+              "opaqueAreaAt270": 5746.32
+            }
+          }
+        },
+        "9": {
+          "visibleHeightAt270": 272.55,
+          "visibleWidthAt270": 115.41,
+          "bands": {
+            "headUpper": {
+              "spanAt270": 109.2,
+              "meanOpaqueWidthAt270": 76.92,
+              "opaqueAreaAt270": 8262.85
+            },
+            "chest": {
+              "spanAt270": 108.31,
+              "meanOpaqueWidthAt270": 82.07,
+              "opaqueAreaAt270": 3788.58
+            },
+            "hips": {
+              "spanAt270": 76.35,
+              "meanOpaqueWidthAt270": 61.72,
+              "opaqueAreaAt270": 2849.12
+            },
+            "lowerLegs": {
+              "spanAt270": 100.32,
+              "meanOpaqueWidthAt270": 63.76,
+              "opaqueAreaAt270": 4811.59
+            }
+          }
+        }
+      },
+      "sourcePartMasks": {
+        "head": {
+          "view": "right",
+          "sourceRect": [
+            795,
+            35,
+            207,
+            198
+          ],
+          "opaqueCrossWidthAt270": 106.54,
+          "opaqueAlongHeightAt270": 102.87
+        },
+        "body": {
+          "view": "down",
+          "sourceRect": [
+            51,
+            477,
+            158,
+            194
+          ],
+          "opaqueCrossWidthAt270": 73.52,
+          "opaqueAlongHeightAt270": 90.62
+        }
+      },
+      "headCrownBand": {
+        "idle": {
+          "spanAt270": 137.0,
+          "opaqueAreaAt270": 7966.0
+        },
+        "jab": {
+          "spanAt270": 125.0,
+          "opaqueAreaAt270": 7205.0
+        },
+        "walk": {
+          "spanAt270": 109.2,
+          "opaqueAreaAt270": 6539.98
+        }
+      }
+    },
+    "seraph": {
+      "idle": {
+        "visibleHeightAt270": 266.0,
+        "visibleWidthAt270": 168.0,
+        "bands": {
+          "headUpper": {
+            "spanAt270": 160.0,
+            "meanOpaqueWidthAt270": 106.85,
+            "opaqueAreaAt270": 11433.0
+          },
+          "chest": {
+            "spanAt270": 166.0,
+            "meanOpaqueWidthAt270": 124.52,
+            "opaqueAreaAt270": 5728.0
+          },
+          "hips": {
+            "spanAt270": 99.0,
+            "meanOpaqueWidthAt270": 63.38,
+            "opaqueAreaAt270": 2852.0
+          },
+          "lowerLegs": {
+            "spanAt270": 137.0,
+            "meanOpaqueWidthAt270": 53.3,
+            "opaqueAreaAt270": 4051.0
+          }
+        }
+      },
+      "jab": {
+        "visibleHeightAt270": 263.0,
+        "visibleWidthAt270": 208.0,
+        "bands": {
+          "headUpper": {
+            "spanAt270": 165.0,
+            "meanOpaqueWidthAt270": 109.53,
+            "opaqueAreaAt270": 11282.0
+          },
+          "chest": {
+            "spanAt270": 208.0,
+            "meanOpaqueWidthAt270": 131.35,
+            "opaqueAreaAt270": 6042.0
+          },
+          "hips": {
+            "spanAt270": 111.0,
+            "meanOpaqueWidthAt270": 56.2,
+            "opaqueAreaAt270": 2529.0
+          },
+          "lowerLegs": {
+            "spanAt270": 148.0,
+            "meanOpaqueWidthAt270": 60.26,
+            "opaqueAreaAt270": 4580.0
+          }
+        }
+      },
+      "walkFrames": {
+        "0": {
+          "visibleHeightAt270": 289.41,
+          "visibleWidthAt270": 130.5,
+          "bands": {
+            "headUpper": {
+              "spanAt270": 130.5,
+              "meanOpaqueWidthAt270": 97.77,
+              "opaqueAreaAt270": 12151.53
+            },
+            "chest": {
+              "spanAt270": 103.87,
+              "meanOpaqueWidthAt270": 72.13,
+              "opaqueAreaAt270": 3329.89
+            },
+            "hips": {
+              "spanAt270": 67.47,
+              "meanOpaqueWidthAt270": 56.07,
+              "opaqueAreaAt270": 2588.25
+            },
+            "lowerLegs": {
+              "spanAt270": 109.2,
+              "meanOpaqueWidthAt270": 60.82,
+              "opaqueAreaAt270": 4589.33
+            }
+          }
+        },
+        "3": {
+          "visibleHeightAt270": 289.41,
+          "visibleWidthAt270": 130.5,
+          "bands": {
+            "headUpper": {
+              "spanAt270": 130.5,
+              "meanOpaqueWidthAt270": 97.77,
+              "opaqueAreaAt270": 12151.53
+            },
+            "chest": {
+              "spanAt270": 98.54,
+              "meanOpaqueWidthAt270": 62.49,
+              "opaqueAreaAt270": 2884.59
+            },
+            "hips": {
+              "spanAt270": 67.47,
+              "meanOpaqueWidthAt270": 57.01,
+              "opaqueAreaAt270": 2631.6
+            },
+            "lowerLegs": {
+              "spanAt270": 82.56,
+              "meanOpaqueWidthAt270": 51.91,
+              "opaqueAreaAt270": 3917.05
+            }
+          }
+        },
+        "6": {
+          "visibleHeightAt270": 289.41,
+          "visibleWidthAt270": 146.48,
+          "bands": {
+            "headUpper": {
+              "spanAt270": 130.5,
+              "meanOpaqueWidthAt270": 97.77,
+              "opaqueAreaAt270": 12151.53
+            },
+            "chest": {
+              "spanAt270": 103.87,
+              "meanOpaqueWidthAt270": 71.82,
+              "opaqueAreaAt270": 3315.7
+            },
+            "hips": {
+              "spanAt270": 87.89,
+              "meanOpaqueWidthAt270": 62.6,
+              "opaqueAreaAt270": 2890.11
+            },
+            "lowerLegs": {
+              "spanAt270": 126.06,
+              "meanOpaqueWidthAt270": 74.54,
+              "opaqueAreaAt270": 5624.95
+            }
+          }
+        },
+        "9": {
+          "visibleHeightAt270": 290.3,
+          "visibleWidthAt270": 134.94,
+          "bands": {
+            "headUpper": {
+              "spanAt270": 130.5,
+              "meanOpaqueWidthAt270": 97.77,
+              "opaqueAreaAt270": 12151.53
+            },
+            "chest": {
+              "spanAt270": 112.75,
+              "meanOpaqueWidthAt270": 83.43,
+              "opaqueAreaAt270": 3851.64
+            },
+            "hips": {
+              "spanAt270": 71.91,
+              "meanOpaqueWidthAt270": 58.87,
+              "opaqueAreaAt270": 2717.5
+            },
+            "lowerLegs": {
+              "spanAt270": 94.99,
+              "meanOpaqueWidthAt270": 61.12,
+              "opaqueAreaAt270": 4612.19
+            }
+          }
+        }
+      },
+      "sourcePartMasks": {
+        "head": {
+          "view": "right",
+          "sourceRect": [
+            768,
+            21,
+            242,
+            231
+          ],
+          "opaqueCrossWidthAt270": 131.48,
+          "opaqueAlongHeightAt270": 125.48
+        },
+        "body": {
+          "view": "down",
+          "sourceRect": [
+            59,
+            519,
+            156,
+            206
+          ],
+          "opaqueCrossWidthAt270": 67.95,
+          "opaqueAlongHeightAt270": 90.16
+        }
+      },
+      "headCrownBand": {
+        "idle": {
+          "spanAt270": 151.0,
+          "opaqueAreaAt270": 7434.0
+        },
+        "jab": {
+          "spanAt270": 156.0,
+          "opaqueAreaAt270": 7161.0
+        },
+        "walk": {
+          "spanAt270": 130.5,
+          "opaqueAreaAt270": 9361.52
+        }
+      }
+    },
+    "lynx": {
+      "idle": {
+        "visibleHeightAt270": 266.0,
+        "visibleWidthAt270": 157.0,
+        "bands": {
+          "headUpper": {
+            "spanAt270": 143.0,
+            "meanOpaqueWidthAt270": 92.14,
+            "opaqueAreaAt270": 9859.0
+          },
+          "chest": {
+            "spanAt270": 148.0,
+            "meanOpaqueWidthAt270": 103.24,
+            "opaqueAreaAt270": 4749.0
+          },
+          "hips": {
+            "spanAt270": 99.0,
+            "meanOpaqueWidthAt270": 73.87,
+            "opaqueAreaAt270": 3324.0
+          },
+          "lowerLegs": {
+            "spanAt270": 153.0,
+            "meanOpaqueWidthAt270": 59.45,
+            "opaqueAreaAt270": 4518.0
+          }
+        }
+      },
+      "jab": {
+        "visibleHeightAt270": 268.0,
+        "visibleWidthAt270": 212.0,
+        "bands": {
+          "headUpper": {
+            "spanAt270": 184.0,
+            "meanOpaqueWidthAt270": 94.01,
+            "opaqueAreaAt270": 10059.0
+          },
+          "chest": {
+            "spanAt270": 170.0,
+            "meanOpaqueWidthAt270": 95.67,
+            "opaqueAreaAt270": 4401.0
+          },
+          "hips": {
+            "spanAt270": 95.0,
+            "meanOpaqueWidthAt270": 69.36,
+            "opaqueAreaAt270": 3121.0
+          },
+          "lowerLegs": {
+            "spanAt270": 162.0,
+            "meanOpaqueWidthAt270": 63.37,
+            "opaqueAreaAt270": 4816.0
+          }
+        }
+      },
+      "walkFrames": {
+        "0": {
+          "visibleHeightAt270": 269.88,
+          "visibleWidthAt270": 132.28,
+          "bands": {
+            "headUpper": {
+              "spanAt270": 132.28,
+              "meanOpaqueWidthAt270": 92.69,
+              "opaqueAreaAt270": 9545.15
+            },
+            "chest": {
+              "spanAt270": 92.33,
+              "meanOpaqueWidthAt270": 70.3,
+              "opaqueAreaAt270": 3245.56
+            },
+            "hips": {
+              "spanAt270": 68.36,
+              "meanOpaqueWidthAt270": 56.54,
+              "opaqueAreaAt270": 2610.32
+            },
+            "lowerLegs": {
+              "spanAt270": 112.75,
+              "meanOpaqueWidthAt270": 63.91,
+              "opaqueAreaAt270": 4822.62
+            }
+          }
+        },
+        "3": {
+          "visibleHeightAt270": 269.88,
+          "visibleWidthAt270": 132.28,
+          "bands": {
+            "headUpper": {
+              "spanAt270": 132.28,
+              "meanOpaqueWidthAt270": 92.74,
+              "opaqueAreaAt270": 9550.67
+            },
+            "chest": {
+              "spanAt270": 92.33,
+              "meanOpaqueWidthAt270": 58.37,
+              "opaqueAreaAt270": 2694.65
+            },
+            "hips": {
+              "spanAt270": 67.47,
+              "meanOpaqueWidthAt270": 57.45,
+              "opaqueAreaAt270": 2652.09
+            },
+            "lowerLegs": {
+              "spanAt270": 87.0,
+              "meanOpaqueWidthAt270": 55.06,
+              "opaqueAreaAt270": 4155.07
+            }
+          }
+        },
+        "6": {
+          "visibleHeightAt270": 269.88,
+          "visibleWidthAt270": 132.28,
+          "bands": {
+            "headUpper": {
+              "spanAt270": 132.28,
+              "meanOpaqueWidthAt270": 92.69,
+              "opaqueAreaAt270": 9545.15
+            },
+            "chest": {
+              "spanAt270": 92.33,
+              "meanOpaqueWidthAt270": 69.33,
+              "opaqueAreaAt270": 3200.63
+            },
+            "hips": {
+              "spanAt270": 89.66,
+              "meanOpaqueWidthAt270": 64.26,
+              "opaqueAreaAt270": 2966.56
+            },
+            "lowerLegs": {
+              "spanAt270": 129.61,
+              "meanOpaqueWidthAt270": 78.75,
+              "opaqueAreaAt270": 5942.57
+            }
+          }
+        },
+        "9": {
+          "visibleHeightAt270": 269.88,
+          "visibleWidthAt270": 132.28,
+          "bands": {
+            "headUpper": {
+              "spanAt270": 132.28,
+              "meanOpaqueWidthAt270": 92.69,
+              "opaqueAreaAt270": 9545.15
+            },
+            "chest": {
+              "spanAt270": 106.53,
+              "meanOpaqueWidthAt270": 82.24,
+              "opaqueAreaAt270": 3796.47
+            },
+            "hips": {
+              "spanAt270": 73.69,
+              "meanOpaqueWidthAt270": 59.46,
+              "opaqueAreaAt270": 2745.09
+            },
+            "lowerLegs": {
+              "spanAt270": 98.54,
+              "meanOpaqueWidthAt270": 64.54,
+              "opaqueAreaAt270": 4869.91
+            }
+          }
+        }
+      },
+      "sourcePartMasks": {
+        "head": {
+          "view": "right",
+          "sourceRect": [
+            784,
+            32,
+            212,
+            199
+          ],
+          "opaqueCrossWidthAt270": 97.28,
+          "opaqueAlongHeightAt270": 91.26
+        },
+        "body": {
+          "view": "down",
+          "sourceRect": [
+            57,
+            461,
+            150,
+            201
+          ],
+          "opaqueCrossWidthAt270": 66.64,
+          "opaqueAlongHeightAt270": 90.33
+        }
+      },
+      "headCrownBand": {
+        "idle": {
+          "spanAt270": 129.0,
+          "opaqueAreaAt270": 6958.0
+        },
+        "jab": {
+          "spanAt270": 130.0,
+          "opaqueAreaAt270": 7101.0
+        },
+        "walk": {
+          "spanAt270": 132.28,
+          "opaqueAreaAt270": 7146.06
+        }
+      }
+    },
+    "tempest": {
+      "idle": {
+        "visibleHeightAt270": 267.0,
+        "visibleWidthAt270": 168.0,
+        "bands": {
+          "headUpper": {
+            "spanAt270": 166.0,
+            "meanOpaqueWidthAt270": 106.04,
+            "opaqueAreaAt270": 11346.0
+          },
+          "chest": {
+            "spanAt270": 164.0,
+            "meanOpaqueWidthAt270": 133.8,
+            "opaqueAreaAt270": 6155.0
+          },
+          "hips": {
+            "spanAt270": 118.0,
+            "meanOpaqueWidthAt270": 65.78,
+            "opaqueAreaAt270": 2960.0
+          },
+          "lowerLegs": {
+            "spanAt270": 141.0,
+            "meanOpaqueWidthAt270": 56.08,
+            "opaqueAreaAt270": 4262.0
+          }
+        }
+      },
+      "jab": {
+        "visibleHeightAt270": 267.0,
+        "visibleWidthAt270": 210.0,
+        "bands": {
+          "headUpper": {
+            "spanAt270": 162.0,
+            "meanOpaqueWidthAt270": 103.94,
+            "opaqueAreaAt270": 11122.0
+          },
+          "chest": {
+            "spanAt270": 210.0,
+            "meanOpaqueWidthAt270": 129.15,
+            "opaqueAreaAt270": 5941.0
+          },
+          "hips": {
+            "spanAt270": 80.0,
+            "meanOpaqueWidthAt270": 57.96,
+            "opaqueAreaAt270": 2608.0
+          },
+          "lowerLegs": {
+            "spanAt270": 139.0,
+            "meanOpaqueWidthAt270": 54.34,
+            "opaqueAreaAt270": 4130.0
+          }
+        }
+      },
+      "walkFrames": {
+        "0": {
+          "visibleHeightAt270": 292.96,
+          "visibleWidthAt270": 142.93,
+          "bands": {
+            "headUpper": {
+              "spanAt270": 142.04,
+              "meanOpaqueWidthAt270": 102.27,
+              "opaqueAreaAt270": 12983.01
+            },
+            "chest": {
+              "spanAt270": 119.85,
+              "meanOpaqueWidthAt270": 71.96,
+              "opaqueAreaAt270": 3322.01
+            },
+            "hips": {
+              "spanAt270": 79.01,
+              "meanOpaqueWidthAt270": 64.09,
+              "opaqueAreaAt270": 2958.67
+            },
+            "lowerLegs": {
+              "spanAt270": 110.08,
+              "meanOpaqueWidthAt270": 57.51,
+              "opaqueAreaAt270": 4339.49
+            }
+          }
+        },
+        "3": {
+          "visibleHeightAt270": 292.96,
+          "visibleWidthAt270": 142.04,
+          "bands": {
+            "headUpper": {
+              "spanAt270": 142.04,
+              "meanOpaqueWidthAt270": 102.27,
+              "opaqueAreaAt270": 12983.01
+            },
+            "chest": {
+              "spanAt270": 114.52,
+              "meanOpaqueWidthAt270": 62.37,
+              "opaqueAreaAt270": 2879.07
+            },
+            "hips": {
+              "spanAt270": 79.01,
+              "meanOpaqueWidthAt270": 65.2,
+              "opaqueAreaAt270": 3009.9
+            },
+            "lowerLegs": {
+              "spanAt270": 86.11,
+              "meanOpaqueWidthAt270": 51.39,
+              "opaqueAreaAt270": 3877.64
+            }
+          }
+        },
+        "6": {
+          "visibleHeightAt270": 292.96,
+          "visibleWidthAt270": 158.91,
+          "bands": {
+            "headUpper": {
+              "spanAt270": 142.04,
+              "meanOpaqueWidthAt270": 102.27,
+              "opaqueAreaAt270": 12983.01
+            },
+            "chest": {
+              "spanAt270": 119.85,
+              "meanOpaqueWidthAt270": 72.03,
+              "opaqueAreaAt270": 3325.16
+            },
+            "hips": {
+              "spanAt270": 97.65,
+              "meanOpaqueWidthAt270": 69.84,
+              "opaqueAreaAt270": 3224.28
+            },
+            "lowerLegs": {
+              "spanAt270": 126.06,
+              "meanOpaqueWidthAt270": 69.76,
+              "opaqueAreaAt270": 5263.98
+            }
+          }
+        },
+        "9": {
+          "visibleHeightAt270": 292.96,
+          "visibleWidthAt270": 150.92,
+          "bands": {
+            "headUpper": {
+              "spanAt270": 142.04,
+              "meanOpaqueWidthAt270": 102.27,
+              "opaqueAreaAt270": 12983.01
+            },
+            "chest": {
+              "spanAt270": 129.61,
+              "meanOpaqueWidthAt270": 85.84,
+              "opaqueAreaAt270": 3962.76
+            },
+            "hips": {
+              "spanAt270": 79.01,
+              "meanOpaqueWidthAt270": 66.75,
+              "opaqueAreaAt270": 3081.62
+            },
+            "lowerLegs": {
+              "spanAt270": 96.77,
+              "meanOpaqueWidthAt270": 59.96,
+              "opaqueAreaAt270": 4524.71
+            }
+          }
+        }
+      },
+      "sourcePartMasks": {
+        "head": {
+          "view": "right",
+          "sourceRect": [
+            769,
+            31,
+            248,
+            220
+          ],
+          "opaqueCrossWidthAt270": 142.65,
+          "opaqueAlongHeightAt270": 126.99
+        },
+        "body": {
+          "view": "down",
+          "sourceRect": [
+            68,
+            517,
+            149,
+            170
+          ],
+          "opaqueCrossWidthAt270": 78.7,
+          "opaqueAlongHeightAt270": 89.56
+        }
+      },
+      "headCrownBand": {
+        "idle": {
+          "spanAt270": 154.0,
+          "opaqueAreaAt270": 7154.0
+        },
+        "jab": {
+          "spanAt270": 150.0,
+          "opaqueAreaAt270": 7126.0
+        },
+        "walk": {
+          "spanAt270": 142.04,
+          "opaqueAreaAt270": 9806.81
+        }
+      }
+    },
+    "onyx": {
+      "idle": {
+        "visibleHeightAt270": 266.0,
+        "visibleWidthAt270": 169.0,
+        "bands": {
+          "headUpper": {
+            "spanAt270": 156.0,
+            "meanOpaqueWidthAt270": 96.75,
+            "opaqueAreaAt270": 10352.0
+          },
+          "chest": {
+            "spanAt270": 169.0,
+            "meanOpaqueWidthAt270": 152.61,
+            "opaqueAreaAt270": 7020.0
+          },
+          "hips": {
+            "spanAt270": 152.0,
+            "meanOpaqueWidthAt270": 88.18,
+            "opaqueAreaAt270": 3968.0
+          },
+          "lowerLegs": {
+            "spanAt270": 146.0,
+            "meanOpaqueWidthAt270": 59.43,
+            "opaqueAreaAt270": 4517.0
+          }
+        }
+      },
+      "jab": {
+        "visibleHeightAt270": 269.0,
+        "visibleWidthAt270": 225.0,
+        "bands": {
+          "headUpper": {
+            "spanAt270": 211.0,
+            "meanOpaqueWidthAt270": 99.45,
+            "opaqueAreaAt270": 10840.0
+          },
+          "chest": {
+            "spanAt270": 225.0,
+            "meanOpaqueWidthAt270": 166.26,
+            "opaqueAreaAt270": 7648.0
+          },
+          "hips": {
+            "spanAt270": 140.0,
+            "meanOpaqueWidthAt270": 84.36,
+            "opaqueAreaAt270": 3796.0
+          },
+          "lowerLegs": {
+            "spanAt270": 145.0,
+            "meanOpaqueWidthAt270": 59.43,
+            "opaqueAreaAt270": 4517.0
+          }
+        }
+      },
+      "walkFrames": {
+        "0": {
+          "visibleHeightAt270": 279.65,
+          "visibleWidthAt270": 126.06,
+          "bands": {
+            "headUpper": {
+              "spanAt270": 117.19,
+              "meanOpaqueWidthAt270": 91.09,
+              "opaqueAreaAt270": 10431.81
+            },
+            "chest": {
+              "spanAt270": 120.74,
+              "meanOpaqueWidthAt270": 73.58,
+              "opaqueAreaAt270": 3396.88
+            },
+            "hips": {
+              "spanAt270": 75.46,
+              "meanOpaqueWidthAt270": 61.77,
+              "opaqueAreaAt270": 2851.49
+            },
+            "lowerLegs": {
+              "spanAt270": 110.97,
+              "meanOpaqueWidthAt270": 60.93,
+              "opaqueAreaAt270": 4598.0
+            }
+          }
+        },
+        "3": {
+          "visibleHeightAt270": 279.65,
+          "visibleWidthAt270": 117.19,
+          "bands": {
+            "headUpper": {
+              "spanAt270": 117.19,
+              "meanOpaqueWidthAt270": 91.09,
+              "opaqueAreaAt270": 10431.81
+            },
+            "chest": {
+              "spanAt270": 111.86,
+              "meanOpaqueWidthAt270": 62.74,
+              "opaqueAreaAt270": 2896.41
+            },
+            "hips": {
+              "spanAt270": 75.46,
+              "meanOpaqueWidthAt270": 62.38,
+              "opaqueAreaAt270": 2879.86
+            },
+            "lowerLegs": {
+              "spanAt270": 86.11,
+              "meanOpaqueWidthAt270": 52.29,
+              "opaqueAreaAt270": 3946.21
+            }
+          }
+        },
+        "6": {
+          "visibleHeightAt270": 279.65,
+          "visibleWidthAt270": 142.93,
+          "bands": {
+            "headUpper": {
+              "spanAt270": 117.19,
+              "meanOpaqueWidthAt270": 91.09,
+              "opaqueAreaAt270": 10431.81
+            },
+            "chest": {
+              "spanAt270": 120.74,
+              "meanOpaqueWidthAt270": 73.07,
+              "opaqueAreaAt270": 3373.24
+            },
+            "hips": {
+              "spanAt270": 93.22,
+              "meanOpaqueWidthAt270": 68.17,
+              "opaqueAreaAt270": 3147.04
+            },
+            "lowerLegs": {
+              "spanAt270": 127.84,
+              "meanOpaqueWidthAt270": 74.46,
+              "opaqueAreaAt270": 5618.64
+            }
+          }
+        },
+        "9": {
+          "visibleHeightAt270": 279.65,
+          "visibleWidthAt270": 132.28,
+          "bands": {
+            "headUpper": {
+              "spanAt270": 117.19,
+              "meanOpaqueWidthAt270": 91.09,
+              "opaqueAreaAt270": 10431.81
+            },
+            "chest": {
+              "spanAt270": 129.61,
+              "meanOpaqueWidthAt270": 85.89,
+              "opaqueAreaAt270": 3965.13
+            },
+            "hips": {
+              "spanAt270": 75.46,
+              "meanOpaqueWidthAt270": 64.06,
+              "opaqueAreaAt270": 2957.1
+            },
+            "lowerLegs": {
+              "spanAt270": 98.54,
+              "meanOpaqueWidthAt270": 61.86,
+              "opaqueAreaAt270": 4668.15
+            }
+          }
+        }
+      },
+      "sourcePartMasks": {
+        "head": {
+          "view": "right",
+          "sourceRect": [
+            787,
+            19,
+            219,
+            211
+          ],
+          "opaqueCrossWidthAt270": 118.07,
+          "opaqueAlongHeightAt270": 115.32
+        },
+        "body": {
+          "view": "down",
+          "sourceRect": [
+            50,
+            531,
+            160,
+            189
+          ],
+          "opaqueCrossWidthAt270": 76.17,
+          "opaqueAlongHeightAt270": 90.64
+        }
+      },
+      "headCrownBand": {
+        "idle": {
+          "spanAt270": 125.0,
+          "opaqueAreaAt270": 6829.0
+        },
+        "jab": {
+          "spanAt270": 130.0,
+          "opaqueAreaAt270": 7243.0
+        },
+        "walk": {
+          "spanAt270": 115.41,
+          "opaqueAreaAt270": 7611.85
+        }
+      }
+    }
+  },
+  "headCrownBandFloorHeightRange": [
+    0.72,
+    1.2
+  ],
+  "headCrownMethod": "Largest connected actual alpha>180 component in upper-head band above0.72floorheight, excluding disconnected raised/striking fists. Hair/crown remain part of visible head shape; no bone-reference claim."
+}

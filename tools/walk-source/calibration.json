@@ -1,0 +1,330 @@
+{
+  "nova": {
+    "rawBodyHeight": 428.57142857142856,
+    "frameOrder": [
+      0,
+      2,
+      1,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "status": "selected Nova V2 one-character0.63; source-cell1/2 chronological swap endorsed by actual near/far-leg visual review; pixels unchanged"
+  },
+  "viper": {
+    "rawBodyHeight": 400,
+    "frameOrder": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      10,
+      9,
+      11
+    ],
+    "status": "selected Viper V2 one-character0.675; source-cell9/10 chronological swap endorsed by actual opposing-leg visual review; pixels unchanged"
+  },
+  "tempest": {
+    "rawBodyHeight": 345,
+    "frameOrder": [
+      0,
+      10,
+      11,
+      2,
+      3,
+      1,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "status": "Reviewed complete source bodies and opposing foot contact/swing coverage; final rendered runtime visual acceptance recorded separately.",
+    "calibrationMethod": "Single actor-wide scale matching head/chin and chin/waist to canonical combat idle; no per-pose bounding-box or part correction.",
+    "sourcePoseCoverage": {
+      "farLeads": [
+        0,
+        10,
+        11
+      ],
+      "nearLeads": [
+        1,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "nearSwing": [
+        2,
+        3
+      ],
+      "farSwing": [
+        9
+      ]
+    },
+    "calibrationNote": "Forehead/chin skin core and chin-waist agree; crown/ponytail outline is~7.3% higher. Retain one uniform bank scale, no hair/core separate scaling."
+  },
+  "raven": {
+    "rawBodyHeight": 320,
+    "frameOrder": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "status": "Reviewed complete source bodies and opposing foot contact/swing coverage; final rendered runtime visual acceptance recorded separately.",
+    "calibrationMethod": "Single actor-wide scale matching head/chin and chin/waist to canonical combat idle; no per-pose bounding-box or part correction.",
+    "sourcePoseCoverage": {
+      "farLeads": [
+        0,
+        1,
+        2,
+        9,
+        10,
+        11
+      ],
+      "nearLeads": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "nearSwing": [
+        3
+      ],
+      "farSwing": [
+        8
+      ]
+    }
+  },
+  "seraph": {
+    "rawBodyHeight": 320,
+    "frameOrder": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "status": "Reviewed complete source bodies and opposing foot contact/swing coverage; final rendered runtime visual acceptance recorded separately.",
+    "calibrationMethod": "Single actor-wide scale matching head/chin and chin/waist to canonical combat idle; no per-pose bounding-box or part correction.",
+    "sourcePoseCoverage": {
+      "farLeads": [
+        0,
+        1,
+        2,
+        10,
+        11
+      ],
+      "nearLeads": [
+        4,
+        5,
+        6
+      ],
+      "nearSwing": [
+        3
+      ],
+      "farSwing": [
+        7,
+        8,
+        9
+      ]
+    }
+  },
+  "ember": {
+    "rawBodyHeight": 325,
+    "frameOrder": [
+      0,
+      10,
+      11,
+      3,
+      1,
+      2,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "status": "Reviewed complete source bodies and opposing foot contact/swing coverage; final rendered runtime visual acceptance recorded separately.",
+    "calibrationMethod": "Single actor-wide scale matching head/chin and chin/waist to canonical combat idle; no per-pose bounding-box or part correction.",
+    "sourcePoseCoverage": {
+      "farLeads": [
+        0,
+        10,
+        11
+      ],
+      "nearLeads": [
+        1,
+        2,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "nearSwing": [
+        3
+      ],
+      "farSwing": [
+        9
+      ],
+      "cell9": "ONLY the edited9 must be composited; original9 incorrectly lifts near again."
+    }
+  },
+  "valkyrie": {
+    "rawBodyHeight": 330,
+    "frameOrder": [
+      0,
+      10,
+      11,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      8,
+      9,
+      7
+    ],
+    "status": "Reviewed complete source bodies and opposing foot contact/swing coverage; final rendered runtime visual acceptance recorded separately.",
+    "calibrationMethod": "Single actor-wide scale matching head/chin and chin/waist to canonical combat idle; no per-pose bounding-box or part correction.",
+    "sourcePoseCoverage": {
+      "farLeads": [
+        0,
+        7,
+        10,
+        11
+      ],
+      "nearLeads": [
+        4,
+        5,
+        6,
+        8
+      ],
+      "nearSwing": [
+        1,
+        2,
+        3
+      ],
+      "farSwing": [
+        9
+      ]
+    }
+  },
+  "lynx": {
+    "rawBodyHeight": 350,
+    "frameOrder": [
+      0,
+      11,
+      3,
+      1,
+      2,
+      4,
+      5,
+      6,
+      7,
+      8,
+      10,
+      9
+    ],
+    "status": "Reviewed complete source bodies and opposing foot contact/swing coverage; final rendered runtime visual acceptance recorded separately.",
+    "calibrationMethod": "Single actor-wide scale matching head/chin and chin/waist to canonical combat idle; no per-pose bounding-box or part correction.",
+    "sourcePoseCoverage": {
+      "farLeads": [
+        0,
+        11
+      ],
+      "nearLeads": [
+        1,
+        2,
+        4,
+        5,
+        6,
+        7,
+        8,
+        10
+      ],
+      "nearSwing": [
+        3
+      ],
+      "farSwing": [
+        9
+      ],
+      "cell9": "ONLY the edited9 must be composited; original9 incorrectly lifts near again."
+    }
+  },
+  "onyx": {
+    "rawBodyHeight": 342.5,
+    "frameOrder": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "status": "Reviewed complete source bodies and opposing foot contact/swing coverage; final rendered runtime visual acceptance recorded separately.",
+    "calibrationMethod": "Single actor-wide scale matching head/chin and chin/waist to canonical combat idle; no per-pose bounding-box or part correction.",
+    "sourcePoseCoverage": {
+      "farLeads": [
+        0,
+        1,
+        2,
+        11
+      ],
+      "nearLeads": [
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "nearSwing": [
+        3
+      ],
+      "farSwing": [
+        10
+      ],
+      "nearSupportFarTrailing": [
+        9
+      ]
+    }
+  }
+}

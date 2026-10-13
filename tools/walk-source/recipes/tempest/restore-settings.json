@@ -1,0 +1,104 @@
+{
+  "method": "Actual Blender compositor at exact source resolution; original sRGB plate + raw-channel marker masks + sampled canonical skin ramp + original alpha passthrough. No pixel-array writes or image geometry edits.",
+  "actor": "tempest",
+  "markerSet": "green-magenta",
+  "targetMaterial": "skin",
+  "input": "tools/walk-source/marked/tempest-walk-markers12.png",
+  "inputSHA256": "7194efa1a27e9a7c654467cbceb9b6528e6c43d09a14e2d659f8aa453f8e2f33",
+  "canonicalReference": "tools/walk-source/references/tempest-idle.png",
+  "canonicalReferenceSHA256": "752923ed848043fd620b3155eb94e200f34fb8248ab29401f65d1d3c86959599",
+  "dimensions": [
+    1350,
+    1165
+  ],
+  "rows": 3,
+  "cols": 4,
+  "lowerBodyBandFraction": 0.52,
+  "paletteSampleCount": 4276,
+  "paletteSRGB8Quantiles": {
+    "0.1": [
+      159.0,
+      101.0,
+      60.0
+    ],
+    "0.25": [
+      188.0,
+      110.0,
+      72.0
+    ],
+    "0.5": [
+      225.0,
+      144.0,
+      86.0
+    ],
+    "0.9": [
+      231.0,
+      151.0,
+      102.0
+    ]
+  },
+  "skinRampSRGB8": [
+    {
+      "intensity": 0.0,
+      "RGB": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "intensity": 0.2,
+      "RGB": [
+        45.0,
+        28.8,
+        17.2
+      ]
+    },
+    {
+      "intensity": 0.55,
+      "RGB": [
+        159.0,
+        101.0,
+        60.0
+      ]
+    },
+    {
+      "intensity": 0.78,
+      "RGB": [
+        188.0,
+        110.0,
+        72.0
+      ]
+    },
+    {
+      "intensity": 0.95,
+      "RGB": [
+        225.0,
+        144.0,
+        86.0
+      ]
+    },
+    {
+      "intensity": 1.0,
+      "RGB": [
+        231.0,
+        151.0,
+        102.0
+      ]
+    }
+  ],
+  "markerThresholds": {
+    "minimumDominantChannel8": 40,
+    "green_R_over_G": 0.65,
+    "green_B_over_G": 0.55,
+    "magenta_minRB_over_maxRB": 0.55,
+    "magenta_G_over_maxRB": 0.35
+  },
+  "geometryChanged": false,
+  "alphaValidation": "External source/output pixel comparison still required",
+  "outputs": [
+    "../../sheets/tempest-walk-sheet.png",
+    "tempest-color-mask-witness.png",
+    "tempest-marker-color-restore.blend"
+  ]
+}

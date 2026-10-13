@@ -1,0 +1,260 @@
+{
+  "onyx": {
+    "runtimeOrderToSourceCell": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "farContactRuntimePhases": [
+      0,
+      1,
+      2,
+      11
+    ],
+    "nearContactRuntimePhases": [
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "nearSwingRuntimePhases": [
+      3
+    ],
+    "farSwingRuntimePhases": [
+      10
+    ],
+    "rawBodyHeight": 342.5
+  },
+  "tempest": {
+    "runtimeOrderToSourceCell": [
+      0,
+      10,
+      11,
+      2,
+      3,
+      1,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "farContactRuntimePhases": [
+      0,
+      1,
+      2
+    ],
+    "nearContactRuntimePhases": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "nearSwingRuntimePhases": [
+      3,
+      4
+    ],
+    "farSwingRuntimePhases": [
+      11
+    ],
+    "rawBodyHeight": 345
+  },
+  "seraph": {
+    "runtimeOrderToSourceCell": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "farContactRuntimePhases": [
+      0,
+      1,
+      2,
+      10,
+      11
+    ],
+    "nearContactRuntimePhases": [
+      4,
+      5,
+      6
+    ],
+    "nearSwingRuntimePhases": [
+      3
+    ],
+    "farSwingRuntimePhases": [
+      7,
+      8,
+      9
+    ],
+    "rawBodyHeight": 320
+  },
+  "raven": {
+    "runtimeOrderToSourceCell": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "farContactRuntimePhases": [
+      0,
+      1,
+      2,
+      9,
+      10,
+      11
+    ],
+    "nearContactRuntimePhases": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "nearSwingRuntimePhases": [
+      3
+    ],
+    "farSwingRuntimePhases": [
+      8
+    ],
+    "rawBodyHeight": 320
+  },
+  "ember": {
+    "runtimeOrderToSourceCell": [
+      0,
+      10,
+      11,
+      3,
+      1,
+      2,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "farContactRuntimePhases": [
+      0,
+      1,
+      2
+    ],
+    "nearContactRuntimePhases": [
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "nearSwingRuntimePhases": [
+      3
+    ],
+    "farSwingRuntimePhases": [
+      11
+    ],
+    "rawBodyHeight": 325
+  },
+  "valkyrie": {
+    "runtimeOrderToSourceCell": [
+      0,
+      10,
+      11,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      8,
+      9,
+      7
+    ],
+    "farContactRuntimePhases": [
+      0,
+      1,
+      2,
+      11
+    ],
+    "nearContactRuntimePhases": [
+      6,
+      7,
+      8,
+      9
+    ],
+    "nearSwingRuntimePhases": [
+      3,
+      4,
+      5
+    ],
+    "farSwingRuntimePhases": [
+      10
+    ],
+    "rawBodyHeight": 330
+  },
+  "lynx": {
+    "runtimeOrderToSourceCell": [
+      0,
+      11,
+      3,
+      1,
+      2,
+      4,
+      5,
+      6,
+      7,
+      8,
+      10,
+      9
+    ],
+    "farContactRuntimePhases": [
+      0,
+      1
+    ],
+    "nearContactRuntimePhases": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "nearSwingRuntimePhases": [
+      2
+    ],
+    "farSwingRuntimePhases": [
+      11
+    ],
+    "rawBodyHeight": 350
+  }
+}

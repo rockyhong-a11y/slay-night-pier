@@ -2,7 +2,6 @@ import { ROSTER, HEROES, ENCOUNTERS, characterFor } from './roster.js';
 import { GRAB_MOVES, COMBO_STEPS, CHAIN_MOVES, COUNTER_MOVES, COMBAT_RULES, directionForMove } from './combat-moves.js';
 import { AudioEngine } from './audio.js';
 import { IMPACT_PROFILES, makeImpact, drawImpact } from './impact.js';
-import { updateFootContacts, legPose, drawLegRig } from './walk-rig.js';
 
 const ASSET_BASE = import.meta.env?.BASE_URL ?? './';
 const assetUrl = (path, version) => `${ASSET_BASE}${path.replace(/^\/+/, '')}${version ? `?v=${encodeURIComponent(version)}` : ''}`;
@@ -189,16 +188,14 @@ export class Game {
     await Promise.all(ROSTER.map(async fighter => {
       const metadata = this.manifest[fighter.id];
       if (!metadata?.frames?.length || !metadata.combat?.poses) throw new Error(`${fighter.name} 전투 스프라이트 데이터가 없습니다.`);
-      const rigMetadata=metadata.walk?.rig;
-      const [image, run, combat, walk, rig] = await Promise.all([
-        metadata.combat ? null : loadImage(assetUrl(metadata.image || fighter.sprite)),
-        !metadata.walk && metadata.runImage ? loadImage(assetUrl(metadata.runImage)) : null,
+      if (!metadata.walk?.frames?.length) {
+        throw new Error(`${fighter.name} 전신 보행 스프라이트 데이터가 없습니다.`);
+      }
+      const [combat, walk] = await Promise.all([
         loadImage(assetUrl(metadata.combat.image, metadata.combat.imageVersion)),
-        metadata.walk?.image ? loadImage(assetUrl(rigMetadata?.upperImage || metadata.walk.image,
-          rigMetadata?.upperImageVersion || metadata.walk.imageVersion)) : null,
-        rigMetadata?.image ? loadImage(assetUrl(rigMetadata.image,rigMetadata.imageVersion)) : null,
+        loadImage(assetUrl(metadata.walk.image, metadata.walk.imageVersion)),
       ]);
-      this.sprites.set(fighter.id, { image, run, combat, walk, rig, metadata });
+      this.sprites.set(fighter.id, { combat, walk, metadata });
     }));
     this.loaded = true;
     this.render();
@@ -446,6 +443,7 @@ export class Game {
     partner.action = 'idle'; partner.actionTime = 0; partner.z = partner.vx = 0;
     // A returning partner arrives at the active hero's new location, with fresh contacts.
     partner.gaitMoving = false; partner.gaitFeet = null; partner.gaitLegPose = null;
+    partner.walkDistance = partner.gaitTravel = partner.gaitPhase = 0;
     partner.renderWasWalking = false; partner.renderPoseFromWalk = false;
     partner.renderPose = 'idle'; partner.renderPoseFrom = 'idle';
     current.gaitMoving = false;
@@ -789,9 +787,7 @@ export class Game {
   updateWalking(actor,dx,dy,dt) {
     const metadata=this.manifest[actor.id]?.walk;
     const slope=(this.floorY(1)-this.floorY(0))/(this.width/VIEW_WIDTH);
-    const worldHeight=BODY_HEIGHT*(actor.boss?1.15:1);
     advanceGait(actor,dx,dy,dt,(metadata?.cycleDistance || WALK_CYCLE_DISTANCE)*(actor.boss?1.15:1),slope);
-    if(metadata?.rig)updateFootContacts(actor,metadata.rig,slope,worldHeight);
   }
 
   separateEnemies(dt) {
@@ -1135,53 +1131,14 @@ export class Game {
 
   drawWalk(sprite, actor, height) {
     const metadata = sprite.metadata.walk;
-    const rig=metadata?.rig;
-    if(rig && sprite.rig && actor.gaitFeet) {
-      const ctx=this.ctx,opacity=ctx.globalAlpha;
-      const slope=(this.floorY(1)-this.floorY(0))/(this.width/VIEW_WIDTH);
-      if(actor.gaitMoving || !actor.gaitLegPose)actor.gaitLegPose=legPose(actor,rig,slope,BODY_HEIGHT*(actor.boss?1.15:1));
-      const back=spriteGeometry(rig.backFrame,rig.bodyHeight,height);
-      ctx.drawImage(sprite.rig,...back.rect,back.x,back.y,back.width,back.height);
-      drawLegRig(ctx,sprite.rig,rig,actor.gaitLegPose,height,actor);
-      const phase=((actor.walkDistance/(metadata.cycleDistance*(actor.boss?1.15:1)))%1+1)%1;
-      actor.gaitRigPhase=phase;
-      const position=phase*rig.upperFrames.length,index=Math.floor(position),blend=position-index;
-      for(const [frame,alpha] of [[rig.upperFrames[index%rig.upperFrames.length],1-blend],
-        [rig.upperFrames[(index+1)%rig.upperFrames.length],blend]]) {
-        if(alpha<.001)continue;
-        const geometry=spriteGeometry(frame,rig.bodyHeight,height);
-        ctx.globalAlpha=opacity*alpha;
-        ctx.drawImage(sprite.walk,...geometry.rect,geometry.x,geometry.y,geometry.width,geometry.height);
-      }
-      ctx.globalAlpha=opacity;
-      return;
-    }
-    const frames = metadata?.frames || sprite.metadata.runFrames.slice(1, 5);
-    const image = sprite.walk || sprite.run;
-    const bodyHeight = metadata?.bodyHeight || sprite.metadata.runBodyHeight;
-    const cycleDistance = (metadata?.cycleDistance || WALK_CYCLE_DISTANCE) * (actor.boss ? 1.15 : 1);
-    const phase = ((actor.gaitTravel / cycleDistance) % 1 + 1) % 1;
+    const phase = ((actor.gaitTravel / (metadata.cycleDistance * (actor.boss ? 1.15 : 1))) % 1 + 1) % 1;
+    const index = Math.floor(phase * metadata.frames.length) % metadata.frames.length;
+    const frame = metadata.frames[index];
+    const geometry = spriteGeometry(frame, metadata.bodyHeight, height);
+    // One complete body drawing; both axes use the same character reference.
+    this.ctx.drawImage(sprite.walk, ...geometry.rect, geometry.x, geometry.y, geometry.width, geometry.height);
+    actor.gaitFrame = index;
     actor.gaitPhase = phase;
-    const position = phase * frames.length;
-    const a = frames[Math.floor(position) % frames.length], b = frames[(Math.floor(position) + 1) % frames.length];
-    const mix = position - Math.floor(position), opacity = this.ctx.globalAlpha;
-    actor.gaitContact = a.contactFoot || (phase < .5 ? 'left' : 'right');
-    const sharedContact = a.contactFoot && a.contactFoot === b.contactFoot && a.foot && b.foot;
-    const relativeFoot = frame => frame.foot.map((value,i) => value-frame.centerPivot[i]);
-    const footA = sharedContact ? relativeFoot(a) : null, footB = sharedContact ? relativeFoot(b) : null;
-    const foot = sharedContact ? [lerp(footA[0],footB[0],mix),lerp(footA[1],footB[1],mix)] : null;
-    const draw = (frame, alpha) => {
-      if (alpha <= .001) return;
-      const geometry = spriteGeometry(frame, bodyHeight, height);
-      // Adjacent body drawings meet at the same planted sole during stance.
-      const sourceFoot = foot ? relativeFoot(frame) : null;
-      const dx = foot ? (foot[0] - sourceFoot[0]) * geometry.scale : 0;
-      const dy = foot ? (foot[1] - sourceFoot[1]) * geometry.scale : 0;
-      this.ctx.globalAlpha = opacity * alpha;
-      this.ctx.drawImage(image, ...geometry.rect, geometry.x + dx, geometry.y + dy, geometry.width, geometry.height);
-    };
-    draw(a, 1 - mix); draw(b, mix);
-    this.ctx.globalAlpha = opacity;
   }
 
   drawFighter(actor, transform = null, anchor = actor, forcedPose) {
@@ -1235,30 +1192,27 @@ export class Game {
     // Facing mirrors the drawing; neither turns nor action tracks squash its aspect.
     c.scale(facing, 1);
     if (actor.invulnerable > 0 && action === 'hurt' && Math.floor(this.state.time * 20) % 2) c.globalAlpha *= .6;
-    const walking = actor.gaitMoving && ['walk', 'charge'].includes(action) && !transform &&
-      (sprite.walk && sprite.metadata.walk?.frames?.length || sprite.run && sprite.metadata.runFrames?.length > 2);
+    if (forcedPose != null) {
+      actor.renderWasWalking = false;
+      actor.renderPoseFromWalk = false;
+      actor.renderPose = actor.renderPoseFrom = forcedPose;
+    }
+    const walking = forcedPose == null && actor.gaitMoving && ['walk', 'charge'].includes(action) && !transform &&
+      sprite.walk && sprite.metadata.walk?.frames?.length;
     if (walking) {
       if (!actor.renderWasWalking) {
         actor.renderWalkStarted = this.state.time;
         actor.renderWalkFrom = actor.renderPose;
       }
-      const walkBlend = clamp((this.state.time-actor.renderWalkStarted)/.07,0,1);
-      const opacity = c.globalAlpha;
-      if (walkBlend < 1) {
-        c.globalAlpha = opacity*(1-walkBlend);
-        this.drawPose(sprite,actor.renderWalkFrom || 'idle',height);
-      }
-      c.globalAlpha = opacity*walkBlend;
       this.drawWalk(sprite, actor, height);
-      c.globalAlpha = opacity;
       actor.renderWasWalking = true;
       actor.renderPoseFromWalk = false;
     } else {
       const pose = forcedPose ?? transform?.pose ?? this.combatPose(actor);
       if (actor.renderWasWalking) {
-        actor.renderPoseFromWalk = true;
+        actor.renderPoseFromWalk = false;
         actor.renderPose = pose;
-        actor.renderPoseFrom = 'idle';
+        actor.renderPoseFrom = pose;
         actor.renderPoseTime = this.state.time;
         actor.renderPoseDuration = .07;
         actor.renderWasWalking = false;
@@ -1287,9 +1241,7 @@ export class Game {
       const blend = settled || actor.renderPoseFrom === pose ? 1 : clamp((this.state.time - actor.renderPoseTime) / (actor.renderPoseDuration || .09), 0, 1);
       actor.renderPoseBlend = blend;
       const opacity = c.globalAlpha;
-      if (blend < 1 && actor.renderPoseFromWalk) {
-        c.globalAlpha = opacity * (1-blend); this.drawWalk(sprite,actor,height);
-      } else if (blend < 1 && actor.renderPoseFrom !== pose) {
+      if (blend < 1 && actor.renderPoseFrom !== pose) {
         c.globalAlpha = opacity * (1 - blend); this.drawPose(sprite, actor.renderPoseFrom, height);
       }
       if (blend >= 1) actor.renderPoseFromWalk = false;
