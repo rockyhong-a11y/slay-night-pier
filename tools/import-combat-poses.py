@@ -6,7 +6,7 @@ No arguments: compact all existing banks to 384 cells, preserving approved raste
 from pathlib import Path
 from PIL import Image,ImageChops,ImageFilter
 from collections import deque
-import argparse,json,math
+import argparse,hashlib,json,math
 ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/'public/assets/sprites';MANIFEST=OUT/'manifest.json'
 CELL=384;BODY=270.;FOOT=[165,346.5];CENTER=[165,211.5]
 parser=argparse.ArgumentParser();parser.add_argument('character',nargs='?');parser.add_argument('--sheet');parser.add_argument('--keys');parser.add_argument('--cols',type=int,default=3);parser.add_argument('--rows',type=int,default=2);parser.add_argument('--key',choices=['green','magenta'],default='green');parser.add_argument('--job');parser.add_argument('--source-url');parser.add_argument('--blender-dir')
@@ -34,7 +34,9 @@ def existing_bank(character):
  image=Image.open(ROOT/'public'/entry['image'].lstrip('/')).convert('RGBA')
  for key,pose in entry['poses'].items():
   if pose.get('alias') or pose.get('source')=='Blender original cutout rig':continue
-  x,y,w,h=pose['rect'];cell=image.crop((x,y,x+w,y+h)).resize((CELL,CELL),Image.Resampling.LANCZOS)
+  x,y,w,h=pose['rect'];drawing=image.crop((x,y,x+w,y+h));ratio=BODY/entry['bodyHeight']
+  drawing=drawing.resize((round(w*ratio),round(h*ratio)),Image.Resampling.LANCZOS)
+  cell=Image.new('RGBA',(CELL,CELL));pivot=pose.get('pivot',entry['pivot']);cell.alpha_composite(drawing,(round(FOOT[0]-pivot[0]*ratio),round(FOOT[1]-pivot[1]*ratio)))
   bank[key]=(cell,{k:v for k,v in pose.items() if k not in ['rect','pivot','centerPivot']})
  return bank
 
@@ -68,6 +70,10 @@ def silhouettes(image,cols,rows):
 def save(character,bank):
  # Atlas's generated parry cell includes an extraneous opponent arm; omit it.
  if (character=='atlas' and bank.get('parry',(None,{}))[1].get('job')=='68fbb266-7d46-4670-91a5-24b1b3a59623') or (character=='nova' and bank.get('parry',(None,{}))[1].get('job')=='e3bb4808-e001-4ede-835d-a3f2fd9a5991'):bank.pop('parry')
+ # The two generated follow-through cells remained upright; substitute the
+ # reviewed lying follow-through from the same hero bank instead.
+ if character=='atlas':bank.pop('reverseDdtFall',None)
+ if character=='nova':bank.pop('backSuplexLand',None)
  # Only reviewed generated poses and original whole-body art are runtime assets.
  original=Image.open(ROOT/'public'/manifest[character]['image'].lstrip('/')).convert('RGBA')
  for key,index in [('windup',0),('hurt',2)]:
@@ -75,15 +81,28 @@ def save(character,bank):
   frame=manifest[character]['frames'][index];x,y,w,h=[frame[n] for n in ['x','y','width','height']];drawing=original.crop((x,y,x+w,y+h));ratio=BODY/h;drawing=drawing.resize((round(w*ratio),round(h*ratio)),Image.Resampling.LANCZOS);canvas=Image.new('RGBA',(CELL,CELL));canvas.alpha_composite(drawing,(round(FOOT[0]-drawing.width/2),round(FOOT[1]-drawing.height)));bank[key]=(canvas,{'source':'Original SD whole-body pose','originalPose':index})
  if 'back' not in bank:
   bank['back']=(bank['hurt'][0],{'source':'Original SD whole-body pose','originalPose':2,'temporaryRearFallback':True})
- keys=list(bank);cols=3 if len(keys)<=6 else 5;rows=math.ceil(len(keys)/cols);sheet=Image.new('RGBA',(CELL*cols,CELL*rows),(0,0,0,0));poses={}
- for index,key in enumerate(keys):
-  image,meta=bank[key];x=index%cols*CELL;y=index//cols*CELL;sheet.alpha_composite(image,(x,y));poses[key]={'rect':[x,y,CELL,CELL],'pivot':FOOT,'centerPivot':CENTER,**meta}
+ keys=list(bank);placements=[];x=y=rowheight=0;atlaswidth=1536 if len(keys)>24 else 1024;poses={}
+ # Tight rectangular packing removes transparent cell padding without scaling
+ # any head, torso or limb. Per-pose pivots retain the exact body-height units.
+ for key in keys:
+  drawing,meta=bank[key];box=drawing.getchannel('A').point(lambda a:255 if a>3 else 0).getbbox()
+  left=max(0,box[0]-3);top=max(0,box[1]-3);right=min(CELL,box[2]+3);bottom=min(CELL,box[3]+3);crop=drawing.crop((left,top,right,bottom))
+  if x+crop.width>atlaswidth:x=0;y+=rowheight;rowheight=0
+  placements.append((crop,x,y));poses[key]={'rect':[x,y,crop.width,crop.height],'pivot':[FOOT[0]-left,FOOT[1]-top],'centerPivot':[CENTER[0]-left,CENTER[1]-top],**meta}
+  x+=crop.width;rowheight=max(rowheight,crop.height)
+ sheet=Image.new('RGBA',(atlaswidth,y+rowheight),(0,0,0,0))
+ for crop,x,y in placements:sheet.alpha_composite(crop,(x,y))
  # Semantic aliases are explicit, so the runtime never needs numeric art guessing.
- for alias,target in {'idle':'windup','charge':'windup','launcher':'cross','strikeRecovery':'windup','recover':'strikeRecovery','guard':'windup','clinch':'windup','underhook':'clinch','overhead':'underhook','throwArc':'recover','slam':'hurt','parry':'hipTurn' if character in ['atlas','nova'] else 'cross','wristCatch':'jab','hipTurn':'clinch','armLock':'wristCatch','roundhouse':'lowKick','rearFacing':'back','rear':'back','chargeStrike':'launcher','counter':'hipTurn','lift':'overhead','lock':'armLock'}.items():
+ for alias,target in {'idle':'windup','charge':'windup','launcher':'cross','strikeRecovery':'windup','recover':'strikeRecovery','guard':'windup','clinch':'windup','underhook':'clinch','overhead':'underhook','throwArc':'recover','slam':'hurt','parry':'hipTurn' if character in ['atlas','nova'] else 'cross','wristCatch':'jab','hipTurn':'clinch','armLock':'wristCatch','roundhouse':'lowKick','rearFacing':'back','rear':'back','chargeStrike':'launcher','counter':'hipTurn','lift':'overhead','lock':'armLock','reverseDdtFall':'ddtFall','backSuplexLand':'verticalRelease'}.items():
   if target in poses and alias not in poses:poses[alias]={**poses[target],'alias':target}
  sheet.save(OUT/f'{character}-combat.webp','WEBP',lossless=True,exact=True)
- manifest[character]['combat']={'image':f'/assets/sprites/{character}-combat.webp','width':sheet.width,'height':sheet.height,'bodyHeight':BODY,'pivot':FOOT,'centerPivot':CENTER,'poses':poses}
- MANIFEST.write_text(json.dumps(manifest,separators=(',',':')))
+ image_version=hashlib.sha256((OUT/f'{character}-combat.webp').read_bytes()).hexdigest()[:16]
+ manifest[character]['combat']={'image':f'/assets/sprites/{character}-combat.webp','imageVersion':image_version,'width':sheet.width,'height':sheet.height,'bodyHeight':BODY,'pivot':FOOT,'centerPivot':CENTER,'poses':poses}
+ # Merge only combat into the latest manifest: walking assets are authored
+ # independently and must survive a combat sheet import. Atomic replacement
+ # also avoids readers seeing an incomplete JSON document.
+ latest=json.loads(MANIFEST.read_text());latest[character]['combat']=manifest[character]['combat']
+ temporary=MANIFEST.with_name('manifest.combat.tmp');temporary.write_text(json.dumps(latest,separators=(',',':')));temporary.replace(MANIFEST)
  print(character,'combat bank:',len(keys),'authored poses +',len(poses)-len(keys),'aliases')
 
 if opt.blender_dir:

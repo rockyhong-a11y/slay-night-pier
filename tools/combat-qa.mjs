@@ -25,6 +25,14 @@ async function closeEnemy({side='front',facing,attack=false,x=190}={}){
  return page.evaluate(({side,facing,attack,x})=>{const g=window.__SLAY__.game,p=g.state.player;p.x=x;p.y=.57;p.facing=1;p.action='idle';p.actionTime=0;p.vx=0;p.z=0;p.invulnerable=0;p.counterCooldown=0;g.hitstop=0;g.camera=x-140;g.setMove(0,0);for(const e of g.state.enemies){e.x=x+340;e.y=.1;e.cooldown=1000;e.action='idle';e.actionTime=0;e.vx=0;e.invulnerable=0;}const e=g.state.enemies[0];e.x=p.x+48;e.y=p.y;e.facing=facing??(side==='rear'?1:-1);e.facingLocked=side==='rear'?1000:0;if(attack)e.cooldown=0;g.render();return{id:e.id,hp:e.hp};},{side,facing,attack,x});
 }
 async function keyTap(code='j'){await page.keyboard.down(code);await page.keyboard.up(code);}
+async function contactProof(){return page.evaluate(()=>{
+ const g=window.__SLAY__.game,ctx=g.ctx,drawFighter=g.drawFighter,drawImage=ctx.drawImage,drawEffects=g.drawEffects,translate=ctx.translate;let actor=null,inEffects=false,index=0;const points=[],bursts=[];
+ g.drawFighter=function(...args){const old=actor;actor=args[0];try{return drawFighter.apply(this,args);}finally{actor=old;}};
+ ctx.drawImage=function(image,...args){const sprite=actor&&g.sprites.get(actor.id),landmark=actor&&g.strikeContacts?.actors[actor.id]?.poses[actor.renderPose];if(image===sprite?.combat&&args.length===8&&landmark?.rect.every((v,i)=>Math.abs(v-args[i])<.01)){const t=this.getTransform(),x=args[4]+landmark.pixel[0]/args[2]*args[6],y=args[5]+landmark.pixel[1]/args[3]*args[7];points.push({id:actor.id,pose:actor.renderPose,alpha:this.globalAlpha,x:t.a*x+t.c*y+t.e,y:t.b*x+t.d*y+t.f});}return drawImage.call(this,image,...args);};
+ g.drawEffects=function(...args){inEffects=true;index=0;try{return drawEffects.apply(this,args);}finally{inEffects=false;}};
+ ctx.translate=function(x,y){const result=translate.call(this,x,y);if(inEffects){const t=this.getTransform(),burst=g.hitBursts[index++];bursts.push({x:t.e,y:t.f,burst:{...burst}});}return result;};
+ try{g.render();return{points,bursts,scale:g.width/420};}finally{g.drawFighter=drawFighter;ctx.drawImage=drawImage;g.drawEffects=drawEffects;ctx.translate=translate;}
+ });}
 const directionKey={up:'w',down:'s',left:'a',right:'d'};
 async function startDirection(direction){await page.keyboard.down(directionKey[direction]);}
 async function endDirection(direction){await page.keyboard.up(directionKey[direction]);}
@@ -58,15 +66,18 @@ try{
  if(process.env.QA_CONTACT_ONLY==='1'){
   for(const hero of heroes){
    await reset(hero);
-   for(const move of ['jab','cross','lowKick','roundhouse']){
+   for(const move of ['jab','cross','lowKick','roundhouse',...(process.env.QA_CONTACT_CHARGE==='1'?['chargeStrike']:[])]){
     await advanceToIdle();
     await page.evaluate(()=>{const g=window.__SLAY__.game,p=g.state.player;p.vx=0;p.invulnerable=0;g.hitstop=0;g.setMove(0,0);for(const e of g.state.enemies){e.x=530;e.y=.1;e.cooldown=1000;e.vx=0;}const e=g.state.enemies[0];e.x=p.x+78;e.y=p.y;e.action='attack';e.actionTime=0;e.actionDuration=1000;e.attackHit=true;e.facing=-1;e.activeStrike='jab';g.render();});
-    const before=await snapshot();await keyTap();const striking=await snapshot();assert.equal(striking.player.move,move);
+    const before=await snapshot();if(move==='chargeStrike'){await page.keyboard.down('j');await step(.55);await page.keyboard.up('j');}else await keyTap();const striking=await snapshot();assert.equal(striking.player.move,move);
     await step(striking.player.duration*striking.player.contactAt+.005);
-    const contact=await snapshot();assert.ok(contact.enemies[0].hp<before.enemies[0].hp);assert.equal(contact.player.renderPose,move,'Contact must display the extended semantic limb pose');const contactBlend=Math.min(1,(contact.time-contact.player.renderPoseTime)/(contact.player.renderPoseDuration||.09));assert.ok(contactBlend>=.9,'Contact pose must be at least 90% visible');const proof=await frame(`${hero}-${move}-exact-contact`);
-    report.sequences.push({name:`${hero}-${move}-exact-contact`,frames:[proof]});check(`${hero} ${move} exact contact at distance78`,{contact,contactBlend});
+    const contact=await snapshot();assert.ok(contact.enemies[0].hp<before.enemies[0].hp);if(move==='chargeStrike')assert.ok(['launcher','cross'].includes(contact.player.renderPose),'Charged contact must show extended fist');else assert.equal(contact.player.renderPose,move,'Contact must display the extended semantic limb pose');const contactBlend=Math.min(1,(contact.time-contact.player.renderPoseTime)/(contact.player.renderPoseDuration||.09));assert.ok(contactBlend>=.9,'Contact pose must be at least 90% visible');const canvas=await contactProof(),point=canvas.points.filter(p=>p.id===hero).sort((a,b)=>b.alpha-a.alpha)[0],burst=canvas.bursts.at(-1);let alignmentError=null;if(point&&burst){alignmentError=Math.hypot(point.x-burst.x,point.y-burst.y)/canvas.scale;assert.ok(alignmentError<1,`${hero} ${move} burst must align with actual drawn opaque weapon pixel: ${alignmentError}`);}if(process.env.QA_CONTACT_CHARGE==='1')assert.ok(point&&burst,'Actual Canvas landmark and effect required');const proof=await frame(`${hero}-${move}-exact-contact`);
+    report.sequences.push({name:`${hero}-${move}-exact-contact`,frames:[proof]});check(`${hero} ${move} exact contact at distance78`,{contact,contactBlend,canvas,alignmentError});
     await advanceToIdle();
    }
+  }
+  if(process.env.QA_CONTACT_CHARGE==='1'){
+   await reset('atlas');await closeEnemy({attack:true});await step(.01);const before=await snapshot();assert.equal(before.enemies[0].action,'attack');await step(.481);const hit=await snapshot();assert.ok(hit.player.hp<before.player.hp,'Real enemy AI attack must connect');const canvas=await contactProof(),point=canvas.points.filter(p=>p.id===hit.enemies[0].id).sort((a,b)=>b.alpha-a.alpha)[0],burst=canvas.bursts.at(-1);assert.ok(point&&burst);const alignmentError=Math.hypot(point.x-burst.x,point.y-burst.y)/canvas.scale;assert.ok(alignmentError<1);const proof=await frame('viper-real-AI-exact-contact');report.sequences.push({name:'viper-real-AI-exact-contact',frames:[proof]});check('Real Viper AI attack effect aligns with actual opaque fist pixel',{before,hit,canvas,alignmentError});
   }
  }else{
 
@@ -99,7 +110,7 @@ try{
   await captureSequence(`${hero}-chain`,chained.player.duration+.2,.15);const after=await snapshot();assert.ok(after.enemies.find(e=>e.id===enemy.id).hp<enemy.hp);assert.equal(after.player.action,'idle');
   const strikeEvents=after.events.filter(e=>e.type==='strike');assert.equal(strikeEvents.length,4);assert.equal(after.events.filter(e=>e.type==='chain').length,1);check(`${hero}: four buffered taps form jab/cross/kick/roundhouse and fifth chains`,{moves,chain:chained.grapple.id,events:after.events});
  }
- for(const hero of heroes)for(const side of ['front','rear'])for(const direction of DIRECTIONS){
+ if(process.env.QA_REGRESSION!=='1')for(const hero of heroes)for(const side of ['front','rear'])for(const direction of DIRECTIONS){
   await reset(hero);const before=await closeEnemy({side});await startDirection(direction);await keyTap('k');await endDirection(direction);const grab=await snapshot();const expected=GRAB_MOVES[hero][side][direction];assert.equal(grab.grapple?.id,expected.id,`${hero} ${side} ${direction}`);
   await captureSequence(expected.id,grab.player.duration+.15,.2);const after=await snapshot();assert.ok(after.enemies[0].hp<before.hp);assert.equal(after.grapple,null);check(`${hero} ${side} ${direction} grab slot`,{id:expected.id,damage:before.hp-after.enemies[0].hp,events:after.events});
  }

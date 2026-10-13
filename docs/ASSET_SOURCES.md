@@ -13,9 +13,9 @@ Atlas and Nova are the two playable original SD identities. Atlas specializes in
 
 ## Reviewed Higgsfield combat poses
 
-The current combat banks contain **82 reviewed Higgsfield drawings**, plus the original whole-body hurt drawing for each hero. The two hero banks each have 18 distinct drawings and 10 explicit semantic aliases. Each of the eight enemy banks has six distinct drawings and 22 aliases. All ten banks therefore expose 28 semantic pose keys, backed by 84 distinct runtime drawings. Aliases reuse existing pixels; they do not consume extra atlas cells.
+The current combat banks contain **176 reviewed Higgsfield drawings**, plus the original whole-body hurt drawing for each hero. The two hero banks each have 33 distinct drawings and 11 explicit semantic aliases. Each of the eight enemy banks has 14 distinct drawings and 22 aliases. Hero banks expose 44 semantic keys each; enemy banks expose 36 each, backed by 178 distinct runtime drawings total. Aliases reuse existing pixels; they do not consume extra atlas cells.
 
-The six hero sheets cover attacks, grappling and counters; the eight enemy sheets cover windup, extended jab, extended cross, kick, hurt and rear-facing stun. Arms and legs visibly extend in the actual raster art. Charge and launcher reuse the reviewed attack poses while Blender supplies their weight shift and paired trajectory. The original cutout rig remains an editable authoring experiment only; its narrow side silhouettes and segment seams are excluded from runtime atlases.
+The first six hero sheets cover attacks, grappling and counters; the first eight enemy sheets cover windup, extended jab, extended cross, kick, hurt and rear-facing stun. Twelve additional technique sheets add 30 new hero drawings and 64 character-specific opponent postures for the iconic technique update described below. Arms and legs visibly extend in the actual raster art. Charge and launcher reuse the reviewed attack poses while Blender supplies their weight shift and paired trajectory. The initial combat cutout rig remains an editable authoring experiment only; its narrow side silhouettes and segment seams are excluded from combat atlases. The new walking rig has its own fixed-length, contact-aligned authoring pipeline described below.
 
 All sheets were generated through the Higgsfield plugin with `nano_banana_2_1`. The approved original Nova portrait was the identity reference. Nova’s first grab/counter results had long trousers inconsistent with her attack sheet, so the approved attack result became the costume reference for two provider edits. Only the corrected black/red shorts versions listed below are shipped. The earlier rejected full-sprite upload was not retried or bypassed.
 
@@ -40,7 +40,7 @@ The complete machine-readable source records, crop-grid dimensions and pose orde
 
 `tools/import-combat-poses.py` uses continuous green/magenta alpha keying, edge-color unmixing and spill suppression. It separates each connected main character silhouette across the entire source sheet before cropping: this removes neighboring feet/hands and faint cell-boundary fragments even when a generated pose crosses its nominal grid border. A shared scale from the first standing pose preserves relative pose size; each extracted silhouette is centered and aligned to the floor individually. Viper and Tempest use magenta keying to preserve their green clothing.
 
-Runtime WebP banks are lossless RGBA with **384 × 384 cells**, a **270-pixel body-height reference**, floor pivot `[165,346.5]` and body-center pivot `[165,211.5]`. Heroes use 5 × 4 banks; enemies use 3 × 2 banks. The total decoded combat image footprint is **49.5 MiB**, rather than ten large 512-cell cutout sheets. The packed authoring scenes are separate from runtime downloads.
+Runtime WebP banks are lossless RGBA, derived from **384 × 384 authoring cells** with a **270-pixel body-height reference**, floor pivot `[165,346.5]` and body-center pivot `[165,211.5]` before packing. Runtime atlases tightly pack cropped rectangles instead of transparent full cells; each rectangle has an adjusted floor/body-center pivot, preserving the same physical scale. The physical 384-cell authoring basis is retained; sprite rectangles are never independently stretched. Final combat banks occupy **49.42 MiB decoded / 9.79 MiB compressed**, with maximum image dimension **1658 pixels**; measured results are in `tools/combat-asset-inspection.json`. The packed authoring scenes are separate from runtime downloads. Each combat image has `imageVersion`, the first 16 characters of its file-byte SHA-256; the loader uses this version in the URL so cached pixels cannot be combined with new atlas rectangles. Final imports/rebuilds refresh it automatically; `python3 tools/rebuild-combat-banks.py --version-only` refreshes metadata without changing image bytes.
 
 To reproduce, download each URL in `combat-sheets.json` using its listed `file` name into one directory, then run:
 
@@ -56,30 +56,54 @@ python3 tools/import-combat-poses.py atlas --sheet /path/to/atlas-attack.png \
   --cols 3 --rows 2 --key green --job JOB_ID --source-url SOURCE_URL
 ```
 
+## Iconic professional-wrestling techniques
+
+The preserved sixteen input IDs now select these techniques:
+
+| Hero | Front ↑ / ↓ / ← / → | Rear ↑ / ↓ / ← / → |
+| --- | --- | --- |
+| Atlas | Powerbomb / DDT / Backbreaker / Spinebuster | German suplex / Reverse DDT / Russian leg sweep / Bulldog |
+| Nova | Vertical suplex / Snapmare / Arm drag / Hurricanrana | Dragon suplex / Back suplex / Neckbreaker / Rolling cradle |
+
+Four newly generated hero sheets provide technique-specific holds and follow-throughs. Eight new opponent sheets retain each enemy’s identity while adding seated, kneeling, forward-folded, back-bent, supine, prone, tucked and over-shoulder postures. Each new 3 × 3 sheet begins with an upright calibration drawing, excluded from runtime, followed by eight action drawings. One uniform scale from that reference applies to the entire sheet. No pose is enlarged to fill its cell, and runtime `scaleX`/`scaleY` remain 1 throughout. Blender uses signed unit X mirroring solely for facing, preserving shape and limb lengths. Atlas’s generated reverse-DDT landing and Nova’s back-suplex landing stayed upright, so they explicitly reuse the same hero’s reviewed reclining follow-through instead. The newly drawn horizontal opponent is held across the raised knee for backbreaker; a standing bridge is not substituted there.
+
+The different landing/hold families have separate two-person trajectories. DDT and bulldog finish prone, snapmare finishes seated, arm drag and head-scissors use folded/tucked rotation, backbreaker strikes the knee above ground, leg sweep drops both performers together, and cradle rolls two tucked bodies through a complete coupled 360° turn into a low pin before release. Cradle, bulldog and hurricanrana retain their forward ending positions; the game commits the final position so recovery does not rewind to the move’s starting point. Grounding during the roll uses the actual visible raster bounds rather than the empty authoring cell. `tools/wrestling_techniques.py` authors these trajectories and grip controls. `tools/wrestling-sheets.json` records the twelve new Higgsfield job IDs, source URLs, grids and semantic ordering. Provider model remains `nano_banana_2_1`, resolution 1K; twelve successfully submitted sheets cost 18 credits total. An explicitly rejected 429 submission created no job and was retried after the active job completed.
+
+To rebuild the newly reviewed poses, download the URLs using the listed file names and run:
+
+```sh
+python3 tools/rebuild-combat-banks.py --catalog tools/wrestling-sheets.json \
+  --source-dir /path/to/new-technique-sheets
+```
+
+Technique-name and visual references include WWE’s [50 coolest maneuvers](https://www.wwe.com/classics/classic-lists/the-50-coolest-maneuvers-of-all-time). No WWE footage, logos, names or artwork are used as game assets.
+
 ## Twenty-eight sampled Blender combat clips
 
 Actual Blender 5.2.2 LTS authors and samples `public/assets/motion/combat.json`. Its editable packed source is `tools/sd-combat.blend`. The scene contains reviewed textured 2D fighter planes, independent hero/opponent motion objects, pose-visibility keys, and contact, lift-apex, impact, regrip and release timeline markers. Source textures are packed into the `.blend`.
 
 - Six strike clips: jab, cross, low kick, roundhouse, launcher and charge strike. Each has 11 authored keys, anticipation, extended-limb contact, follow-through and return to idle. The extended pose begins at least 85 ms before contact so the runtime pose crossfade completes before damage.
-- Sixteen directional grapples: front/rear × up/down/left/right for each hero. Every move has 12 authored keys and a distinct opponent path with different height, throw direction, turnover, speed and landing. Atlas uses lift-and-slam powerbomb variants; Nova uses vertical, belly-to-belly, fisherman, snap, German, dragon, side and rolling suplex variants.
+- Sixteen directional grapples: front/rear × up/down/left/right for each hero. Every move now has 13 authored keys and an individually authored, recognizable wrestling technique, including headlocks, knee backbreakers, shoulder/wrist throws, head scissors, leg sweeps and rolling pins. The input IDs are retained.
 - Two chain throws have 17 authored keys, a real second lift and two impact events at 38% and 78%; they are not a replay of one throw.
 - Four counters cover paired reversal slams and arm-lock takedowns. Each has 12 authored keys, a guard/parry entry, waist or wrist-grip interval, impact and recovery.
 
-All clips are sampled from evaluated Blender object transforms and actual visible texture poses at 60 Hz. Scale remains 1 throughout; the engine blends into and out of each motion. `combat-inspection.json` records clip frame spans, sample counts, contact/impact frames, end transforms, maximum opponent lift and minimum scale for structured inspection. The `grip` field is a paired hold marker between the actor centers, useful for phase inspection; it is not a hand-bone IK constraint.
+All clips are sampled from evaluated Blender object transforms and actual visible texture poses at 60 Hz. Absolute scale remains 1 throughout; the engine blends into and out of each motion. Facing is exported separately as `relativeFacing` (+1 or −1). `combat-inspection.json` records clip frame spans, sample counts, contact/impact frames, end transforms, maximum opponent lift and minimum scale for structured inspection. The `grip` field is evaluated from a Blender control parented to the hero and keyed to the technique’s headlock, wrist, shoulder, waist, knee or scissors hold. It is not a midpoint between actors. `impactAnchor` is likewise sampled from an actual authored Blender control: ground contacts follow the landing; body contacts follow the raised knee or cradle hold.
 
 ```js
 {
   version: 2, sampleRate: 60, unit: 'bodyHeight', pivot: 'bodyCenter',
   clips: {
-    atlas_front_up: {
-      type: 'grapple', heroId: 'atlas', direction: 'front', duration: 1.55,
-      contactAt: 0.11, impactAt: 0.72, recoveryAt: 0.81,
-      authoredKeyCount: 12, poseBlend: 0.085,
+    atlas_front_left: {
+      type: 'grapple', family:'backbreaker', heroId:'atlas', duration:1.45,
+      contactAt:0.12, impactAt:0.47, recoveryAt:0.82,
+      impactSurface:'body', impactHeight:0.27,
+      authoredKeyCount:13, poseBlend:0.085,
       frames: [{
         t: 0, // normalized 0–1
-        hero: {x:0,z:0,angle:0,scaleX:1,scaleY:1,pose:'clinch'},
-        victim: {x:0.54,z:0,angle:0,scaleX:1,scaleY:1,pose:'idle'},
-        grip: {active:false,type:'waist',x:0.27,z:0}
+        hero:{x:0,z:0,angle:0,scaleX:1,scaleY:1,pose:'clinch',relativeFacing:1},
+        victim:{x:0.52,z:0,angle:0,scaleX:1,scaleY:1,pose:'idle',relativeFacing:-1},
+        grip:{active:false,type:'raisedKnee',x:0,z:0},
+        impactAnchor:{surface:'body',x:0.23,z:-0.23}
       }]
     }
   }
@@ -87,6 +111,8 @@ All clips are sampled from evaluated Blender object transforms and actual visibl
 ```
 
 `x` is along the hero’s facing direction and `z` is upward, both in body-height units. `angle` is clockwise Canvas radians. The pair mirrors together with facing. Transform pivots are at the body center. `t`, `contactAt`, `impactAt`, `recoveryAt`, event times and grip periods are normalized; elapsed seconds equal phase × duration. The manifest resolves each string pose to a rectangle and its center pivot. Named aliases are explicit, so the renderer does not guess numerical artwork indices.
+
+`tools/export-pose-hulls.py` analyzes the final WebP alpha without changing pixels or metadata. It exports exact convex support vertices of alpha > 160 pixel squares for Nova’s `cradleTuck`/`cradleRoll` and Viper’s `tuck`, normalized around each actual frame center pivot and body-height reference. `tools/pose-contact-hulls.json` includes source SHA-256 hashes. Collinear edge sampling preserves exact support geometry; transparent rectangle corners do not control rolling contact. Regenerate after any relevant sprite change with `python3 tools/export-pose-hulls.py`, then rebuild the Blender motion.
 
 Rebuild after the reviewed banks are ready:
 
@@ -96,6 +122,27 @@ Rebuild after the reviewed banks are ready:
 ```
 
 `tools/build-combat-poses.py` and `tools/sd-combat-poses.blend` retain the original articulated cutout authoring experiment. That script takes `--source` and `--output` for its original cutout-kit inputs; its raster output is not imported into runtime banks.
+
+## Fixed-length walking — Blender
+
+The runtime walking banks are actual Blender renders of the original directional SD character parts, authored separately from the discarded combat cutout experiment. `tools/sd-walk.blend` packs the textured parts and the twelve-frame walking rig. Both boots face the direction of travel. Fixed-length upper/lower limbs alternate planted stance and swinging recovery; the root advances while each support foot stays fixed in world coordinates. Head core and torso references remain 90 authored units each. A shared anatomical standing reference of 293.044 units excludes trailing hair, so ponytails do not shrink a character’s torso between idle and walking. Costume palette is aligned with the reviewed combat standing outfit.
+
+`tools/walk-motion.json` records evaluated per-frame foot targets, planted flags, world positions, reference height and cycle distance. Each `manifest[id].walk` entry contains the shared raster body reference of 304.132 pixels, distance per cycle, and twelve cropped Blender frames. Its compact `rig` exports the original thigh/calf/boot textures and geometry, back hair, and twelve upper-body frames. The runtime loads the upper-body and part banks; the full-body frames remain as an authoring reference.
+
+`src/walk-rig.js` solves two fixed-length bones in the ground plane and skins the calf into the flat boot. A planted sole has a world X/lane anchor, including during vertical or diagonal movement and joystick heading changes. Swing targets follow the current direction. At the physical reach limit the foot lifts early, keeping bone lengths fixed. Actual clamped displacement drives phase; walls, pause and idle do not advance it. The upper-body pivot stays independent of foot contact, preserving head and torso proportions. Combat and facing use signed unit mirroring without independent horizontal or vertical body scaling. Browser QA measures the authored sole pixel through the actual final Canvas UV transform rather than relying solely on contact metadata.
+
+`public/assets/motion/strike-contacts.json` stores 50 reviewed fist/boot contact points from the final combat pixels, normalized around each cell's actual body-center pivot. `tools/export-strike-contacts.py` measures the forward opaque limb cluster inside its semantic height band and records the source SHA-256 and crop. The game applies the same Blender translation/rotation and signed facing as the attack drawing, so the contact flash follows the visible striking limb. Multiple victims of one strike share one flash; each grappling impact keeps its authored knee/pin/floor control. Regenerate contacts after a combat bank change with `python3 tools/export-strike-contacts.py`; add `--grid artifacts/strike-contacts/contact-grid.png` for visual inspection.
+
+Rebuild from an explicitly supplied original directional kit directory (its `manifest.json` and ten WebP part sheets):
+
+```sh
+/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup \
+  --python tools/build-walk-motion.py -- \
+  --source /path/to/original-directional-kit --output /path/to/walk-renders
+python3 tools/pack-walk-frames.py --input /path/to/walk-renders --merge
+```
+
+Combat and walking importers reread the current manifest and merge only their own field. Atomic replacement prevents partially written metadata and preserves the independently generated banks.
 
 ## First-version authoring archive
 

@@ -1,0 +1,13 @@
+{
+  "authoredSources": {
+    "Higgsfield": 176,
+    "Original SD whole-body pose": 2
+  },
+  "semanticAliases": 198,
+  "decodedBytes": 51822592,
+  "compressedBytes": 10264704,
+  "maxImageDimension": 1658,
+  "actorBodyHeight": 270,
+  "allWalkingFieldsPreserved": true,
+  "silhouetteClipping": []
+}

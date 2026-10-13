@@ -6,8 +6,8 @@ const fighter = (id, name, ko, color, role, specialty, archetype, special, descr
 });
 
 export const ROSTER = [
-  fighter('atlas', 'ATLAS', '아틀라스', '#f18a48', 'hero', 'powerbomb', '파워밤 스페셜리스트', '타이탄 파워밤', '적을 높이 들어 올려 지면에 꽂는 파워 타입. 묵직한 파워밤으로 거리를 지배한다.', { power: 5, speed: 3, technique: 4, hp: 160 }),
-  fighter('nova', 'NOVA', '노바', '#73bff3', 'hero', 'suplex', '스플렉스 스페셜리스트', '오로라 스플렉스', '빠르게 파고들어 뒤로 넘기는 테크니션. 저먼 스플렉스로 접근한 적을 제압한다.', { power: 3, speed: 5, technique: 5, hp: 140 }),
+  fighter('atlas', 'ATLAS', '아틀라스', '#f18a48', 'hero', 'powerbomb', '파워 레슬러', '타이탄 파워밤', '파워밤, DDT, 백브레이커와 스파인버스터를 구사하는 파워 타입.', { power: 5, speed: 3, technique: 4, hp: 160 }),
+  fighter('nova', 'NOVA', '노바', '#73bff3', 'hero', 'suplex', '테크니컬 레슬러', '오로라 스플렉스', '스플렉스, 암드래그, 허리케인라나와 롤링 크레이들로 공방을 연결하는 테크니션.', { power: 3, speed: 5, technique: 5, hp: 140 }),
   fighter('viper', 'VIPER', '바이퍼', '#aad77d', 'enemy', 'rush', '부두의 기습가', '바이퍼 러시', '옆으로 돌아들어 빠르게 치고 빠지는 적.', { power: 2, speed: 5, technique: 3, hp: 64 }),
   fighter('lynx', 'LYNX', '링스', '#c6a0ee', 'enemy', 'rush', '재빠른 추격자', '퀵 클로', '짧은 연속 공격으로 빈틈을 노린다.', { power: 2, speed: 5, technique: 4, hp: 64 }),
   fighter('raven', 'RAVEN', '레이븐', '#f16e7d', 'enemy', 'brawler', '레드라인 브롤러', '레드 훅', '직선으로 접근해 묵직한 훅을 날린다.', { power: 4, speed: 3, technique: 3, hp: 82 }),

@@ -54,7 +54,7 @@ $('#app').innerHTML = `
           <button class="fighter ${hero.id === selected ? 'selected' : ''}" data-hero="${hero.id}" aria-pressed="${hero.id === selected}" style="--fighter:${hero.color}">
             <span class="fighter-no">0${index + 1}</span><span class="selected-marker">${icon('lightning')}선봉</span>
             <div class="fighter-art"><div class="fighter-backdrop"></div><img src="${art(hero)}" alt="${hero.ko}" draggable="false"></div>
-            <div class="fighter-info"><span class="fighter-en">${hero.name}</span><h3>${hero.ko}</h3><span class="fighter-role">${hero.id === 'atlas' ? '파워밤 스페셜리스트' : '스플렉스 스페셜리스트'}</span></div>
+            <div class="fighter-info"><span class="fighter-en">${hero.name}</span><h3>${hero.ko}</h3><span class="fighter-role">${hero.archetype}</span></div>
             <div class="fighter-skill">${hero.id === 'atlas' ? '들어 올려, 내려꽂는다' : '뒤로 넘겨, 제압한다'}</div>
           </button>`).join('')}
         </div>

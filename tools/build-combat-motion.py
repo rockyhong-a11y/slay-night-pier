@@ -4,7 +4,7 @@ Each paired technique has 12+ authored transform keys, grip/contact markers,
 independent hero/victim motion, and a dedicated recovery section.
 """
 from pathlib import Path
-import bpy,json,math
+import bpy,json,math,hashlib
 from mathutils import Vector
 ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/'public/assets/motion';OUT.mkdir(parents=True,exist_ok=True)
 FPS=60;K=[0,.05,.11,.20,.31,.43,.54,.64,.72,.81,.90,1]
@@ -43,45 +43,12 @@ for name in ['launcher','chargeStrike']:
    progress=min(1,(t-clip['contactAt'])/.42)
    clip['victim'][i]=state(.62+.55*progress,.32*math.sin(PI*progress),2*PI*progress,'hurt' if progress<.85 else 'rearFacing')
 
-# Twelve independently authored opponent trajectories per directional technique.
-# The paths intentionally differ in lift height, acceleration, turnover, landing
-# side and hold rather than merely renaming one common throw.
-PROFILES={
-'atlas_front_up':('하이 리프트 파워밤',1.55,[(.54,0,0),(.51,.01,0),(.45,.04,-.12),(.25,.22,.75),(.10,.46,2.3),(.07,.82,PI),(.12,.83,PI+.08),(.40,.47,4.02),(.97,-.21,1.5*PI),(1.06,-.20,1.5*PI),(1.1,-.21,1.5*PI),(1.12,-.21,1.5*PI)]),
-'atlas_front_down':('싯아웃 파워밤',1.34,[(.54,0,0),(.5,0,0),(.43,.02,-.15),(.23,.17,.8),(.09,.40,2.5),(.10,.56,PI),(.22,.55,3.55),(.44,.21,4.22),(.72,-.22,1.5*PI),(.75,-.21,1.5*PI),(.79,-.22,1.5*PI),(.82,-.22,1.5*PI)]),
-'atlas_front_left':('스핀 파워밤',1.58,[(.54,0,0),(.49,0,.05),(.43,.04,.15),(.20,.23,1.0),(.10,.49,2.8),(-.14,.61,4.12),(-.28,.58,5.37),(.15,.32,7.0),(.90,-.21,2.5*PI),(.99,-.20,2.5*PI),(1.04,-.21,2.5*PI),(1.05,-.21,2.5*PI)]),
-'atlas_front_right':('러닝 파워밤',1.49,[(.54,0,0),(.53,0,0),(.46,.03,-.1),(.27,.20,.8),(.28,.42,2.4),(.51,.56,PI),(.77,.53,3.5),(1.1,.28,4.2),(1.57,-.21,1.5*PI),(1.68,-.20,1.5*PI),(1.74,-.21,1.5*PI),(1.76,-.21,1.5*PI)]),
-'atlas_rear_up':('리버스 파워밤',1.52,[(.43,0,0),(.4,.01,0),(.35,.04,-.1),(.13,.22,-.55),(.04,.46,-2.5),(-.06,.70,-PI),(-.31,.65,-3.65),(-.57,.29,-4.23),(-.94,-.21,-1.5*PI),(-1.01,-.20,-1.5*PI),(-1.06,-.21,-1.5*PI),(-1.08,-.21,-1.5*PI)]),
-'atlas_rear_down':('백클린치 슬램',1.26,[(.43,0,0),(.40,0,0),(.34,.025,-.05),(.18,.15,-.28),(.08,.33,-.67),(-.18,.41,-.98),(-.40,.27,-1.25),(-.67,.03,-1.48),(-.84,-.22,-PI/2),(-.89,-.21,-PI/2),(-.92,-.22,-PI/2),(-.94,-.22,-PI/2)]),
-'atlas_rear_left':('턴오버 파워밤',1.54,[(.43,0,0),(.4,.01,0),(.35,.03,.1),(.14,.2,1.0),(-.02,.45,2.35),(-.17,.56,3.8),(.03,.57,5.2),(.39,.27,6.9),(.86,-.21,2.5*PI),(.96,-.20,2.5*PI),(1.0,-.21,2.5*PI),(1.02,-.21,2.5*PI)]),
-'atlas_rear_right':('백 리프트밤',1.46,[(.43,0,0),(.40,.01,0),(.33,.04,-.12),(.16,.25,.9),(.10,.56,2.7),(.21,.73,PI),(.38,.65,3.5),(.69,.32,4.15),(1.15,-.21,1.5*PI),(1.22,-.20,1.5*PI),(1.26,-.21,1.5*PI),(1.28,-.21,1.5*PI)]),
-'nova_front_up':('버티컬 스플렉스',1.57,[(.54,0,0),(.5,.01,0),(.42,.03,-.12),(.24,.28,1.13),(.11,.66,2.8),(.02,.84,PI),(-.22,.75,3.6),(-.62,.35,4.22),(-1.04,-.21,1.5*PI),(-1.1,-.20,1.5*PI),(-1.12,-.21,1.5*PI),(-1.14,-.21,1.5*PI)]),
-'nova_front_down':('벨리 투 벨리',1.35,[(.54,0,0),(.5,.01,0),(.41,.03,.08),(.23,.18,.25),(.10,.38,.65),(.20,.52,1.01),(.52,.40,1.27),(.80,.15,1.46),(1.06,-.21,PI/2),(1.14,-.20,PI/2),(1.18,-.21,PI/2),(1.2,-.21,PI/2)]),
-'nova_front_left':('피셔맨 스플렉스',1.47,[(.54,0,0),(.49,0,0),(.4,.03,-.12),(.20,.22,.55),(.06,.42,1.1),(-.11,.55,2.5),(-.38,.42,3.6),(-.7,.15,4.3),(-.98,-.21,1.5*PI),(-1.0,-.20,1.5*PI),(-1.02,-.21,1.5*PI),(-1.04,-.21,1.5*PI)]),
-'nova_front_right':('스냅 스플렉스',1.08,[(.54,0,0),(.50,0,0),(.40,.02,-.1),(.22,.14,.65),(.07,.35,2.2),(-.18,.42,3.25),(-.47,.27,3.92),(-.76,.02,4.5),(-1.01,-.21,1.5*PI),(-1.08,-.20,1.5*PI),(-1.11,-.21,1.5*PI),(-1.12,-.21,1.5*PI)]),
-'nova_rear_up':('저먼 스플렉스',1.48,[(.43,0,0),(.40,.01,0),(.33,.03,-.06),(.15,.22,-.30),(-.03,.47,-.60),(-.24,.64,-.85),(-.56,.51,-1.11),(-.87,.18,-1.39),(-1.09,-.21,-PI/2),(-1.14,-.20,-PI/2),(-1.16,-.21,-PI/2),(-1.18,-.21,-PI/2)]),
-'nova_rear_down':('드래곤 스플렉스',1.58,[(.43,0,0),(.40,0,0),(.34,.025,-.05),(.14,.25,-.18),(-.03,.56,-.52),(-.27,.76,-.91),(-.62,.56,-1.17),(-.98,.18,-1.43),(-1.24,-.21,-PI/2),(-1.29,-.20,-PI/2),(-1.31,-.21,-PI/2),(-1.32,-.21,-PI/2)]),
-'nova_rear_left':('사이드 스플렉스',1.36,[(.43,0,0),(.40,0,0),(.33,.03,.08),(.17,.20,.32),(.19,.41,.6),(.35,.47,.96),(.65,.33,1.2),(.91,.09,1.43),(1.12,-.21,PI/2),(1.2,-.20,PI/2),(1.24,-.21,PI/2),(1.25,-.21,PI/2)]),
-'nova_rear_right':('롤링 저먼',1.67,[(.43,0,0),(.39,0,0),(.32,.03,-.1),(.11,.24,-.45),(-.07,.51,-.98),(-.36,.59,-1.5),(-.62,.43,-2.45),(-.69,.16,-3.74),(-.79,-.21,-1.5*PI),(-.87,-.20,-1.5*PI),(-.92,-.21,-1.5*PI),(-.94,-.21,-1.5*PI)])
-}
-
-for id,(name,duration,opponent) in PROFILES.items():
- hero,side,direction=id.split('_');running=direction=='right' and hero=='atlas';spin=direction=='left' and hero=='atlas';forward=hero=='nova' and direction=='down' and side=='front' or hero=='nova' and direction=='left' and side=='rear'
- if hero=='atlas':
-  xs=[0,.01,.02,.02,.02,.05,.08,.10,.11,.08,.025,0];zs=[0,-.015,-.045,-.09,.02,.07,.08,.01,-.12,-.07,-.02,0];angles=[0,0,-.03,-.06,-.025,0,.025,.055,.10,.08,.02,0]
-  if direction=='up':zs[5]=.10;zs[6]=.12
-  if direction=='down':zs[8]=-.19;zs[9]=-.14
-  if side=='rear' and direction=='down':angles=[0,-.01,-.03,-.10,-.26,-.44,-.66,-.92,-1.05,-.62,-.20,0]
-  if running:xs=[0,.015,.025,.05,.14,.32,.56,.68,.64,.43,.18,0]
-  if spin:angles=[0,.01,.02,.035,.05,.08,.09,.10,.12,.07,.02,0]
- else:
-  xs=[0,.01,.015,.005,-.025,-.10,-.22,-.34,-.43,-.31,-.12,0];zs=[0,-.015,-.035,-.07,.025,.085,.055,-.035,-.15,-.085,-.025,0];angles=[0,-.01,-.025,-.065,-.15,-.33,-.57,-.85,-1.12,-.72,-.25,0]
-  if forward:xs=[0,.01,.02,.035,.08,.16,.25,.32,.35,.24,.10,0];angles=[0,0,.02,.05,.1,.24,.47,.75,.94,.6,.2,0]
-  if side=='rear' and direction=='right':angles=[0,-.01,-.03,-.10,-.28,-.60,-1.2,-2.30,-3.1,-2.05,-.80,0]
- poses=['clinch','clinch','underhook','underhook','overhead','overhead','throwArc','throwArc','slam','slam','recover','idle']
- if hero=='nova' and not(direction=='up' and side=='front'):poses[4]='underhook';poses[5]='underhook'
- opponent_poses=['rearFacing' if side=='rear' else 'idle']*2+['hurt']*10
- CLIPS[id]={'name':name,'heroId':hero,'type':'grapple','direction':side,'inputDirection':direction,'duration':duration,'contactAt':.11,'impactAt':.72,'recoveryAt':.81,'recovery':.17,'times':K,'hero':[state(x,z,a,p) for x,z,a,p in zip(xs,zs,angles,poses)],'victim':keys(opponent,opponent_poses),'gripPeriods':[[.11,.44]],'events':[{'at':.11,'type':'grip'},{'at':.43,'type':'apex'},{'at':.72,'type':'impact'},{'at':.90,'type':'release'}]}
+# Anatomically distinct headlocks, knee drops, arm throws, scissors and pins.
+import sys
+sys.path.insert(0,str(ROOT/'tools'))
+from wrestling_techniques import author_techniques
+CLIPS.update(author_techniques(state))
+CLIPS['atlas_front_left']['victimFrontDuring']=[.29,.65]
 
 # A second lift and second impact are authored, not simulated by repeating one clip.
 for hero in ['atlas','nova']:
@@ -124,19 +91,42 @@ def actor(character,label,poses):
   obj=bpy.data.objects.new(label+'__'+pose,mesh);scene.collection.objects.link(obj);obj.parent=root;obj['pose']=pose;obj.data.materials.append(material(character))
  return root
 
-spans={};cursor=1
+def control(parent,label,feature):
+ obj=bpy.data.objects.new(label,None);scene.collection.objects.link(obj);obj.parent=parent
+ obj.empty_display_type='SPHERE';obj.empty_display_size=.035;obj['feature']=feature;obj['unit']='bodyHeight';obj['source']='authored anatomical contact control'
+ return obj
+
+spans={};controls={};cursor=1
 for id,clip in CLIPS.items():
  start=cursor;end=start+round(clip['duration']*FPS);hero=actor(clip.get('heroId','atlas'),id+'_Hero',[value['pose'] for value in clip['hero']]);victim=actor('viper',id+'_Victim',[value['pose'] for value in clip['victim']]);spans[id]=(hero,victim,start,end)
+ grip=control(hero,id+'_GripAnchor',clip.get('gripFeature',clip.get('gripType','waist')))
+ impact=control(hero,id+'_ImpactAnchor',clip.get('impactSurface','ground'));controls[id]=(grip,impact)
  for root in [hero,victim]:
   for child in root.children:
+   if child.get('pose') is None:continue
    for boundary in [start-1,end+1]:child.hide_render=True;child.hide_viewport=True;child.keyframe_insert(data_path='hide_render',frame=boundary);child.keyframe_insert(data_path='hide_viewport',frame=boundary)
- for phase,hero_state,victim_state in zip(clip['times'],clip['hero'],clip['victim']):
+ for index,(phase,hero_state,victim_state) in enumerate(zip(clip['times'],clip['hero'],clip['victim'])):
   frame=start+round(phase*(end-start))
   for root,value in [(hero,hero_state),(victim,victim_state)]:
-   root.location=(value['x'],0,value['z']);root.rotation_euler=(0,value['angle'],0);root.scale=(value['scaleX'],1,value['scaleY'])
+   relative=value.get('relativeFacing',1)
+   front=clip.get('victimFrontDuring');victim_front=front and front[0]<=phase<=front[1]
+   depth=(-.01 if root is victim else .01) if victim_front else (-.01 if root is hero else .01)
+   root.location=(value['x'],depth,value['z']);root.rotation_euler=(0,value['angle'],0);root.scale=(value['scaleX']*relative,1,value['scaleY'])
+   root['relativeFacing']=relative;root.keyframe_insert(data_path='["relativeFacing"]',frame=frame)
    for prop in ['location','rotation_euler','scale']:root.keyframe_insert(data_path=prop,frame=frame)
    for child in root.children:
+    if child.get('pose') is None:continue
     child.hide_render=child['pose']!=value['pose'];child.hide_viewport=child.hide_render;child.keyframe_insert(data_path='hide_render',frame=frame);child.keyframe_insert(data_path='hide_viewport',frame=frame)
+  grip_local=clip.get('gripLocal',[(.15,.12)]*len(clip['times']))[index]
+  grip.location=(grip_local[0],0,grip_local[1]);grip.keyframe_insert(data_path='location',frame=frame)
+  if clip.get('impactLocal'):
+   local=clip['impactLocal']
+  else:
+   # The floor contact follows the actual landing actor. Counter/chain roots
+   # may rotate, so convert the world floor point into the hero control space.
+   dx=victim_state['x']-hero_state['x'];dz=-.5-hero_state['z'];a=hero_state['angle']
+   local=(math.cos(a)*dx-math.sin(a)*dz,math.sin(a)*dx+math.cos(a)*dz)
+  impact.location=(local[0],0,local[1]);impact.keyframe_insert(data_path='location',frame=frame)
  for event in clip['events']:scene.timeline_markers.new(id+' / '+event['type'].upper(),frame=start+round(event['at']*(end-start)))
  cursor=end+12
 # Smooth root transitions, constant raster pose keys; continuous sprite crossfades
@@ -148,7 +138,29 @@ for obj in bpy.data.objects:
  if obj.animation_data and obj.animation_data.action:
   for curve in curves(obj.animation_data.action):
    for key in curve.keyframe_points:
-    key.interpolation='CONSTANT' if curve.data_path.startswith('hide_') else 'BEZIER';key.handle_left_type='AUTO_CLAMPED';key.handle_right_type='AUTO_CLAMPED'
+    key.interpolation='CONSTANT' if curve.data_path.startswith('hide_') or curve.data_path=='["relativeFacing"]' else 'BEZIER';key.handle_left_type='AUTO_CLAMPED';key.handle_right_type='AUTO_CLAMPED'
+
+# A complete cradle roll rotates the already-curled drawing about its body
+# center. Key each grounded frame from that drawing's painted footprint so
+# it rolls along the floor instead of orbiting the standing-height pivot.
+roll=CLIPS['nova_rear_right'];roll['groundedRoll']=True
+hulls=json.loads((ROOT/'tools/pose-contact-hulls.json').read_text())['poses']
+for character,poses in hulls.items():
+ source=ROOT/'public'/manifest[character]['combat']['image'].lstrip('/')
+ digest=hashlib.sha256(source.read_bytes()).hexdigest()
+ if any(value['sourceSha256']!=digest for value in poses.values()):raise RuntimeError('Contact hulls are stale; run python3 tools/export-pose-hulls.py first')
+roll_hero,roll_victim,roll_start,roll_end=spans['nova_rear_right']
+for frame in range(roll_start+round(.29*(roll_end-roll_start)),roll_start+round(.73*(roll_end-roll_start))+1):
+ scene.frame_set(frame)
+ for obj,character in [(roll_hero,'nova'),(roll_victim,'viper')]:
+  pose=next(child['pose'] for child in obj.children if child.get('pose') is not None and not child.hide_render)
+  a=obj.rotation_euler.y
+  lowest=min(-math.sin(a)*x+math.cos(a)*z for x,z in hulls[character][pose]['points'])
+  obj.location.z=-.5-lowest;obj.keyframe_insert(data_path='location',index=2,frame=frame)
+for obj in [roll_hero,roll_victim]:
+ for curve in curves(obj.animation_data.action):
+  if curve.data_path=='location' and curve.array_index==2:
+   for key in curve.keyframe_points:key.interpolation='LINEAR'
 
 export={'version':2,'sampleRate':FPS,'unit':'bodyHeight','pivot':'bodyCenter','authoring':'Blender 5.2.2 LTS','coordinateSystem':{'x':'right along hero facing','z':'up','angle':'clockwise Canvas radians'},'clips':{}}
 report={'version':1,'scene':'sd-combat.blend','upAxis':'Z','forwardAxis':'X','pivot':'bodyCenter','sampleRate':FPS,'clips':{}}
@@ -157,15 +169,18 @@ for id,(hero,victim,start,end) in spans.items():
  for frame in range(start,end+1):
   scene.frame_set(frame);phase=(frame-start)/(end-start);record={'t':round(phase,6)}
   for label,obj in [('hero',hero),('victim',victim)]:
-   visible=next((child['pose'] for child in obj.children if not child.hide_render),'idle')
-   record[label]={'x':round(obj.location.x,6),'z':round(obj.location.z,6),'angle':round(obj.rotation_euler.y,6),'scaleX':round(obj.scale.x,6),'scaleY':round(obj.scale.z,6),'pose':visible}
-  # Separate grip anchor exported for motion/state QA. It is stable relative to
-  # the actual opponent during the hold and follows the two actors' trajectory.
+   visible=next((child['pose'] for child in obj.children if child.get('pose') is not None and not child.hide_render),'idle')
+   record[label]={'x':round(obj.location.x,6),'z':round(obj.location.z,6),'angle':round(obj.rotation_euler.y,6),'scaleX':round(abs(obj.scale.x),6),'scaleY':round(abs(obj.scale.z),6),'relativeFacing':int(obj.get('relativeFacing',1)),'pose':visible}
+  # Sample evaluated Blender contact controls, never an actor midpoint.
   active=any(a<=phase<=b for a,b in clip['gripPeriods'])
-  record['grip']={'active':active,'type':clip.get('gripType','waist'),'x':round((record['hero']['x']+record['victim']['x'])*.5,6),'z':round((record['hero']['z']+record['victim']['z'])*.5,6)}
+  grip,impact=controls[id];depsgraph=bpy.context.evaluated_depsgraph_get()
+  grip_world=grip.evaluated_get(depsgraph).matrix_world.translation;impact_world=impact.evaluated_get(depsgraph).matrix_world.translation
+  record['grip']={'active':active,'type':clip.get('gripType','waist'),'feature':grip['feature'],'source':'Blender evaluated GripAnchor','x':round(grip_world.x,6),'z':round(grip_world.z,6)}
+  record['impactAnchor']={'surface':clip.get('impactSurface','ground'),'source':'Blender evaluated ImpactAnchor','x':round(impact_world.x,6),'z':round(impact_world.z,6)}
   frames.append(record)
  metadata={key:value for key,value in clip.items() if key not in ['times','hero','victim']};metadata.update({'authoredKeyCount':len(clip['times']),'poseBlend':.085,'frames':frames})
- export['clips'][id]=metadata;report['clips'][id]={'startFrame':start,'endFrame':end,'authoredKeyCount':len(clip['times']),'samples':len(frames),'contactFrame':start+round(clip['contactAt']*(end-start)),'impactFrame':start+round(clip['impactAt']*(end-start)),'heroEnd':frames[-1]['hero'],'victimEnd':frames[-1]['victim'],'maxVictimHeight':round(max(f['victim']['z'] for f in frames),5),'minimumScale':min(f[role]['scaleY'] for f in frames for role in ['hero','victim'])}
+ impact_sample=min(frames,key=lambda sample:abs(sample['t']-clip['impactAt']))
+ export['clips'][id]=metadata;report['clips'][id]={'startFrame':start,'endFrame':end,'authoredKeyCount':len(clip['times']),'samples':len(frames),'contactFrame':start+round(clip['contactAt']*(end-start)),'impactFrame':start+round(clip['impactAt']*(end-start)),'heroEnd':frames[-1]['hero'],'victimEnd':frames[-1]['victim'],'maxVictimHeight':round(max(f['victim']['z'] for f in frames),5),'minimumScale':min(f[role][axis] for f in frames for role in ['hero','victim'] for axis in ['scaleX','scaleY']),'maximumScale':max(f[role][axis] for f in frames for role in ['hero','victim'] for axis in ['scaleX','scaleY']),'gripControl':controls[id][0].name,'gripFeature':controls[id][0]['feature'],'impactControl':controls[id][1].name,'impactAnchor':impact_sample['impactAnchor']}
 (OUT/'combat.json').write_text(json.dumps(export,separators=(',',':')))
 (OUT/'combat-inspection.json').write_text(json.dumps(report,separators=(',',':')))
 scene.frame_start=1;scene.frame_end=cursor-12;scene.frame_set(1);bpy.ops.wm.save_as_mainfile(filepath=str(ROOT/'tools/sd-combat.blend'))

@@ -3,13 +3,17 @@ export const DIRECTIONS = ['up', 'down', 'left', 'right'];
 export const DIRECTION_LABELS = { up: '↑', down: '↓', left: '←', right: '→' };
 const names = {
   atlas: {
-    front: ['하이 리프트 파워밤', '싯아웃 파워밤', '스핀 파워밤', '러닝 파워밤'],
-    rear: ['리버스 파워밤', '백클린치 슬램', '턴오버 파워밤', '백 리프트밤'],
+    front: ['파워밤', 'DDT', '백브레이커', '스파인버스터'],
+    rear: ['저먼 스플렉스', '리버스 DDT', '러시안 레그 스윕', '불독'],
   },
   nova: {
-    front: ['버티컬 스플렉스', '벨리 투 벨리', '피셔맨 스플렉스', '스냅 스플렉스'],
-    rear: ['저먼 스플렉스', '드래곤 스플렉스', '사이드 스플렉스', '롤링 저먼'],
+    front: ['버티컬 스플렉스', '스냅메어', '암드래그', '허리케인라나'],
+    rear: ['드래곤 스플렉스', '백 스플렉스', '넥브레이커', '롤링 크레이들'],
   },
+};
+const kinds = {
+  atlas: { front: ['powerbomb', 'ddt', 'backbreaker', 'spinebuster'], rear: ['germanSuplex', 'reverseDdt', 'legSweep', 'bulldog'] },
+  nova: { front: ['verticalSuplex', 'snapmare', 'armDrag', 'hurricanrana'], rear: ['dragonSuplex', 'backSuplex', 'neckbreaker', 'cradle'] },
 };
 export const GRAB_MOVES = Object.fromEntries(Object.entries(names).map(([hero, sides]) => [hero,
   Object.fromEntries(Object.entries(sides).map(([side, moves]) => [side,
@@ -17,7 +21,7 @@ export const GRAB_MOVES = Object.fromEntries(Object.entries(names).map(([hero, s
       id: `${hero}_${side}_${direction}`, clip: `${hero}_${side}_${direction}`,
       name: moves[i], hero, side, direction,
       damage: side === 'rear' ? [46, 43, 44, 48][i] : [38, 36, 37, 40][i],
-      kind: hero === 'atlas' ? 'powerbomb' : 'suplex',
+      kind: kinds[hero][side][i],
     }]))
   ]))
 ]));

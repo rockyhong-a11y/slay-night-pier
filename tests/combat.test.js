@@ -221,10 +221,14 @@ test('a defeated grabbed victim releases on the floor and never enters the get-u
   const { game, enemy, events } = createGame();
   enemy.hp = 1;
   game.action('grab');
+  const clip = game.state.player.grapple.clip;
   while (game.state.player.grapple) game.step(1 / 120);
   assert.equal(enemy.hp, 0);
   assert.equal(enemy.action, 'dead');
-  assert.ok(enemy.z < 0);
+  const landing = sampleMotion(clip, clip.duration).victim;
+  assert.equal(enemy.z, landing.z);
+  assert.equal(enemy.releasedPose, landing.pose);
+  assert.ok(Math.abs(enemy.z) < .01, 'the authored lying pose lands at its intrinsic floor pivot');
   assert.ok(Number.isFinite(enemy.releasedAngle));
   advance(game, 2);
   assert.equal(enemy.action, 'dead');

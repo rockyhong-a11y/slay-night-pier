@@ -1,12 +1,16 @@
 import { ROSTER, HEROES, ENCOUNTERS, characterFor } from './roster.js';
 import { GRAB_MOVES, COMBO_STEPS, CHAIN_MOVES, COUNTER_MOVES, COMBAT_RULES, directionForMove } from './combat-moves.js';
 import { AudioEngine } from './audio.js';
+import { IMPACT_PROFILES, makeImpact, drawImpact } from './impact.js';
+import { updateFootContacts, legPose, drawLegRig } from './walk-rig.js';
 
 const ASSET_BASE = import.meta.env?.BASE_URL ?? './';
-const assetUrl = path => `${ASSET_BASE}${path.replace(/^\/+/, '')}`;
+const assetUrl = (path, version) => `${ASSET_BASE}${path.replace(/^\/+/, '')}${version ? `?v=${encodeURIComponent(version)}` : ''}`;
 const STAGE_LENGTH = 2380;
 const VIEW_WIDTH = 420;
 const BODY_HEIGHT = 128;
+const WALK_CYCLE_DISTANCE = BODY_HEIGHT * .82;
+const LANE_WALK_DISTANCE = 216;
 const WAVES = [
   { start: 0, trigger: 0, end: 640, spawn: [365, 495] },
   { start: 670, trigger: 850, end: 1370, spawn: [1050, 1160, 1250] },
@@ -43,6 +47,8 @@ function makeFighter(id, x = 150, y = .57) {
     facing: data.role === 'hero' ? 1 : -1, action: 'idle', actionTime: 0,
     actionDuration: 0, cooldown: 0, counterCooldown: 0, invulnerable: 0,
     vx: 0, vy: 0, z: 0, attackHit: false, walkTime: 0, deathTime: 0,
+    walkDistance: 0, gaitTravel: 0, gaitPhase: 0, gaitSpeed: 0, gaitDirection: 1,
+    gaitX: 1, gaitY: 0, gaitMoving: false, gaitFeet: null, gaitLegPose: null,
     comboStep: 0, chainHits: 0, chainTarget: null, lastInput: -10,
     grapple: null, activeClip: null, activeMove: null, grabReady: false,
     targetSide: 'front', targetDirection: 'down', facingLocked: 0, rearUntil: 0,
@@ -74,12 +80,47 @@ export function sampleMotion(clip, elapsed) {
       result[actor][key] = lerp(a[actor]?.[key] ?? defaultValue, b[actor]?.[key] ?? defaultValue, mix);
     }
     result[actor].pose = mix < .5 ? a[actor]?.pose ?? 'idle' : b[actor]?.pose ?? 'idle';
+    result[actor].relativeFacing = mix < .5 ? a[actor]?.relativeFacing ?? 1 : b[actor]?.relativeFacing ?? 1;
+  }
+  if (a.impactAnchor || b.impactAnchor) {
+    const from = a.impactAnchor || b.impactAnchor, to = b.impactAnchor || from;
+    result.impactAnchor = { x: lerp(from.x, to.x, mix), z: lerp(from.z, to.z, mix),
+      surface: mix < .5 ? from.surface : to.surface };
   }
   return result;
 }
 
 export function targetSide(player, enemy) {
   return (player.x - enemy.x) * enemy.facing < -8 ? 'rear' : 'front';
+}
+
+/** A gait advances only for actual, clamped locomotion, never knockback or elapsed idle time. */
+export function advanceGait(actor, dx, dy, dt, cycleDistance = WALK_CYCLE_DISTANCE, laneScale = LANE_WALK_DISTANCE) {
+  const wasMoving=actor.gaitMoving;
+  const lane = dy * laneScale;
+  const distance = Math.hypot(dx, lane);
+  actor.gaitMoving = distance > .0001;
+  actor.gaitSpeed = dt > 0 ? distance / dt : 0;
+  if (!actor.gaitMoving) return;
+  actor.gaitRestart=!wasMoving;
+  actor.gaitPlaneSlope=laneScale;
+  const direction = Math.abs(dx) > distance * .15 && dx * actor.facing < 0 ? -1 : 1;
+  actor.walkDistance += distance;
+  actor.gaitTravel += distance * direction;
+  actor.gaitDirection = direction;
+  actor.gaitPhase = ((actor.gaitTravel / cycleDistance) % 1 + 1) % 1;
+  actor.gaitX = dx / distance;
+  actor.gaitY = lane / distance;
+}
+
+/** Scale from the authored standing body reference, preserving every raster's aspect ratio. */
+export function spriteGeometry(frame, bodyHeight, height) {
+  const rect = frame.rect || [frame.x, frame.y, frame.width, frame.height];
+  const scale = height / bodyHeight;
+  const pivot = frame.pivot || [rect[2] / 2, rect[3]];
+  const center = frame.centerPivot || [pivot[0], pivot[1] - bodyHeight / 2];
+  return { rect, scale, x: -center[0] * scale, y: -center[1] * scale,
+    width: rect[2] * scale, height: rect[3] * scale };
 }
 
 export class Game {
@@ -94,11 +135,10 @@ export class Game {
     this.sprites = new Map();
     this.manifest = {};
     this.motion = { clips: {} };
+    this.strikeContacts = { actors: {} };
     this.move = { x: 0, y: 0 };
     this.inputBuffer = [];
-    this.particles = [];
-    this.floaters = [];
-    this.rings = [];
+    this.hitBursts = [];
     this.width = 420;
     this.height = 600;
     this.camera = 0;
@@ -135,12 +175,13 @@ export class Game {
 
   async load() {
     if (!this.canvas) { this.loaded = true; return this; }
-    const [spriteResponse, motionResponse] = await Promise.all([
+    const [spriteResponse, motionResponse, contactResponse] = await Promise.all([
       fetch(assetUrl('/assets/sprites/manifest.json'), { cache: 'no-cache' }),
       fetch(assetUrl('/assets/motion/combat.json'), { cache: 'no-cache' }),
+      fetch(assetUrl('/assets/motion/strike-contacts.json'), { cache: 'no-cache' }),
     ]);
-    if (!spriteResponse.ok || !motionResponse.ok) throw new Error('캐릭터 또는 블렌더 모션 데이터를 불러오지 못했습니다.');
-    [this.manifest, this.motion] = await Promise.all([spriteResponse.json(), motionResponse.json()]);
+    if (!spriteResponse.ok || !motionResponse.ok || !contactResponse.ok) throw new Error('캐릭터 또는 블렌더 모션 데이터를 불러오지 못했습니다.');
+    [this.manifest, this.motion, this.strikeContacts] = await Promise.all([spriteResponse.json(), motionResponse.json(), contactResponse.json()]);
     const required = [...COMBO_STEPS.map(step => step.id), 'chargeStrike', ...Object.values(CHAIN_MOVES).map(move => move.clip),
       ...Object.values(GRAB_MOVES).flatMap(sides => Object.values(sides).flatMap(moves => Object.values(moves).map(move => move.clip))),
       ...Object.values(COUNTER_MOVES).flatMap(moves => Object.values(moves).map(move => move.clip))];
@@ -148,13 +189,16 @@ export class Game {
     await Promise.all(ROSTER.map(async fighter => {
       const metadata = this.manifest[fighter.id];
       if (!metadata?.frames?.length || !metadata.combat?.poses) throw new Error(`${fighter.name} 전투 스프라이트 데이터가 없습니다.`);
-      const [image, run, grapple, combat] = await Promise.all([
-        loadImage(assetUrl(metadata.image || fighter.sprite)),
-        metadata.runImage ? loadImage(assetUrl(metadata.runImage)) : null,
-        metadata.grappleImage ? loadImage(assetUrl(metadata.grappleImage)) : null,
-        loadImage(assetUrl(metadata.combat.image)),
+      const rigMetadata=metadata.walk?.rig;
+      const [image, run, combat, walk, rig] = await Promise.all([
+        metadata.combat ? null : loadImage(assetUrl(metadata.image || fighter.sprite)),
+        !metadata.walk && metadata.runImage ? loadImage(assetUrl(metadata.runImage)) : null,
+        loadImage(assetUrl(metadata.combat.image, metadata.combat.imageVersion)),
+        metadata.walk?.image ? loadImage(assetUrl(rigMetadata?.upperImage || metadata.walk.image,
+          rigMetadata?.upperImageVersion || metadata.walk.imageVersion)) : null,
+        rigMetadata?.image ? loadImage(assetUrl(rigMetadata.image,rigMetadata.imageVersion)) : null,
       ]);
-      this.sprites.set(fighter.id, { image, run, grapple, combat, metadata });
+      this.sprites.set(fighter.id, { image, run, combat, walk, rig, metadata });
     }));
     this.loaded = true;
     this.render();
@@ -168,7 +212,7 @@ export class Game {
     this.camera = 0;
     this.move = { x: 0, y: 0 };
     this.inputBuffer = [];
-    this.particles.length = this.floaters.length = this.rings.length = 0;
+    this.hitBursts.length = 0;
     this.hitstop = this.shake = this.publishTime = 0;
     this.lastFrame = null;
     this.spawnWave(0);
@@ -385,8 +429,9 @@ export class Game {
     p.counterResolved = true;
     const lock = p.counterLockIntent;
     const move = COUNTER_MOVES[p.id][lock ? 'armLock' : 'slam'];
+    const contact = this.strikePoint(enemy);
     this.capture(enemy, move, 'counter');
-    this.impact(p.x + p.facing * 30, p.y, '#b2f9f1', false);
+    this.impact(contact.x, contact.y, 'guard', { direction: p.facing, height: contact.height });
     return true;
   }
 
@@ -399,6 +444,11 @@ export class Game {
     this.inputBuffer = [];
     partner.x = current.x; partner.y = current.y; partner.facing = current.facing;
     partner.action = 'idle'; partner.actionTime = 0; partner.z = partner.vx = 0;
+    // A returning partner arrives at the active hero's new location, with fresh contacts.
+    partner.gaitMoving = false; partner.gaitFeet = null; partner.gaitLegPose = null;
+    partner.renderWasWalking = false; partner.renderPoseFromWalk = false;
+    partner.renderPose = 'idle'; partner.renderPoseFrom = 'idle';
+    current.gaitMoving = false;
     partner.invulnerable = 1.1; partner.strikeHeld = false;
     current.action = current.hp > 0 ? 'idle' : 'dead';
     current.grapple = null;
@@ -480,7 +530,8 @@ export class Game {
     state.progress = clamp((state.kills / 8) * .72 + (p.x / STAGE_LENGTH) * .28, 0, 1);
     if (state.phase === 'fight' && state.aliveEnemies === 0 && !p.grapple && !(state.wave === 3 && p.action === 'strike')) this.clearWave();
     if (state.phase === 'advance' && state.wave < 3 && p.x >= WAVES[state.wave].trigger) this.spawnWave(state.wave);
-    const targetCamera = clamp(p.x - VIEW_WIDTH * .36, 0, STAGE_LENGTH - VIEW_WIDTH);
+    const visiblePlayerX = p.grapple ? p.x + this.grappleSample(p).hero.x * BODY_HEIGHT * p.facing : p.x;
+    const targetCamera = clamp(visiblePlayerX - VIEW_WIDTH * .36, 0, STAGE_LENGTH - VIEW_WIDTH);
     this.camera = lerp(this.camera, targetCamera, 1 - Math.exp(-dt * 7));
     this.publish();
   }
@@ -491,6 +542,8 @@ export class Game {
     p.actionTime += dt;
     p.x += p.vx * dt;
     p.vx *= Math.exp(-dt * 11);
+    const walkStartX = p.x, walkStartY = p.y;
+    let locomotion = false;
     if (p.strikeHeld) {
       p.chargeTime = Math.min(COMBAT_RULES.chargeMax, this.state.time - p.pressTime);
       p.chargeAmount = p.chargeRatio = clamp(p.chargeTime / COMBAT_RULES.chargeThreshold, 0, 1);
@@ -523,10 +576,10 @@ export class Game {
       const moving = Math.hypot(this.move.x, this.move.y) > .08;
       p.action = p.strikeHeld ? 'charge' : moving ? 'walk' : 'idle';
       if (moving) {
-        const speed = (p.id === 'nova' ? 225 : 200) * (p.strikeHeld ? .38 : 1);
+        locomotion = true;
+        const speed = (p.id === 'nova' ? 118 : 104) * (p.strikeHeld ? .38 : 1);
         p.x += this.move.x * speed * dt;
-        p.y += this.move.y * .68 * dt * (p.strikeHeld ? .38 : 1);
-        p.walkTime += dt;
+        p.y += this.move.y * .41 * dt * (p.strikeHeld ? .38 : 1);
         if (Math.abs(this.move.x) > .15) p.facing = this.move.x > 0 ? 1 : -1;
       }
       this.consumeInput();
@@ -535,6 +588,7 @@ export class Game {
     const maxX = this.state.phase === 'fight' ? wave.end : this.state.wave < 3 ? WAVES[this.state.wave].trigger + 25 : STAGE_LENGTH - 40;
     p.x = clamp(p.x, Math.max(50, wave.start - 200), maxX);
     p.y = clamp(p.y, .08, .96);
+    this.updateWalking(p,locomotion ? p.x-walkStartX : 0,locomotion ? p.y-walkStartY : 0,dt);
   }
 
   resolveStrike(p) {
@@ -542,12 +596,14 @@ export class Game {
     const victims = this.state.enemies.filter(enemy => alive(enemy) && enemy.action !== 'grabbed' &&
       laneDistance(p, enemy) < .25 && Math.abs(enemy.x - p.x) < (move.range || 129) && (enemy.x - p.x) * p.facing > -28);
     const primary = victims.sort((a, b) => planarDistance(p, a) - planarDistance(p, b))[0];
+    const contact = this.strikePoint(p);
     for (const enemy of victims) {
       const charged = Boolean(move.charged);
       this.damageEnemy(enemy, move.damage + (p.id === 'atlas' && !charged ? 1 : 0), {
         knockback: p.facing * (charged ? 170 : move.id === 'roundhouse' ? 58 : 24),
         down: false, kind: charged ? 'chargeStrike' : move.id,
         hurtDuration: charged ? COMBAT_RULES.rearDuration : .34,
+        impactPoint: enemy === primary ? contact : false,
       });
       if (charged && enemy.hp > 0) {
         enemy.turnFromFacing = enemy.facing;
@@ -591,12 +647,17 @@ export class Game {
     sample.victim.z = lerp(grapple.entry.z, sample.victim.z, ease);
     sample.victim.angle = lerp(grapple.entry.angle, sample.victim.angle, ease);
     sample.victim.laneOffset = grapple.entry.lane * (1 - ease);
-    if (grapple.entry.facing !== p.facing && progress < 1) {
-      sample.victim.facing = progress < .5 ? grapple.entry.facing : p.facing;
-      sample.victim.scaleX *= .2 + .8 * Math.abs(Math.cos(progress * Math.PI));
-    }
+    sample.hero.facing = p.facing * (sample.hero.relativeFacing ?? 1);
+    const victimFacing = p.facing * (sample.victim.relativeFacing ?? 1);
+    sample.victim.facing = progress < .5 ? grapple.entry.facing : victimFacing;
+    const heroX = sample.hero.x, victimX = sample.victim.x;
+    const wave = WAVES[this.state.wave - 1];
+    sample.hero.x = (clamp(p.x + heroX * BODY_HEIGHT * p.facing, Math.max(50, wave.start - 200),
+      this.state.phase === 'fight' ? wave.end : STAGE_LENGTH - 40) - p.x) / (BODY_HEIGHT * p.facing);
     const worldX = p.x + sample.victim.x * BODY_HEIGHT * p.facing;
     sample.victim.x = (clamp(worldX, 30, STAGE_LENGTH - 30) - p.x) / (BODY_HEIGHT * p.facing);
+    if (sample.impactAnchor) sample.impactAnchor.x += sample.impactAnchor.surface === 'body'
+      ? sample.hero.x - heroX : sample.victim.x - victimX;
     return sample;
   }
 
@@ -611,7 +672,7 @@ export class Game {
       if (grapple.effectsDone.includes(index) || p.actionTime < cue.at * p.actionDuration) continue;
       grapple.effectsDone.push(index);
       if (cue.type === 'impact' && cue.at < (grapple.clip.impactAt - .001)) {
-        this.impact(target.x, target.y, p.color, false, false);
+        this.impact(target.x, target.y, 'ground', { withHitstop: false, ground: true, direction: p.facing });
         this.audio.sfx('chainImpact');
         this.event('chainImpact', { hero: p.id, enemy: target.id, move: grapple.move.id, at: cue.at });
       } else if (cue.type === 'regrip') this.audio.sfx('grab');
@@ -626,8 +687,13 @@ export class Game {
           }
         }
       }
-      this.impact(target.x, p.y, p.color, true);
-      this.audio.sfx('slam');
+      const anchor = sampled.impactAnchor;
+      const ground = (anchor?.surface ?? grapple.clip?.impactSurface) !== 'body';
+      const impactX = anchor ? p.x + anchor.x * BODY_HEIGHT * p.facing : target.x;
+      this.impact(impactX, target.y, ground ? 'ground' : 'heavy', { ground, direction: p.facing,
+        height: ground ? 0 : (anchor ? .5 + anchor.z : grapple.clip.impactHeight ?? .5 * (target.boss ? 1.15 : 1) + sampled.victim.z),
+      });
+      this.audio.sfx(ground ? 'slam' : 'launcher');
       this.event('slam', { hero: p.id, enemy: target.id, move: grapple.move.id, combatType: grapple.type, message: grapple.move.name });
     }
     if (p.actionTime >= p.actionDuration) {
@@ -638,9 +704,12 @@ export class Game {
       target.vx = 0;
       const releaseAngle = sampled.victim.angle * p.facing;
       target.releasedAngle = Math.atan2(Math.sin(releaseAngle), Math.cos(releaseAngle));
-      target.releasedFacing = p.facing;
+      target.releasedFacing = sampled.victim.facing;
       target.releasedPose = sampled.victim.pose;
       target.z = sampled.victim.z / (target.boss ? 1.15 : 1);
+      // Running/rolling techniques leave both actors where the last drawing
+      // landed, rather than sliding the hero back to the initial grab position.
+      p.x += sampled.hero.x * BODY_HEIGHT * p.facing;
       p.grapple = null;
       this.finishPlayerAction();
     }
@@ -656,6 +725,8 @@ export class Game {
     enemy.facingLocked = Math.max(0, enemy.facingLocked - dt);
     enemy.x += enemy.vx * dt;
     enemy.vx *= Math.exp(-dt * 6);
+    const walkStartX = enemy.x, walkStartY = enemy.y;
+    let locomotion = false;
     const p = this.state.player;
     const dx = p.x - enemy.x, dy = p.y - enemy.y;
     if (Math.abs(dx) > 8 && enemy.facingLocked <= 0 && !['attack', 'rearStun', 'down', 'hurt', 'recover'].includes(enemy.action)) {
@@ -684,7 +755,6 @@ export class Game {
         enemy.attackHit = true;
         const reach = enemy.boss ? 125 : enemy.specialty === 'striker' ? 105 : 84;
         if (Math.abs(dx) < reach && Math.abs(dy) < .24 && dx * enemy.facing > -15) this.damagePlayer(5 + enemy.power * 1.7 + (enemy.boss ? 5 : 0), enemy.facing, enemy);
-        if (enemy.boss) this.rings.push({ x: enemy.x, y: enemy.y, radius: 10, max: 125, life: .42, total: .42, color: '#f27691' });
       }
       if (enemy.action === 'attack' && enemy.actionTime >= enemy.actionDuration) {
         enemy.action = 'idle'; enemy.actionTime = 0;
@@ -701,18 +771,27 @@ export class Game {
         enemy.attackHit = false;
         this.event('telegraph', { enemy: enemy.id, boss: Boolean(enemy.boss), contactIn: enemy.boss ? .65 : .48 });
       } else {
-        const speed = 47 + enemy.speed * 13 + (enemy.boss ? 8 : 0);
+        locomotion = true;
+        const speed = 34 + enemy.speed * 10 + (enemy.boss ? 6 : 0);
         const desiredX = p.x + (enemy.x > p.x ? range - 8 : -range + 8);
         const horizontal = Math.abs(desiredX - enemy.x) > 8 ? Math.sign(desiredX - enemy.x) : 0;
         const vertical = Math.abs(dy) > .065 ? Math.sign(dy) : 0;
         enemy.x += horizontal * speed * dt;
         enemy.y += vertical * speed / 520 * dt;
         enemy.action = horizontal || vertical ? 'walk' : 'idle';
-        if (enemy.action === 'walk') enemy.walkTime += dt;
       }
     }
-    enemy.x = clamp(enemy.x, 30, WAVES[this.state.wave - 1].end - 30);
+    enemy.x = clamp(enemy.x, 30, STAGE_LENGTH - 30);
     enemy.y = clamp(enemy.y, .1, .95);
+    this.updateWalking(enemy,locomotion ? enemy.x-walkStartX : 0,locomotion ? enemy.y-walkStartY : 0,dt);
+  }
+
+  updateWalking(actor,dx,dy,dt) {
+    const metadata=this.manifest[actor.id]?.walk;
+    const slope=(this.floorY(1)-this.floorY(0))/(this.width/VIEW_WIDTH);
+    const worldHeight=BODY_HEIGHT*(actor.boss?1.15:1);
+    advanceGait(actor,dx,dy,dt,(metadata?.cycleDistance || WALK_CYCLE_DISTANCE)*(actor.boss?1.15:1),slope);
+    if(metadata?.rig)updateFootContacts(actor,metadata.rig,slope,worldHeight);
   }
 
   separateEnemies(dt) {
@@ -727,7 +806,22 @@ export class Game {
     }
   }
 
-  damageEnemy(enemy, amount, { knockback = 0, down = false, kind = 'strike', keepGrabbed = false, hurtDuration = .3 } = {}) {
+  strikePoint(actor) {
+    const transform = actor.action === 'strike' ? sampleMotion(actor.activeClip, actor.actionTime)?.hero : null;
+    const pose = transform?.pose || this.combatPose(actor);
+    const point = this.strikeContacts.actors[actor.id]?.poses[pose] || { x: .38, z: .12 };
+    const body = BODY_HEIGHT * (actor.boss ? 1.15 : 1);
+    const angle = (transform?.angle || 0) * actor.facing;
+    const cos = Math.cos(angle), sin = Math.sin(angle);
+    const localX = point.x * actor.facing, localY = -point.z;
+    return {
+      x: actor.x + body * ((transform?.x || 0) * actor.facing + cos * localX - sin * localY),
+      y: actor.y,
+      height: (body / BODY_HEIGHT) * (.5 + (transform?.z ?? actor.z ?? 0) - sin * localX - cos * localY),
+    };
+  }
+
+  damageEnemy(enemy, amount, { knockback = 0, down = false, kind = 'strike', keepGrabbed = false, hurtDuration = .3, impactPoint } = {}) {
     if (!alive(enemy) || (enemy.action === 'grabbed' && !keepGrabbed)) return false;
     const previousAction = enemy.action, previousTime = enemy.actionTime, previousDuration = enemy.actionDuration;
     const damage = Math.round(amount);
@@ -745,8 +839,9 @@ export class Game {
     this.lastHitTime = this.state.time;
     const p = this.state.player;
     p.meter = clamp(p.meter + 6, 0, 100);
-    this.impact(enemy.x, enemy.y, '#ffcd79', down || kind === 'chargeStrike');
-    this.floaters.push({ x: enemy.x, y: enemy.y, text: String(damage), life: .7, total: .7, color: '#ffe4a3' });
+    if (!keepGrabbed && impactPoint !== false) this.impact(impactPoint?.x ?? enemy.x, impactPoint?.y ?? enemy.y, down || kind === 'chargeStrike' ? 'heavy' : 'light', {
+      ground: kind === 'shockwave', direction: p.facing, height: impactPoint?.height ?? .49,
+    });
     this.event('hit', { enemy: enemy.id, damage, combo: this.state.combo, kind });
     if (enemy.hp <= 0) {
       this.state.kills++;
@@ -769,7 +864,8 @@ export class Game {
     this.inputBuffer = [];
     p.comboStep = p.chainHits = 0; p.chainTarget = null;
     this.state.combo = 0;
-    this.impact(p.x, p.y, '#ff637a', false);
+    const contact = attacker ? this.strikePoint(attacker) : { x: p.x, y: p.y, height: .49 };
+    this.impact(contact.x, contact.y, 'light', { direction, height: contact.height });
     this.audio.sfx('hurt');
     this.event('hurt', { hero: p.id, damage, hp: p.hp });
     if (p.hp <= 0 && !this.tag(true)) {
@@ -801,26 +897,20 @@ export class Game {
     if (force || this.state.time - this.publishTime >= .095) { this.publishTime = this.state.time; this.onUpdate(this.state); }
   }
 
-  impact(x, y, color, heavy, withHitstop = true) {
-    if (withHitstop) this.hitstop = Math.max(this.hitstop, heavy ? .06 : .018);
-    if (!this.reducedMotion) this.shake = Math.max(this.shake, heavy ? 7 : 2.5);
-    const count = this.reducedMotion ? 5 : heavy ? 19 : 9;
-    for (let i = 0; i < count; i++) {
-      const angle = this.random() * Math.PI * 2;
-      const velocity = 65 + this.random() * (heavy ? 230 : 115);
-      this.particles.push({ x, y, ox: 0, oy: -BODY_HEIGHT * .45, vx: Math.cos(angle) * velocity,
-        vy: Math.sin(angle) * velocity - 30, life: .22 + this.random() * .24, color, size: 2 + this.random() * 2 });
-    }
-    if (heavy) this.rings.push({ x, y, radius: 7, max: 115, life: .4, total: .4, color });
+  impact(x, y, kind = 'light', { withHitstop = true, ground = false, direction = 1, height = .49 } = {}) {
+    const profile = IMPACT_PROFILES[kind] || IMPACT_PROFILES.light;
+    if (withHitstop) this.hitstop = Math.max(this.hitstop, profile.freeze);
+    if (!this.reducedMotion) this.shake = Math.max(this.shake, profile.shake);
+    const burst = makeImpact(x, y, kind, direction, Math.floor(this.random() * 8));
+    burst.ground = ground;
+    burst.height = ground ? 0 : height;
+    this.hitBursts.push(burst);
+    if (this.hitBursts.length > 12) this.hitBursts.shift();
   }
 
   updateEffects(dt) {
-    for (const particle of this.particles) { particle.life -= dt; particle.ox += particle.vx * dt; particle.oy += particle.vy * dt; particle.vy += 230 * dt; }
-    this.particles = this.particles.filter(particle => particle.life > 0);
-    for (const ring of this.rings) { ring.life -= dt; ring.radius = ring.max * (1 - ring.life / ring.total); }
-    this.rings = this.rings.filter(ring => ring.life > 0);
-    for (const floater of this.floaters) floater.life -= dt;
-    this.floaters = this.floaters.filter(floater => floater.life > 0);
+    for (const burst of this.hitBursts) { burst.age += dt; burst.life -= dt; }
+    this.hitBursts = this.hitBursts.filter(burst => burst.life > 0);
   }
   resize() {
     if (!this.canvas || !this.ctx) return;
@@ -848,16 +938,6 @@ export class Game {
       c.translate(Math.sin(this.state.time * 142) * this.shake, Math.cos(this.state.time * 117) * this.shake * 0.45);
     }
     this.drawBackground();
-    for (const ring of this.rings) {
-      c.save();
-      c.globalAlpha = ring.life / ring.total * 0.65;
-      c.strokeStyle = ring.color;
-      c.lineWidth = 3;
-      c.beginPath();
-      c.ellipse(this.worldX(ring.x), this.floorY(ring.y), ring.radius * this.width / VIEW_WIDTH, ring.radius * 0.28, 0, 0, Math.PI * 2);
-      c.stroke();
-      c.restore();
-    }
     const actors = [...this.state.enemies, this.state.player].filter(actor => actor === this.state.player || actor.hp > 0 || actor.deathTime < 1.2);
     actors.sort((a, b) => a.y - b.y);
     const p = this.state.player;
@@ -1041,16 +1121,67 @@ export class Game {
     const fallbackKey = ['clinch', 'lift', 'slam', 'lock', 'recover', 'rearFacing', 'rear'].includes(key) ? 'hurt' : key === 'charge' ? 'guard' : 'jab';
     const frame = poseBank?.poses?.[key] || poseBank?.poses?.[fallbackKey];
     if (frame && sprite.combat) {
-      const [x, y, width, sourceHeight] = frame.rect;
-      const scale = height / poseBank.bodyHeight;
-      const center = frame.centerPivot || [frame.pivot[0], frame.pivot[1] - poseBank.bodyHeight / 2];
-      c.drawImage(sprite.combat, x, y, width, sourceHeight, -center[0] * scale, -center[1] * scale, width * scale, sourceHeight * scale);
+      const bodyHeight = frame.bodyHeight || poseBank.bodyHeight;
+      const geometry = spriteGeometry(frame, bodyHeight, height);
+      c.drawImage(sprite.combat, ...geometry.rect, geometry.x, geometry.y, geometry.width, geometry.height);
       return;
     }
     const index = key === 'idle' || key === 'guard' ? 0 : ['hurt', 'rearFacing', 'rear', 'recover'].includes(key) ? 2 : 1;
     const oldFrame = sprite.metadata.frames[index];
-    const frameWidth = height * oldFrame.width / oldFrame.height;
-    c.drawImage(sprite.image, oldFrame.x, oldFrame.y, oldFrame.width, oldFrame.height, -frameWidth / 2, -height / 2, frameWidth, height);
+    const bodyHeight = sprite.metadata.bodyHeight || sprite.metadata.frames[0].height;
+    const geometry = spriteGeometry(oldFrame, bodyHeight, height);
+    c.drawImage(sprite.image, ...geometry.rect, geometry.x, geometry.y, geometry.width, geometry.height);
+  }
+
+  drawWalk(sprite, actor, height) {
+    const metadata = sprite.metadata.walk;
+    const rig=metadata?.rig;
+    if(rig && sprite.rig && actor.gaitFeet) {
+      const ctx=this.ctx,opacity=ctx.globalAlpha;
+      const slope=(this.floorY(1)-this.floorY(0))/(this.width/VIEW_WIDTH);
+      if(actor.gaitMoving || !actor.gaitLegPose)actor.gaitLegPose=legPose(actor,rig,slope,BODY_HEIGHT*(actor.boss?1.15:1));
+      const back=spriteGeometry(rig.backFrame,rig.bodyHeight,height);
+      ctx.drawImage(sprite.rig,...back.rect,back.x,back.y,back.width,back.height);
+      drawLegRig(ctx,sprite.rig,rig,actor.gaitLegPose,height,actor);
+      const phase=((actor.walkDistance/(metadata.cycleDistance*(actor.boss?1.15:1)))%1+1)%1;
+      actor.gaitRigPhase=phase;
+      const position=phase*rig.upperFrames.length,index=Math.floor(position),blend=position-index;
+      for(const [frame,alpha] of [[rig.upperFrames[index%rig.upperFrames.length],1-blend],
+        [rig.upperFrames[(index+1)%rig.upperFrames.length],blend]]) {
+        if(alpha<.001)continue;
+        const geometry=spriteGeometry(frame,rig.bodyHeight,height);
+        ctx.globalAlpha=opacity*alpha;
+        ctx.drawImage(sprite.walk,...geometry.rect,geometry.x,geometry.y,geometry.width,geometry.height);
+      }
+      ctx.globalAlpha=opacity;
+      return;
+    }
+    const frames = metadata?.frames || sprite.metadata.runFrames.slice(1, 5);
+    const image = sprite.walk || sprite.run;
+    const bodyHeight = metadata?.bodyHeight || sprite.metadata.runBodyHeight;
+    const cycleDistance = (metadata?.cycleDistance || WALK_CYCLE_DISTANCE) * (actor.boss ? 1.15 : 1);
+    const phase = ((actor.gaitTravel / cycleDistance) % 1 + 1) % 1;
+    actor.gaitPhase = phase;
+    const position = phase * frames.length;
+    const a = frames[Math.floor(position) % frames.length], b = frames[(Math.floor(position) + 1) % frames.length];
+    const mix = position - Math.floor(position), opacity = this.ctx.globalAlpha;
+    actor.gaitContact = a.contactFoot || (phase < .5 ? 'left' : 'right');
+    const sharedContact = a.contactFoot && a.contactFoot === b.contactFoot && a.foot && b.foot;
+    const relativeFoot = frame => frame.foot.map((value,i) => value-frame.centerPivot[i]);
+    const footA = sharedContact ? relativeFoot(a) : null, footB = sharedContact ? relativeFoot(b) : null;
+    const foot = sharedContact ? [lerp(footA[0],footB[0],mix),lerp(footA[1],footB[1],mix)] : null;
+    const draw = (frame, alpha) => {
+      if (alpha <= .001) return;
+      const geometry = spriteGeometry(frame, bodyHeight, height);
+      // Adjacent body drawings meet at the same planted sole during stance.
+      const sourceFoot = foot ? relativeFoot(frame) : null;
+      const dx = foot ? (foot[0] - sourceFoot[0]) * geometry.scale : 0;
+      const dy = foot ? (foot[1] - sourceFoot[1]) * geometry.scale : 0;
+      this.ctx.globalAlpha = opacity * alpha;
+      this.ctx.drawImage(image, ...geometry.rect, geometry.x + dx, geometry.y + dy, geometry.width, geometry.height);
+    };
+    draw(a, 1 - mix); draw(b, mix);
+    this.ctx.globalAlpha = opacity;
   }
 
   drawFighter(actor, transform = null, anchor = actor, forcedPose) {
@@ -1092,27 +1223,53 @@ export class Game {
     if (!transform && down && actor.releasedAngle == null) c.translate(0, height * .3);
     if (!transform && action === 'idle' && !this.reducedMotion) c.translate(0, Math.sin(this.state.time * 3.7 + actor.x) * .65);
     c.rotate(angle * (transform ? anchor.facing : 1));
-    let facing = transform?.facing ?? (transform ? anchor.facing : (down || recovering) && actor.releasedFacing ? actor.releasedFacing : actor.facing);
-    let yawScale = 1;
+    let facing = transform?.facing ?? (transform?.relativeFacing ? transform.relativeFacing * anchor.facing :
+      transform ? anchor.facing : (down || recovering) && actor.releasedFacing ? actor.releasedFacing : actor.facing);
     if (action === 'rearStun' && actor.actionTime < .32) {
       const turn = clamp(actor.actionTime / .32, 0, 1);
       facing = turn < .5 ? actor.turnFromFacing : actor.facing;
-      yawScale = .16 + .84 * Math.abs(Math.cos(turn * Math.PI));
-    } else if (!transform && !down && !recovering && actor.turnTime != null && actor.turnTime < .18) {
+    } else if (!transform && !down && !recovering && !actor.gaitMoving && actor.turnTime != null && actor.turnTime < .18) {
       const turn = clamp(actor.turnTime / .18, 0, 1);
       facing = turn < .5 ? actor.turnFromFacing : actor.facing;
-      yawScale = .2 + .8 * Math.abs(Math.cos(turn * Math.PI));
     }
-    c.scale(facing * (transform?.scaleX ?? 1) * yawScale, transform?.scaleY ?? 1);
+    // Facing mirrors the drawing; neither turns nor action tracks squash its aspect.
+    c.scale(facing, 1);
     if (actor.invulnerable > 0 && action === 'hurt' && Math.floor(this.state.time * 20) % 2) c.globalAlpha *= .6;
-    const walking = action === 'walk' && !transform && sprite.run && sprite.metadata.runFrames;
+    const walking = actor.gaitMoving && ['walk', 'charge'].includes(action) && !transform &&
+      (sprite.walk && sprite.metadata.walk?.frames?.length || sprite.run && sprite.metadata.runFrames?.length > 2);
     if (walking) {
-      const metadata = sprite.metadata;
-      const frame = metadata.runFrames[Math.floor(actor.walkTime * (metadata.runFps || 10)) % metadata.runFrames.length];
-      const scale = height / (metadata.runBodyHeight || 216), pivot = frame.pivot || [frame.width / 2, frame.height * .95];
-      c.drawImage(sprite.run, frame.x, frame.y, frame.width, frame.height, -pivot[0] * scale, height * .5 - pivot[1] * scale, frame.width * scale, frame.height * scale);
+      if (!actor.renderWasWalking) {
+        actor.renderWalkStarted = this.state.time;
+        actor.renderWalkFrom = actor.renderPose;
+      }
+      const walkBlend = clamp((this.state.time-actor.renderWalkStarted)/.07,0,1);
+      const opacity = c.globalAlpha;
+      if (walkBlend < 1) {
+        c.globalAlpha = opacity*(1-walkBlend);
+        this.drawPose(sprite,actor.renderWalkFrom || 'idle',height);
+      }
+      c.globalAlpha = opacity*walkBlend;
+      this.drawWalk(sprite, actor, height);
+      c.globalAlpha = opacity;
+      actor.renderWasWalking = true;
+      actor.renderPoseFromWalk = false;
     } else {
       const pose = forcedPose ?? transform?.pose ?? this.combatPose(actor);
+      if (actor.renderWasWalking) {
+        actor.renderPoseFromWalk = true;
+        actor.renderPose = pose;
+        actor.renderPoseFrom = 'idle';
+        actor.renderPoseTime = this.state.time;
+        actor.renderPoseDuration = .07;
+        actor.renderWasWalking = false;
+      }
+      const paired = transform && anchor.grapple;
+      const contactTimes = paired ? [...new Set([paired.clip?.impactAt,
+        ...(paired.clip?.events || []).filter(event => event.type === 'impact').map(event => event.at)])]
+        .filter(Number.isFinite).map(at => at * anchor.actionDuration) : [];
+      const contact = contactTimes.sort((a,b) => Math.abs(a-anchor.actionTime)-Math.abs(b-anchor.actionTime))[0];
+      const contactLead = contact == null ? null : contact-anchor.actionTime;
+      const nearLanding = contactLead != null && Math.abs(contactLead) < .09;
       if (actor.renderPose !== pose) {
         actor.renderPoseFrom = actor.renderPose;
         actor.renderPose = pose;
@@ -1121,13 +1278,21 @@ export class Game {
         if (actor.action === 'strike' && ['jab', 'cross', 'lowKick', 'roundhouse', 'launcher'].includes(pose)) {
           const contactLead = actor.actionDuration * actor.activeClip.contactAt - actor.actionTime;
           actor.renderPoseDuration = clamp(contactLead, .025, .09);
+        } else if (nearLanding) {
+          actor.renderPoseDuration = clamp(contactLead, .006, .06);
         }
       }
-      const blend = actor.renderPoseFrom === pose ? 1 : clamp((this.state.time - actor.renderPoseTime) / (actor.renderPoseDuration || .09), 0, 1);
+      // A contact surface must be fully visible when its atomic damage and landing burst occur.
+      const settled = nearLanding && contactLead <= .001;
+      const blend = settled || actor.renderPoseFrom === pose ? 1 : clamp((this.state.time - actor.renderPoseTime) / (actor.renderPoseDuration || .09), 0, 1);
+      actor.renderPoseBlend = blend;
       const opacity = c.globalAlpha;
-      if (blend < 1 && actor.renderPoseFrom !== pose) {
+      if (blend < 1 && actor.renderPoseFromWalk) {
+        c.globalAlpha = opacity * (1-blend); this.drawWalk(sprite,actor,height);
+      } else if (blend < 1 && actor.renderPoseFrom !== pose) {
         c.globalAlpha = opacity * (1 - blend); this.drawPose(sprite, actor.renderPoseFrom, height);
       }
+      if (blend >= 1) actor.renderPoseFromWalk = false;
       c.globalAlpha = opacity * blend;
       this.drawPose(sprite, pose, height);
       c.globalAlpha = opacity;
@@ -1146,7 +1311,6 @@ export class Game {
       c.beginPath(); c.moveTo(centerX - 5, centerY - height * .69); c.lineTo(centerX + 5, centerY - height * .69);
       c.lineTo(centerX, centerY - height * .61); c.closePath(); c.fill();
     }
-    if (action === 'strike' && actor.role === 'hero') this.drawAttackArc(actor, centerX, footY, height);
     c.restore();
   }
 
@@ -1158,29 +1322,15 @@ export class Game {
       this.drawFighter(p, { x: 0, z: 0, angle: 0, pose: 'clinch' }, p);
       return;
     }
-    if (sampled.victim.z > 0.7) {
+    const front = p.grapple.clip?.victimFrontDuring;
+    const phase = p.actionTime / p.actionDuration;
+    if (sampled.victim.z > 0.7 || front && phase >= front[0] && phase <= front[1]) {
       this.drawFighter(p, sampled.hero, p);
       this.drawFighter(victim, sampled.victim, p);
     } else {
       this.drawFighter(victim, sampled.victim, p);
       this.drawFighter(p, sampled.hero, p);
     }
-  }
-
-  drawAttackArc(actor, x, y, height) {
-    const c = this.ctx;
-    const phase = clamp(actor.actionTime / actor.actionDuration, 0, 1);
-    if (phase > 0.7 || phase < 0.15) return;
-    c.save();
-    c.translate(x, y - height * 0.55 - actor.z * height);
-    c.scale(actor.facing, 1);
-    c.globalAlpha *= Math.sin(phase * Math.PI) * 0.75;
-    c.strokeStyle = actor.id === 'atlas' ? '#ffc87c' : '#adf5fc';
-    c.shadowColor = c.strokeStyle; c.shadowBlur = 10;
-    c.lineWidth = actor.activeMove?.charged ? 6 : 3;
-    c.beginPath(); c.arc(height * 0.2, 0, height * (actor.activeMove?.charged ? 0.72 : 0.43), -1.1 + phase, 1 + phase); c.stroke();
-    c.shadowBlur = 0;
-    c.restore();
   }
 
   drawForeground() {
@@ -1195,26 +1345,10 @@ export class Game {
 
   drawEffects() {
     const c = this.ctx, scale = this.width / VIEW_WIDTH;
-    for (const particle of this.particles) {
-      c.save();
-      c.globalAlpha = Math.min(1, particle.life * 4);
-      c.strokeStyle = particle.color;
-      c.lineWidth = particle.size;
-      const x = this.worldX(particle.x) + particle.ox * scale;
-      const y = this.floorY(particle.y) + particle.oy * scale;
-      c.beginPath(); c.moveTo(x, y); c.lineTo(x - particle.vx * 0.022 * scale, y - particle.vy * 0.022 * scale); c.stroke();
-      c.restore();
-    }
-    c.textAlign = 'center';
-    for (const floater of this.floaters) {
-      c.save();
-      c.globalAlpha = Math.min(1, floater.life * 3);
-      c.fillStyle = floater.color;
-      c.font = `900 ${Math.max(14, 19 * scale)}px monospace`;
-      c.strokeStyle = '#112c32'; c.lineWidth = 3;
-      const x = this.worldX(floater.x), y = this.floorY(floater.y) - BODY_HEIGHT * scale * 0.9 - (1 - floater.life / floater.total) * 40;
-      c.strokeText(floater.text, x, y); c.fillText(floater.text, x, y);
-      c.restore();
+    for (const burst of this.hitBursts) {
+      const x = this.worldX(burst.x);
+      const y = this.floorY(burst.y) - (burst.ground ? 2 : BODY_HEIGHT * burst.height) * scale;
+      drawImpact(c, burst, x, y, scale, this.reducedMotion);
     }
   }
 

@@ -1,3 +1,5 @@
+import { IMPACT_PROFILES, makeHitSound } from './impact.js';
+
 /** Small, self-contained arcade soundtrack. Audio begins only after a user gesture. */
 export class AudioEngine {
   constructor() {
@@ -8,6 +10,7 @@ export class AudioEngine {
     this.beat = 0;
     this.nextBeat = 0;
     this.timer = null;
+    this.hitBuffer = null;
   }
 
   unlock() {
@@ -101,43 +104,46 @@ export class AudioEngine {
     source.onended = () => { source.disconnect(); filter.disconnect(); gain.disconnect(); };
   }
 
+  hit(kind = 'light', at, gainScale = 1) {
+    if (!this.context || !this.master) return;
+    if (!this.hitBuffer) {
+      const samples = makeHitSound(this.context.sampleRate);
+      this.hitBuffer = this.context.createBuffer(1, samples.length, this.context.sampleRate);
+      this.hitBuffer.getChannelData(0).set(samples);
+    }
+    const profile = IMPACT_PROFILES[kind] || IMPACT_PROFILES.light;
+    const source = this.context.createBufferSource(), gain = this.context.createGain();
+    source.buffer = this.hitBuffer;
+    source.playbackRate.value = profile.rate;
+    gain.gain.value = profile.gain * gainScale;
+    source.connect(gain); gain.connect(this.master);
+    source.start(at ?? this.context.currentTime);
+    source.onended = () => { source.disconnect(); gain.disconnect(); };
+  }
+
   sfx(name) {
     this.unlock();
     if (!this.context) return;
     const now = this.context.currentTime;
     if (name === 'swing') {
       this.noise(0.1, 0.035, now, 1600);
-    } else if (name === 'kick') {
-      this.tone(145, 0.12, 'triangle', 0.24, now, 38);
-      this.noise(0.13, 0.12, now, 350);
+    } else if (name === 'punch' || name === 'kick' || name === 'hurt') {
+      this.hit('light', now);
     } else if (name === 'launcher') {
-      this.tone(195, 0.25, 'triangle', 0.29, now, 30);
-      this.noise(0.22, 0.18, now, 220);
-      this.tone(65, 0.36, 'sine', 0.15, now + 0.025);
+      this.hit('heavy', now);
     } else if (name === 'charge') {
       this.tone(220, 0.2, 'sine', 0.1, now, 880);
       this.tone(660, 0.13, 'triangle', 0.07, now + 0.12);
     } else if (name === 'guard') {
-      this.tone(290, 0.09, 'triangle', 0.055, now, 420);
+      this.noise(.055, .012, now, 900);
     } else if (name === 'parry') {
-      this.tone(780, 0.17, 'sine', 0.16, now, 1170);
-      this.tone(1560, 0.24, 'sine', 0.09, now + 0.018);
-      this.noise(0.08, 0.045, now, 3900);
-    } else if (name === 'punch') {
-      this.tone(180, 0.095, 'triangle', 0.19, now, 45);
-      this.noise(0.08, 0.1, now, 550);
+      this.hit('guard', now);
     } else if (name === 'chainImpact') {
-      this.tone(110, 0.18, 'sine', 0.18, now, 38);
-      this.noise(0.15, 0.09, now, 280);
+      this.hit('ground', now, .8);
     } else if (name === 'slam') {
-      this.tone(120, 0.34, 'sine', 0.34, now, 26);
-      this.noise(0.3, 0.19, now, 180);
-      this.tone(52, 0.48, 'triangle', 0.11, now + 0.025);
-    } else if (name === 'hurt') {
-      this.tone(140, 0.15, 'sawtooth', 0.08, now, 65);
+      this.hit('ground', now);
     } else if (name === 'grab') {
-      this.tone(240, 0.1, 'triangle', 0.12, now, 400);
-      this.tone(480, 0.07, 'sine', 0.07, now + 0.08);
+      this.noise(.07, .035, now, 800);
     } else if (name === 'special') {
       this.tone(120, 0.42, 'sawtooth', 0.065, now, 650);
       this.tone(360, 0.25, 'sine', 0.09, now + 0.15, 1200);
@@ -158,5 +164,6 @@ export class AudioEngine {
     if (this.context) this.context.close().catch(() => {});
     this.context = null;
     this.master = null;
+    this.hitBuffer = null;
   }
 }
