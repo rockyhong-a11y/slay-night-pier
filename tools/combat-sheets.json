@@ -1,0 +1,273 @@
+{
+  "version": 1,
+  "sheets": [
+    {
+      "character": "atlas",
+      "group": "attack",
+      "file": "atlas-attack.png",
+      "cols": 3,
+      "rows": 2,
+      "keys": [
+        "windup",
+        "jab",
+        "cross",
+        "lowKick",
+        "roundhouse",
+        "strikeRecovery"
+      ],
+      "keyColor": "green",
+      "model": "nano_banana_2_1",
+      "job": "8aebe56d-013d-425b-9ec8-35968a79bc3a",
+      "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jx4IFW1oMtuHLRGsebq6Lj642q/hf_20261013_023625_8aebe56d-013d-425b-9ec8-35968a79bc3a.png"
+    },
+    {
+      "character": "atlas",
+      "group": "grab",
+      "file": "atlas-grab.png",
+      "cols": 3,
+      "rows": 2,
+      "keys": [
+        "clinch",
+        "underhook",
+        "overhead",
+        "throwArc",
+        "slam",
+        "recover"
+      ],
+      "keyColor": "green",
+      "model": "nano_banana_2_1",
+      "job": "8c1673b3-5020-46e1-bc16-5cda63de395e",
+      "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jx4IFW1oMtuHLRGsebq6Lj642q/hf_20261013_024001_8c1673b3-5020-46e1-bc16-5cda63de395e.png"
+    },
+    {
+      "character": "atlas",
+      "group": "counter",
+      "file": "atlas-counter.png",
+      "cols": 3,
+      "rows": 2,
+      "keys": [
+        "guard",
+        "parry",
+        "wristCatch",
+        "hipTurn",
+        "armLock",
+        "back"
+      ],
+      "keyColor": "green",
+      "model": "nano_banana_2_1",
+      "job": "68fbb266-7d46-4670-91a5-24b1b3a59623",
+      "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jx4IFW1oMtuHLRGsebq6Lj642q/hf_20261013_024057_68fbb266-7d46-4670-91a5-24b1b3a59623.png"
+    },
+    {
+      "character": "nova",
+      "group": "attack",
+      "file": "nova-attack.png",
+      "cols": 3,
+      "rows": 2,
+      "keys": [
+        "windup",
+        "jab",
+        "cross",
+        "lowKick",
+        "roundhouse",
+        "strikeRecovery"
+      ],
+      "keyColor": "green",
+      "model": "nano_banana_2_1",
+      "job": "2afa5b66-33d9-477a-869e-03a967fee036",
+      "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jx4IFW1oMtuHLRGsebq6Lj642q/hf_20261013_023508_2afa5b66-33d9-477a-869e-03a967fee036.png"
+    },
+    {
+      "character": "nova",
+      "group": "grab",
+      "file": "nova-grab.png",
+      "cols": 3,
+      "rows": 2,
+      "keys": [
+        "clinch",
+        "underhook",
+        "overhead",
+        "throwArc",
+        "slam",
+        "recover"
+      ],
+      "keyColor": "green",
+      "model": "nano_banana_2_1",
+      "job": "b91cbcf2-aa4a-4334-81d0-023e13d323cc",
+      "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jx4IFW1oMtuHLRGsebq6Lj642q/hf_20261013_025726_b91cbcf2-aa4a-4334-81d0-023e13d323cc.png"
+    },
+    {
+      "character": "nova",
+      "group": "counter",
+      "file": "nova-counter.png",
+      "cols": 3,
+      "rows": 2,
+      "keys": [
+        "guard",
+        "parry",
+        "wristCatch",
+        "hipTurn",
+        "armLock",
+        "back"
+      ],
+      "keyColor": "green",
+      "model": "nano_banana_2_1",
+      "job": "e3bb4808-e001-4ede-835d-a3f2fd9a5991",
+      "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jx4IFW1oMtuHLRGsebq6Lj642q/hf_20261013_025858_e3bb4808-e001-4ede-835d-a3f2fd9a5991.png"
+    },
+    {
+      "character": "viper",
+      "group": "attack",
+      "file": "viper-attack.png",
+      "cols": 3,
+      "rows": 2,
+      "keys": [
+        "windup",
+        "jab",
+        "cross",
+        "lowKick",
+        "hurt",
+        "back"
+      ],
+      "keyColor": "magenta",
+      "model": "nano_banana_2_1",
+      "job": "20844757-c81b-4ba5-ba56-5f2c6113eb61",
+      "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jx4IFW1oMtuHLRGsebq6Lj642q/hf_20261013_024631_20844757-c81b-4ba5-ba56-5f2c6113eb61.png"
+    },
+    {
+      "character": "lynx",
+      "group": "attack",
+      "file": "lynx-attack.png",
+      "cols": 3,
+      "rows": 2,
+      "keys": [
+        "windup",
+        "jab",
+        "cross",
+        "lowKick",
+        "hurt",
+        "back"
+      ],
+      "keyColor": "green",
+      "model": "nano_banana_2_1",
+      "job": "d097cf7e-6a39-49e0-ad04-cb883553fec5",
+      "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jx4IFW1oMtuHLRGsebq6Lj642q/hf_20261013_024754_d097cf7e-6a39-49e0-ad04-cb883553fec5.png"
+    },
+    {
+      "character": "raven",
+      "group": "attack",
+      "file": "raven-attack.png",
+      "cols": 4,
+      "rows": 2,
+      "keys": [
+        "windup",
+        "jab",
+        "cross",
+        "_extraCross",
+        "lowKick",
+        "hurt",
+        "_extraHurt",
+        "back"
+      ],
+      "keyColor": "green",
+      "model": "nano_banana_2_1",
+      "job": "dd1eb224-0e42-42a9-9f47-a7f5df260b9e",
+      "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jx4IFW1oMtuHLRGsebq6Lj642q/hf_20261013_024855_dd1eb224-0e42-42a9-9f47-a7f5df260b9e.png"
+    },
+    {
+      "character": "seraph",
+      "group": "attack",
+      "file": "seraph-attack.png",
+      "cols": 3,
+      "rows": 2,
+      "keys": [
+        "windup",
+        "jab",
+        "cross",
+        "lowKick",
+        "hurt",
+        "back"
+      ],
+      "keyColor": "green",
+      "model": "nano_banana_2_1",
+      "job": "60c3208b-8e74-4258-8556-3deb47ebc5e5",
+      "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jx4IFW1oMtuHLRGsebq6Lj642q/hf_20261013_025037_60c3208b-8e74-4258-8556-3deb47ebc5e5.png"
+    },
+    {
+      "character": "tempest",
+      "group": "attack",
+      "file": "tempest-attack.png",
+      "cols": 3,
+      "rows": 2,
+      "keys": [
+        "windup",
+        "jab",
+        "cross",
+        "lowKick",
+        "hurt",
+        "back"
+      ],
+      "keyColor": "magenta",
+      "model": "nano_banana_2_1",
+      "job": "13e2792e-30aa-4f3f-be69-6907687227ad",
+      "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jx4IFW1oMtuHLRGsebq6Lj642q/hf_20261013_025136_13e2792e-30aa-4f3f-be69-6907687227ad.png"
+    },
+    {
+      "character": "ember",
+      "group": "attack",
+      "file": "ember-attack.png",
+      "cols": 3,
+      "rows": 2,
+      "keys": [
+        "windup",
+        "jab",
+        "cross",
+        "lowKick",
+        "hurt",
+        "back"
+      ],
+      "keyColor": "green",
+      "model": "nano_banana_2_1",
+      "job": "4043cc18-4cf9-4ca6-a1a2-8ee61392fae5",
+      "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jx4IFW1oMtuHLRGsebq6Lj642q/hf_20261013_025331_4043cc18-4cf9-4ca6-a1a2-8ee61392fae5.png"
+    },
+    {
+      "character": "valkyrie",
+      "group": "attack",
+      "file": "valkyrie-attack.png",
+      "cols": 3,
+      "rows": 2,
+      "keys": [
+        "windup",
+        "jab",
+        "cross",
+        "lowKick",
+        "hurt",
+        "back"
+      ],
+      "keyColor": "green",
+      "model": "nano_banana_2_1",
+      "job": "58641fa1-55aa-4bd1-9878-204b09a305df",
+      "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jx4IFW1oMtuHLRGsebq6Lj642q/hf_20261013_025420_58641fa1-55aa-4bd1-9878-204b09a305df.png"
+    },
+    {
+      "character": "onyx",
+      "group": "attack",
+      "file": "onyx-attack.png",
+      "cols": 3,
+      "rows": 2,
+      "keys": [
+        "windup",
+        "jab",
+        "cross",
+        "lowKick",
+        "hurt",
+        "back"
+      ],
+      "keyColor": "green",
+      "model": "nano_banana_2_1",
+      "job": "6178f7cd-01b4-4612-b594-3fb369665db5",
+      "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jx4IFW1oMtuHLRGsebq6Lj642q/hf_20261013_025637_6178f7cd-01b4-4612-b594-3fb369665db5.png"
+    }
+  ]
+}

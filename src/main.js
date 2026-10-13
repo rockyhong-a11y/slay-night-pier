@@ -1,6 +1,7 @@
 import './style.css';
 import { ROSTER, HEROES, ENEMIES } from './roster.js';
 import { Game } from './game.js';
+import { GRAB_MOVES, DIRECTIONS, DIRECTION_LABELS, COMBAT_RULES } from './combat-moves.js';
 
 const base = import.meta.env.BASE_URL;
 const url = path => `${base}${path.replace(/^\//, '')}`;
@@ -16,9 +17,14 @@ if (!HEROES.some(hero => hero.id === selected)) selected = HEROES[0].id;
 let muted = storage.read('muted', false);
 let reduced = storage.read('reduced', window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 let theme = storage.read('theme', window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
-let game, loaded = false, loadError, currentScreen = 'lobby', terminalHandled = false;
-const held = new Set(), keys = new Set();
-let repeatTimer, actionPointer;
+let game, loaded = false, loadError, currentScreen = 'lobby', terminalHandled = false, resultTimer;
+const keys = new Set();
+let strikePointer;
+
+function moveGuide(heroId) {
+  const moves = GRAB_MOVES[heroId] || GRAB_MOVES.atlas;
+  return `<div class="move-guide-heading"><span>방향 + 잡기</span><b>정면</b><b>후면</b></div>${DIRECTIONS.map(direction => `<div class="move-guide-row"><span>${DIRECTION_LABELS[direction]}</span><b>${moves.front[direction].name}</b><b>${moves.rear[direction].name}</b></div>`).join('')}`;
+}
 
 document.documentElement.dataset.theme = theme;
 document.documentElement.dataset.reduced = String(reduced);
@@ -61,23 +67,25 @@ $('#app').innerHTML = `
 
     <section id="arena" class="arena hidden" aria-label="밤의 부두 게임">
       <div class="hud">
-        <div class="player-hud"><img id="hud-portrait" alt="" draggable="false"><div class="player-stats"><div class="hud-name"><strong id="hud-name">ATLAS</strong><span id="health-number">100</span></div><div class="health-track" role="meter" aria-label="체력" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><i id="health-fill"></i></div><div class="meter-row"><span>SPECIAL</span><div class="special-track"><i id="special-fill"></i></div></div></div></div>
+        <div class="player-hud"><img id="hud-portrait" alt="" draggable="false"><div class="player-stats"><div class="hud-name"><strong id="hud-name">ATLAS</strong><span id="health-number">100</span></div><div class="health-track" role="meter" aria-label="체력" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><i id="health-fill"></i></div><div class="meter-row"><span id="charge-label">CHARGE</span><div class="special-track"><i id="charge-fill"></i></div></div></div></div>
         <div class="score-hud"><small>SCORE</small><strong id="score">000000</strong><button class="icon-button" id="pause" aria-label="일시정지">${icon('pause')}</button></div>
       </div>
       <div class="stage-bar"><span id="objective">진입로를 정리하세요</span><span><b id="kills">0</b> / 8</span></div>
-      <div class="viewport"><canvas id="game-canvas" tabindex="0" aria-label="이동은 방향키 또는 WASD. J 공격, K 잡기, L 필살기, 스페이스 점프, Q 교대, Escape 일시정지."></canvas><div class="game-toast" id="game-toast" aria-live="polite"></div><div class="combo-display" id="combo-display"><b id="combo">0</b><span>HITS</span></div><div class="stage-progress"><i id="progress-fill"></i></div></div>
+      <div class="viewport"><canvas id="game-canvas" tabindex="0" aria-label="이동은 방향키 또는 WASD. J 타격: 연타로 콤보, 길게 눌렀다 놓으면 차지. 방향키와 K를 함께 눌러 잡기. 상대 공격에 맞춰 L 반격. Q 교대, Escape 일시정지."></canvas><div class="game-toast" id="game-toast" aria-live="polite"></div><div class="move-preview" id="move-preview"></div><div class="combo-display" id="combo-display"><b id="combo">0</b><span>HITS</span></div><div class="stage-progress"><i id="progress-fill"></i></div></div>
       <div class="controls">
         <div class="movement"><div class="joystick" id="joystick" role="group" aria-label="이동 조이스틱"><span class="joy-arrow joy-up">↑</span><span class="joy-arrow joy-left">←</span><span class="joy-arrow joy-right">→</span><span class="joy-arrow joy-down">↓</span><div class="joy-knob" id="joy-knob"></div></div><span class="control-caption">이동 <kbd>WASD</kbd></span></div>
-        <div class="actions"><button class="action-button jump" data-action="jump" aria-label="점프, 스페이스"><span>점프</span><kbd>SPACE</kbd></button><button class="action-button grab" data-action="grab" aria-label="잡기 기술, K"><span>잡기</span><kbd>K</kbd></button><button class="action-button special" data-action="special" aria-label="필살기, L"><span>필살기</span><kbd>L</kbd></button><button class="action-button attack" data-action="attack" aria-label="공격, J"><span>공격</span><kbd>J</kbd></button></div>
+        <div class="actions"><button class="action-button grab" data-action="grab" aria-label="방향과 조합해 잡기, K"><span>잡기</span><kbd>K</kbd></button><button class="action-button counter" data-action="counter" aria-label="상대 타격에 맞춰 반격, L"><span>반격</span><kbd>L</kbd></button><button class="action-button strike" data-action="strike" aria-label="타격: 연타로 콤보, 길게 눌렀다 놓으면 차지, J"><span>타격</span><small id="strike-hint">연타 / 홀드</small><kbd>J</kbd></button></div>
         <button class="tag-button" data-action="tag" aria-label="파트너 교대, Q"><img id="partner-portrait" alt="" draggable="false"><span>교대 <kbd>Q</kbd></span><i id="partner-health"></i></button>
       </div>
-      <div class="combat-tip" id="combat-tip">가까이 붙어서 잡기 버튼을 누르세요</div>
+      <div class="combat-tip" id="combat-tip">연타: 펀치 → 킥 → 연속 잡기</div>
     </section>
 
     <dialog id="help-dialog" class="dialog">
       <button class="dialog-close icon-button" data-close aria-label="닫기">${icon('x')}</button><span class="dialog-label">HOW TO PLAY</span><h2>거리 좁히고,<br>크게 한 방.</h2>
-      <p>조이스틱으로 좌우·위아래 이동하세요. 적과 같은 높이에서 공격이 맞습니다.</p>
-      <div class="help-rows"><div><b>공격 <kbd>J</kbd></b><span>길게 눌러 3단 콤보</span></div><div><b>잡기 <kbd>K</kbd></b><span>근접한 적에게 파워밤 / 스플렉스</span></div><div><b>필살기 <kbd>L</kbd></b><span>게이지를 모아 강력한 광역 기술</span></div><div><b>점프 <kbd>SPACE</kbd></b><span>공격을 피해 점프 킥</span></div><div><b>교대 <kbd>Q</kbd></b><span>아틀라스와 노바를 즉시 교대</span></div></div>
+      <p>조이스틱으로 적과 같은 높이에 서세요. 전투 버튼은 타격·잡기·반격 세 개입니다.</p>
+      <div class="help-rows"><div><b>타격 연타 <kbd>J</kbd></b><span>잽 → 스트레이트 → 킥 2회 → 잡기</span></div><div><b>타격 홀드</b><span>모았다가 놓기: 상대 뒤돌리기</span></div><div><b>방향 + 잡기 <kbd>K</kbd></b><span>정면 4종 / 후면 4종</span></div><div><b>타이밍 반격 <kbd>L</kbd></b><span>타격 직전 눌러 슬램 / 관절기</span></div><div><b>↓ + 반격</b><span>관절기, 나머지 방향은 슬램</span></div><div><b>교대 <kbd>Q</kbd></b><span>파트너 버튼으로 주인공 교대</span></div></div>
+      <div class="move-guide-tabs">${HEROES.map(hero => `<button data-guide-hero="${hero.id}" aria-pressed="${selected === hero.id}">${hero.ko}</button>`).join('')}</div><div id="move-guide" class="move-guide">${moveGuide(selected)}</div>
+      <p class="help-note">차지로 등을 보이게 하거나 뒤로 돌아가서 후면 잡기를 시전하세요. 방향을 입력하지 않은 잡기는 ↓ 기술입니다. 반격을 너무 일찍 누르면 실패하며, 성공 후에는 잠깐의 재사용 대기 시간이 있습니다.</p>
       <p class="help-note">파트너마다 체력이 따로 있습니다. 두 명 모두 쓰러지면 게임 오버. 적 8명을 전부 제압하면 클리어!</p>
       <label class="setting-row" for="reduce-effects"><span>화면 흔들림과 섬광 줄이기</span><input type="checkbox" id="reduce-effects" ${reduced ? 'checked' : ''}></label>
       <button class="secondary-button" data-close>준비 완료</button>
@@ -103,7 +111,13 @@ function selectHero(id) {
     const active = button.dataset.hero === id;
     button.classList.toggle('selected', active); button.setAttribute('aria-pressed', String(active));
   });
+  setGuideHero(id);
 }
+function setGuideHero(id) {
+  $('#move-guide').innerHTML = moveGuide(id);
+  document.querySelectorAll('[data-guide-hero]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.guideHero === id)));
+}
+document.querySelectorAll('[data-guide-hero]').forEach(button => button.addEventListener('click', () => setGuideHero(button.dataset.guideHero)));
 document.querySelectorAll('[data-hero]').forEach(button => button.addEventListener('click', () => selectHero(button.dataset.hero)));
 $('.wordmark').addEventListener('click', event => { event.preventDefault(); if (currentScreen === 'lobby') return; pauseGame(); });
 $('#theme').addEventListener('click', () => {
@@ -120,6 +134,7 @@ let helpResume = false;
 $('#help').addEventListener('click', () => {
   helpResume = game?.state.status === 'playing';
   if (helpResume) { resetInput(); game.pause(true); }
+  setGuideHero(currentScreen === 'arena' ? game.state.player.id : selected);
   $('#help-dialog').showModal();
 });
 $('#help-dialog').addEventListener('close', () => { if (helpResume) { game.pause(false); helpResume = false; } });
@@ -130,12 +145,14 @@ $('#reduce-effects').addEventListener('change', event => {
 });
 
 function resetInput() {
-  held.clear(); keys.clear(); clearInterval(repeatTimer); repeatTimer = undefined; actionPointer = undefined;
+  keys.clear(); strikePointer = undefined; game?.cancelStrike?.();
   game?.setMove(0, 0); $('#joy-knob').style.transform = ''; joystickPointer = undefined;
   document.querySelectorAll('.pressed').forEach(button => button.classList.remove('pressed'));
 }
 function start() {
   if (!loaded) return;
+  clearTimeout(resultTimer); clearTimeout(toastTimer);
+  $('#game-toast').textContent = ''; $('#game-toast').classList.remove('visible');
   document.querySelectorAll('dialog[open]').forEach(dialog => dialog.close()); resetInput();
   currentScreen = 'arena'; terminalHandled = false;
   $('#lobby').classList.add('hidden'); $('#arena').classList.remove('hidden');
@@ -144,6 +161,8 @@ function start() {
   requestAnimationFrame(() => { game.resize?.(); $('#game-canvas').focus({ preventScroll: true }); });
 }
 function home() {
+  clearTimeout(resultTimer); clearTimeout(toastTimer);
+  $('#game-toast').textContent = ''; $('#game-toast').classList.remove('visible');
   helpResume = false; resetInput(); game.pause(true);
   document.querySelectorAll('dialog[open]').forEach(dialog => dialog.close());
   currentScreen = 'lobby'; $('#lobby').classList.remove('hidden'); $('#arena').classList.add('hidden');
@@ -171,13 +190,22 @@ function update(state) {
     const hero = ROSTER.find(hero => hero.id === player.id); lastHero = player.id;
     $('#hud-name').textContent = hero?.name || player.id.toUpperCase(); $('#hud-portrait').src = art(hero || player);
     $('#partner-portrait').src = art(ROSTER.find(hero => hero.id === partner?.id) || HEROES.find(hero => hero.id !== player.id));
-    $('#combat-tip').textContent = player.id === 'atlas' ? '가까이 붙어서 잡기: 파워밤' : '가까이 붙어서 잡기: 저먼 스플렉스';
+    $('#combat-tip').textContent = '연타: 펀치 → 킥 → 연속 잡기';
   }
   const hp = Math.max(0, player.hp / (player.maxHp || 100) * 100);
   $('#health-fill').style.width = `${hp}%`; $('#health-number').textContent = Math.ceil(player.hp);
   $('.health-track').setAttribute('aria-valuenow', String(Math.ceil(hp)));
-  const meter = Math.max(0, Math.min(100, player.meter / (player.maxMeter || 100) * 100));
-  $('#special-fill').style.width = `${meter}%`; $('[data-action="special"]').classList.toggle('charged', meter >= 45);
+  const chargeTime = player.chargeTime || 0;
+  const charge = Math.min(100, chargeTime / COMBAT_RULES.chargeMax * 100);
+  const charged = chargeTime >= COMBAT_RULES.chargeThreshold;
+  $('#charge-fill').style.width = `${charge}%`; $('[data-action="strike"]').classList.toggle('charged', charged);
+  $('#charge-label').textContent = charged ? 'READY' : 'CHARGE';
+  $('#strike-hint').textContent = charged ? '놓으면 뒤돌리기' : '연타 / 홀드';
+  $('[data-action="counter"]').classList.toggle('cooldown', (player.counterCooldown || state.counterCooldown || 0) > 0);
+  const grab = state.grabContext;
+  const preview = grab?.ready && grab.move && ['idle', 'walk', 'charge', 'strike'].includes(player.action);
+  $('#move-preview').textContent = preview ? `${grab.side === 'rear' ? '후면' : '정면'} ${DIRECTION_LABELS[grab.direction]} ${grab.move.name}` : '';
+  $('#move-preview').classList.toggle('visible', Boolean(preview));
   $('#partner-health').style.width = `${Math.max(0, (partner?.hp || 0) / (partner?.maxHp || 100) * 100)}%`;
   $('[data-action="tag"]').classList.toggle('unavailable', !partner?.hp);
   $('#score').textContent = String(state.score || 0).padStart(6, '0'); $('#kills').textContent = state.kills || 0;
@@ -185,7 +213,7 @@ function update(state) {
   $('#progress-fill').style.width = `${(state.progress || 0) * 100}%`;
   $('#combo').textContent = state.combo || 0; $('#combo-display').classList.toggle('visible', state.combo >= 2);
   if (['victory', 'gameover'].includes(state.status) && !terminalHandled) {
-    terminalHandled = true; resetInput(); setTimeout(() => showResult(state), 650);
+    terminalHandled = true; resetInput(); resultTimer = setTimeout(() => showResult(state), 650);
   }
 }
 function showResult(state) {
@@ -226,18 +254,28 @@ for (const type of ['pointerup', 'pointercancel', 'lostpointercapture']) joystic
 document.querySelectorAll('[data-action]').forEach(button => {
   button.addEventListener('pointerdown', event => {
     if (game?.state.status !== 'playing') return;
-    button.setPointerCapture(event.pointerId); button.classList.add('pressed'); game.action(button.dataset.action);
-    if (button.dataset.action === 'attack') { clearInterval(repeatTimer); actionPointer = event.pointerId; repeatTimer = setInterval(() => game.action('attack'), 160); }
+    if (button.dataset.action === 'strike' && strikePointer !== undefined) return;
+    button.setPointerCapture(event.pointerId); button.classList.add('pressed');
+    if (button.dataset.action === 'strike') { strikePointer = event.pointerId; game.beginStrike(); }
+    else game.action(button.dataset.action);
   });
-  const release = event => {
+  const release = (event, cancel = false) => {
     button.classList.remove('pressed');
-    if (event.pointerId === actionPointer) { clearInterval(repeatTimer); actionPointer = undefined; }
+    if (event.pointerId === strikePointer) {
+      strikePointer = undefined;
+      if (cancel) game?.cancelStrike?.(); else game?.endStrike();
+    }
   };
-  for (const type of ['pointerup', 'pointercancel', 'lostpointercapture']) button.addEventListener(type, release);
-  button.addEventListener('click', event => { if (event.detail === 0) game?.action(button.dataset.action); });
+  button.addEventListener('pointerup', event => release(event));
+  for (const type of ['pointercancel', 'lostpointercapture']) button.addEventListener(type, event => release(event, true));
+  button.addEventListener('click', event => {
+    if (event.detail !== 0 || game?.state.status !== 'playing') return;
+    if (button.dataset.action === 'strike') { game.beginStrike(); game.endStrike(); }
+    else game.action(button.dataset.action);
+  });
 });
 const movementKeys = ['KeyW', 'KeyA', 'KeyS', 'KeyD', 'ArrowUp', 'ArrowLeft', 'ArrowDown', 'ArrowRight'];
-const actionKeys = { KeyJ: 'attack', KeyK: 'grab', KeyL: 'special', Space: 'jump', KeyQ: 'tag' };
+const actionKeys = { KeyJ: 'strike', KeyK: 'grab', KeyL: 'counter', KeyQ: 'tag' };
 function keyboardMove() {
   const x = (keys.has('KeyD') || keys.has('ArrowRight') ? 1 : 0) - (keys.has('KeyA') || keys.has('ArrowLeft') ? 1 : 0);
   const y = (keys.has('KeyS') || keys.has('ArrowDown') ? 1 : 0) - (keys.has('KeyW') || keys.has('ArrowUp') ? 1 : 0);
@@ -247,9 +285,17 @@ window.addEventListener('keydown', event => {
   if (editable(event.target) || currentScreen !== 'arena' || $('dialog[open]')) return;
   if (event.code === 'Escape') { event.preventDefault(); pauseGame(); return; }
   if (movementKeys.includes(event.code)) { event.preventDefault(); keys.add(event.code); keyboardMove(); }
-  if (actionKeys[event.code]) { event.preventDefault(); if (!event.repeat || event.code === 'KeyJ') game?.action(actionKeys[event.code]); }
+  if (actionKeys[event.code]) {
+    event.preventDefault(); if (event.repeat || keys.has(event.code)) return;
+    keys.add(event.code);
+    if (event.code === 'KeyJ') game?.beginStrike(); else game?.action(actionKeys[event.code]);
+  }
 });
-window.addEventListener('keyup', event => { if (movementKeys.includes(event.code)) { keys.delete(event.code); keyboardMove(); } });
+window.addEventListener('keyup', event => {
+  const held = keys.has(event.code); keys.delete(event.code);
+  if (movementKeys.includes(event.code)) keyboardMove();
+  if (event.code === 'KeyJ' && held) game?.endStrike();
+});
 
 async function loadGame() {
   loaded = false; loadError = undefined; $('#start').disabled = true; $('#start-label').textContent = '캐릭터 준비 중';

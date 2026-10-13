@@ -1,10 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { Game, GAME_CONSTANTS, sampleMotion } from '../src/game.js';
+import { Game, GAME_CONSTANTS } from '../src/game.js';
 import { ENCOUNTERS } from '../src/roster.js';
+import { COMBAT_RULES } from '../src/combat-moves.js';
 
-const motion = JSON.parse(readFileSync(new URL('../public/assets/motion/grapples.json', import.meta.url), 'utf8'));
+const motion = JSON.parse(readFileSync(new URL('../public/assets/motion/combat.json', import.meta.url), 'utf8'));
 const createGame = (hero = 'atlas') => {
   const events = [];
   const game = new Game({ seed: 14, onEvent: event => events.push(event) });
@@ -13,14 +14,7 @@ const createGame = (hero = 'atlas') => {
   return { game, events };
 };
 const advance = (game, seconds) => {
-  while (seconds > 0) { const dt = Math.min(seconds, 0.1); game.step(dt); seconds -= dt; }
-};
-const putEnemyInRange = game => {
-  const enemy = game.state.enemies.find(enemy => enemy.hp > 0);
-  enemy.x = game.state.player.x + 55;
-  enemy.y = game.state.player.y;
-  enemy.cooldown = 10;
-  return enemy;
+  while (seconds > .00001) { const dt = Math.min(seconds, .05); game.step(dt); seconds -= dt; }
 };
 
 test('one stage encounters contain every enemy exactly once and victory requires all eight', () => {
@@ -30,13 +24,13 @@ test('one stage encounters contain every enemy exactly once and victory requires
   assert.equal(game.state.encountered, 2);
   for (let wave = 0; wave < 3; wave++) {
     for (const enemy of game.state.enemies.filter(enemy => enemy.hp > 0)) game.damageEnemy(enemy, 999);
-    advance(game, 0.2);
+    advance(game, .2);
     assert.equal(game.state.kills, [2, 5, 8][wave]);
     if (wave < 2) {
       assert.equal(game.state.status, 'playing');
       assert.equal(game.state.phase, 'advance');
       game.state.player.x = GAME_CONSTANTS.waves[wave + 1].trigger;
-      advance(game, 0.1);
+      advance(game, .1);
       assert.equal(game.state.wave, wave + 2);
     }
   }
@@ -48,179 +42,139 @@ test('one stage encounters contain every enemy exactly once and victory requires
   game.destroy();
 });
 
-test('portrait lane movement stays inside the encounter gate until enemies are defeated', () => {
+test('portrait lane movement stays inside encounter gates', () => {
   const { game } = createGame();
   game.setMove(1, 1);
   advance(game, 3.5);
   assert.ok(game.state.player.x <= GAME_CONSTANTS.waves[0].end);
-  assert.ok(game.state.player.y <= 0.96);
+  assert.ok(game.state.player.y <= .96);
   game.setMove(-1, -1);
   advance(game, 3.5);
   assert.ok(game.state.player.x >= 50);
-  assert.ok(game.state.player.y >= 0.08);
+  assert.ok(game.state.player.y >= .08);
   game.destroy();
 });
 
-test('a directional punch hits once, builds meter, and does not hit another depth lane', () => {
+test('tag preserves independent health and both heroes must fall for game over', () => {
   const { game } = createGame();
-  const victim = putEnemyInRange(game);
-  const other = game.state.enemies.find(enemy => enemy !== victim);
-  other.x = victim.x;
-  other.y = 0.02;
-  other.cooldown = 10;
-  const victimHp = victim.hp;
-  const otherHp = other.hp;
-  const meter = game.state.player.meter;
-  assert.equal(game.action('attack'), true);
-  advance(game, 0.25);
-  assert.ok(victim.hp < victimHp);
-  assert.equal(other.hp, otherHp);
-  const hpAfterImpact = victim.hp;
-  advance(game, 0.12);
-  assert.equal(victim.hp, hpAfterImpact);
-  assert.ok(game.state.player.meter > meter);
-  assert.equal(game.state.combo, 1);
-  game.destroy();
-});
-
-test('actual Blender tracks distinguish overhead powerbomb from backward suplex', () => {
-  const powerLift = sampleMotion(motion.clips.powerbomb, motion.clips.powerbomb.duration * 0.44);
-  const suplexThrow = sampleMotion(motion.clips.suplex, motion.clips.suplex.duration * 0.69);
-  const powerEnd = sampleMotion(motion.clips.powerbomb, motion.clips.powerbomb.duration);
-  const suplexEnd = sampleMotion(motion.clips.suplex, motion.clips.suplex.duration);
-  assert.ok(powerLift.victim.z > 0.8, 'powerbomb lifts the victim above the hero');
-  assert.ok(suplexThrow.victim.x < 0, 'suplex throws behind the hero');
-  assert.ok(powerEnd.victim.x > 0.5);
-  assert.ok(suplexEnd.victim.x < -0.5);
-  assert.ok(Number.isFinite(powerLift.hero.angle));
-});
-
-test('a grab follows the sampled track and applies exactly one impact at the Blender marker', () => {
-  const { game, events } = createGame('nova');
-  const target = putEnemyInRange(game);
-  target.maxHp = target.hp = 150;
-  assert.equal(game.action('grab'), true);
-  assert.equal(target.action, 'grabbed');
-  const clip = motion.clips.suplex;
-  const impact = clip.duration * clip.impactAt;
-  advance(game, impact - 0.08);
-  assert.equal(target.hp, 150);
-  assert.ok(target.x < game.state.player.x, 'victim moves behind hero before impact');
-  advance(game, 0.16);
-  assert.equal(target.hp, 101);
-  advance(game, 0.7);
-  assert.equal(target.hp, 101);
-  assert.equal(events.filter(event => event.type === 'slam').length, 1);
-  assert.equal(game.state.player.grapple, null);
-  game.destroy();
-});
-
-test('special meter and jump invulnerability prevent spamming and reward timing', () => {
-  const { game } = createGame();
-  const victim = putEnemyInRange(game);
-  game.state.player.meter = 44;
-  assert.equal(game.action('special'), false);
-  assert.equal(game.state.player.meter, 44);
-  game.state.player.meter = 60;
-  assert.equal(game.action('special'), true);
-  assert.equal(game.state.player.meter, 15);
-  const hp = game.state.player.hp;
-  assert.equal(game.damagePlayer(30), false);
-  advance(game, 0.95);
-  assert.ok(victim.hp < victim.maxHp);
-  assert.equal(game.state.player.hp, hp);
-  assert.equal(game.action('jump'), true);
-  assert.equal(game.damagePlayer(30), false);
-  advance(game, 0.75);
-  assert.equal(game.state.player.z, 0);
-  game.destroy();
-});
-
-test('tag preserves separate health and both heroes must fall for game over', () => {
-  const { game } = createGame();
-  const atlas = game.state.player;
-  atlas.hp = 44;
+  game.state.player.hp = 44;
+  game.beginStrike();
   assert.equal(game.action('tag'), true);
   assert.equal(game.state.player.id, 'nova');
   assert.equal(game.state.team.find(hero => hero.id === 'atlas').hp, 44);
-  assert.equal(game.action('tag'), false, 'manual tag has a cooldown');
+  assert.equal(game.state.team.find(hero => hero.id === 'atlas').strikeHeld, false);
+  assert.equal(game.action('tag'), false);
   game.state.player.hp = 1;
   game.state.player.invulnerable = 0;
-  assert.equal(game.damagePlayer(10), true);
+  game.damagePlayer(10);
   assert.equal(game.state.status, 'playing');
   assert.equal(game.state.player.id, 'atlas');
-  assert.equal(game.state.player.hp, 44);
   game.state.player.hp = 1;
   game.state.player.invulnerable = 0;
-  assert.equal(game.damagePlayer(10), true);
+  game.damagePlayer(10);
   assert.equal(game.state.status, 'gameover');
+  assert.equal(game.state.player.strikeHeld, false);
+  assert.equal(game.inputBuffer.length, 0);
   game.destroy();
 });
 
-test('pause freezes simulation, clears movement, and restart resets pending actions', () => {
-  const { game } = createGame();
-  game.setMove(1, 0);
-  advance(game, 0.2);
+test('pause and pointer cancellation clear a held charge without firing on resume or release', () => {
+  const { game, events } = createGame();
+  game.beginStrike(); advance(game, .6);
+  assert.equal(game.state.player.chargeReady, true);
   game.pause(true);
   const time = game.state.time;
-  const x = game.state.player.x;
+  assert.equal(game.endStrike(), false);
   advance(game, 2);
-  assert.equal(game.state.status, 'paused');
   assert.equal(game.state.time, time);
-  assert.equal(game.state.player.x, x);
-  game.pause(false);
-  advance(game, 0.2);
-  assert.equal(game.state.player.x, x);
-  game.queuedAttack = true;
+  game.pause(false); advance(game, .3);
+  assert.equal(game.state.player.action, 'idle');
+  assert.equal(game.state.player.strikeHeld, false);
+  assert.equal(game.state.player.chargeTime, 0);
+  assert.equal(events.filter(event => event.type === 'strike').length, 0);
+  game.beginStrike(); advance(game, .5); game.cancelStrike();
+  assert.equal(game.endStrike(), false);
+  assert.equal(game.state.player.action, 'idle');
   game.start('nova');
-  assert.equal(game.queuedAttack, false);
+  assert.equal(game.inputBuffer.length, 0);
   assert.equal(game.state.player.id, 'nova');
-  assert.equal(game.state.kills, 0);
-  assert.equal(game.state.score, 0);
   game.destroy();
 });
 
-test('ordinary approach, grab, special, and tag inputs can clear the complete stage with real health', () => {
+test('real-health input-only play clears all eight using charge, rear grab, timed counter, and tag', () => {
   for (const hero of ['atlas', 'nova']) {
     const { game, events } = createGame(hero);
-    let ticks = 0;
-    let lastAction = -100;
-    let nextTagAt = 9;
+    let ticks = 0, nextTagAt = 13, lastCharge = -10, counterDone = false;
     while (game.state.status === 'playing' && ticks < 60 * 180) {
       const player = game.state.player;
       const targets = game.state.enemies.filter(enemy => enemy.hp > 0).sort((a, b) =>
         Math.hypot(a.x - player.x, (a.y - player.y) * 330) - Math.hypot(b.x - player.x, (b.y - player.y) * 330));
-      if (game.state.time >= nextTagAt && ['idle', 'walk'].includes(player.action)) {
-        game.action('tag');
-        nextTagAt += 9;
+      const canAct = ['idle', 'walk', 'charge'].includes(player.action);
+      if (game.state.time >= nextTagAt && canAct && !player.strikeHeld) {
+        game.action('tag'); nextTagAt += 13;
       }
       if (!targets.length) game.setMove(1, 0);
       else {
-        const enemy = targets[0];
-        const dx = enemy.x - player.x;
-        const dy = enemy.y - player.y;
-        if (Math.hypot(dx, dy * 330) > 69) {
-          game.setMove(Math.abs(dx) > 52 ? Math.sign(dx) : 0, Math.abs(dy) > 0.07 ? Math.sign(dy) : 0);
+        const enemy = targets[0], dx = enemy.x - player.x, dy = enemy.y - player.y;
+        const distance = Math.hypot(dx, dy * 330);
+        if (player.strikeHeld) {
+          game.setMove(0, 0);
+          if (player.chargeTime >= COMBAT_RULES.chargeThreshold + .12) game.endStrike();
+        } else if (distance > 67) {
+          game.setMove(Math.abs(dx) > 52 ? Math.sign(dx) : 0, Math.abs(dy) > .07 ? Math.sign(dy) : 0);
+          if (counterDone && distance < 125 && canAct && game.state.time - lastCharge > 3) {
+            game.setMove(0, 0); game.beginStrike(); lastCharge = game.state.time;
+          }
         } else {
           game.setMove(0, 0);
-          if (ticks - lastAction > 14) {
-            game.action(player.meter >= 45 && targets.length > 1 ? 'special' : 'grab');
-            lastAction = ticks;
-          }
+          if (!counterDone) {
+            const incoming = targets.find(target => target.action === 'attack' && !target.attackHit &&
+              target.actionTime >= (target.boss ? .65 : .48) - .14);
+            if (incoming && canAct) { game.action('counter'); counterDone = true; }
+          } else if (canAct && game.state.tagCooldown < 2.9) game.action('grab');
         }
       }
-      game.step(1 / 60);
-      ticks++;
+      game.step(1 / 60); ticks++;
     }
-    assert.equal(game.state.status, 'victory', `${hero} clears using gameplay inputs`);
+    assert.equal(game.state.status, 'victory', `${hero} completes ordinary-input combat`);
     assert.equal(game.state.kills, 8);
     assert.equal(game.state.encountered, 8);
     assert.ok(game.state.team.some(fighter => fighter.hp > 0));
     assert.ok(game.state.team.every(fighter => fighter.hp <= fighter.maxHp));
-    assert.ok(events.some(event => event.type === 'grapple'));
-    assert.ok(events.some(event => event.type === 'special'));
+    assert.ok(events.some(event => event.type === 'counter'));
+    assert.ok(events.some(event => event.type === 'rearOpening'));
+    assert.ok(events.some(event => event.type === 'grapple' && event.side === 'rear'));
     assert.ok(events.some(event => event.type === 'tag'));
     assert.equal(events.filter(event => event.type === 'kill').length, 8);
     game.destroy();
   }
+});
+
+test('last-wave victory completes the final strike and cancels a held follow-up', () => {
+  const { game } = createGame();
+  for (let wave = 0; wave < 2; wave++) {
+    for (const enemy of game.state.enemies.filter(enemy => enemy.hp > 0)) game.damageEnemy(enemy, 999);
+    advance(game, .2);
+    game.state.player.x = GAME_CONSTANTS.waves[wave + 1].trigger;
+    advance(game, .1);
+  }
+  const boss = game.state.boss;
+  for (const enemy of game.state.enemies.filter(enemy => enemy.hp > 0 && enemy !== boss)) game.damageEnemy(enemy, 999);
+  game.state.player.x = boss.x - 55; game.state.player.y = boss.y;
+  boss.hp = 1; boss.cooldown = 10;
+  game.beginStrike(); advance(game, .6); game.endStrike();
+  game.beginStrike();
+  advance(game, .3);
+  assert.equal(game.state.kills, 8);
+  assert.equal(game.state.status, 'playing', 'victory waits for the actual final strike recovery');
+  advance(game, .7);
+  assert.equal(game.state.status, 'victory');
+  assert.equal(game.state.player.action, 'idle');
+  assert.equal(game.state.player.strikeHeld, false);
+  assert.equal(game.inputBuffer.length, 0);
+  assert.equal(game.endStrike(), false);
+  const time = game.state.time;
+  advance(game, .5);
+  assert.equal(game.state.time, time);
+  game.destroy();
 });

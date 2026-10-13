@@ -105,9 +105,30 @@ export class AudioEngine {
     this.unlock();
     if (!this.context) return;
     const now = this.context.currentTime;
-    if (name === 'punch') {
+    if (name === 'swing') {
+      this.noise(0.1, 0.035, now, 1600);
+    } else if (name === 'kick') {
+      this.tone(145, 0.12, 'triangle', 0.24, now, 38);
+      this.noise(0.13, 0.12, now, 350);
+    } else if (name === 'launcher') {
+      this.tone(195, 0.25, 'triangle', 0.29, now, 30);
+      this.noise(0.22, 0.18, now, 220);
+      this.tone(65, 0.36, 'sine', 0.15, now + 0.025);
+    } else if (name === 'charge') {
+      this.tone(220, 0.2, 'sine', 0.1, now, 880);
+      this.tone(660, 0.13, 'triangle', 0.07, now + 0.12);
+    } else if (name === 'guard') {
+      this.tone(290, 0.09, 'triangle', 0.055, now, 420);
+    } else if (name === 'parry') {
+      this.tone(780, 0.17, 'sine', 0.16, now, 1170);
+      this.tone(1560, 0.24, 'sine', 0.09, now + 0.018);
+      this.noise(0.08, 0.045, now, 3900);
+    } else if (name === 'punch') {
       this.tone(180, 0.095, 'triangle', 0.19, now, 45);
       this.noise(0.08, 0.1, now, 550);
+    } else if (name === 'chainImpact') {
+      this.tone(110, 0.18, 'sine', 0.18, now, 38);
+      this.noise(0.15, 0.09, now, 280);
     } else if (name === 'slam') {
       this.tone(120, 0.34, 'sine', 0.34, now, 26);
       this.noise(0.3, 0.19, now, 180);
